@@ -166,6 +166,40 @@
   .foot{border-top:1px solid var(--hair);margin-top:30px;padding:20px 0 8px;color:var(--faint);font-size:12px;line-height:1.7}
   .foot b{color:var(--muted)}
 
+  /* ---- rarity chips (trophy detail) ---- */
+  .stat .v .swatch{width:9px;height:9px;border-radius:50%}
+  .tag.rare{color:#8A5600;border-color:#E4C48A;background:#F7EAD1}
+  .tag.normal{color:var(--muted);border-color:var(--hair);background:var(--panel-2)}
+  .tag.ps{color:#fff;border-color:var(--g-plat);background:var(--g-plat)}
+  .row.flash{animation:flashpulse 1.8s ease-out}
+  @keyframes flashpulse{0%,16%{box-shadow:0 0 0 2px var(--thirium),0 10px 26px -12px rgba(11,60,90,.55);background:var(--thirium-glow)}100%{box-shadow:none}}
+
+  /* ---- master table (成就总表) ---- */
+  .xhint{font-size:13px;color:var(--muted);margin:0 0 16px;line-height:1.7;background:var(--panel);border:1px solid var(--hair);border-left:3px solid var(--thirium);border-radius:4px;padding:12px 15px}
+  .xbar{display:flex;flex-wrap:wrap;gap:11px;align-items:center;margin-bottom:16px}
+  .xbar .lab{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--faint)}
+  .mrows{display:flex;flex-direction:column;gap:8px}
+  .mrow{display:flex;align-items:center;gap:14px;width:100%;text-align:left;font:inherit;color:inherit;background:var(--panel);border:1px solid var(--hair);border-radius:6px;padding:12px 15px;cursor:pointer;transition:border-color .12s,box-shadow .12s}
+  .mrow:hover{border-color:var(--thirium);box-shadow:0 6px 18px -12px rgba(11,60,90,.4)}
+  .mrow:focus-visible{outline:2px solid var(--thirium);outline-offset:2px}
+  .mrow-main{min-width:0;flex:1}
+  .mrow-cn{font-size:14.5px;font-weight:700;display:flex;flex-wrap:wrap;align-items:baseline;gap:8px}
+  .mrow-cn .en{font-family:var(--mono);font-size:10.5px;color:var(--faint);letter-spacing:.08em;font-weight:400;text-transform:uppercase}
+  .mrow-ch{font-size:11.5px;color:var(--muted);margin-top:3px}
+  .mrow-rate{flex:0 0 auto;width:112px;display:flex;flex-direction:column;gap:5px}
+  .mrow-pct{font-family:var(--mono);font-weight:700;font-size:14px;font-variant-numeric:tabular-nums;text-align:right;color:var(--ink)}
+  .mrow.rare .mrow-pct{color:#B87A1A}
+  .mrow-bar{height:5px;border-radius:3px;background:var(--hair);overflow:hidden}
+  .mrow-bar i{display:block;height:100%;background:var(--thirium);border-radius:3px}
+  .mrow.rare .mrow-bar i{background:#C8912A}
+  .mrow-rar{flex:0 0 auto;width:52px;text-align:center}
+  .mrow-arw{flex:0 0 auto;color:var(--faint);font-size:16px}
+  .chip{font-family:var(--mono);font-size:10px;font-weight:700;letter-spacing:.04em;padding:3px 8px;border-radius:3px;white-space:nowrap;display:inline-block}
+  .chip.rare{background:#B87A1A;color:#fff}
+  .chip.normal{background:var(--panel-2);color:var(--muted);border:1px solid var(--hair)}
+  .chip.ps{background:var(--g-plat);color:#fff}
+  @media (max-width:560px){.mrow-rate{width:76px}.mrow-ch{display:none}.mrow-arw{display:none}}
+
   @media (max-width:680px){
     .runs{grid-template-columns:1fr}
     .cs-cols{grid-template-columns:1fr}
@@ -201,7 +235,8 @@
   <div class="tabbar">
     <div class="wrap tabbar-inner" role="tablist">
       <button class="tab" role="tab" data-view="route" aria-selected="true">路线规划</button>
-      <button class="tab" role="tab" data-view="trophies" aria-selected="false">奖杯 <span class="n">49</span></button>
+      <button class="tab" role="tab" data-view="x" aria-selected="false">成就总表 <span class="n">49</span></button>
+      <button class="tab" role="tab" data-view="trophies" aria-selected="false">奖杯详解</button>
       <button class="tab" role="tab" data-view="mags" aria-selected="false">杂志 <span class="n">46</span></button>
     </div>
   </div>
@@ -310,12 +345,24 @@
       </div>
     </section>
 
+    <!-- ============ MASTER TABLE ============ -->
+    <section class="view" id="view-x">
+      <p class="xhint">Steam 共 <b>48</b> 个成就 = <b style="color:#B87A1A">稀有 10</b>(全球完成率 &lt; 10%) + <b>普通 38</b>；第 49 个是 <b>PS 独占白金</b>。默认按全球完成率排序(越稀有越靠前)，<b>点任意一条即可跳到「奖杯详解」里的完整解锁条件</b>。</p>
+      <div class="xbar">
+        <span class="lab">稀有度</span><div class="segs" id="xRareSegs"></div>
+        <span class="lab">排序</span><div class="segs" id="xSortSegs"></div>
+        <div class="count" id="xcount"></div>
+      </div>
+      <div class="mrows" id="masterList"></div>
+    </section>
+
     <!-- ============ TROPHIES ============ -->
     <section class="view" id="view-trophies">
       <div class="controls">
         <label class="search"><input id="q" type="text" placeholder="搜索奖杯名 / 章节 / 关键词…" aria-label="搜索奖杯"></label>
         <div class="segs" id="routeSegs"></div>
         <button class="seg warn" id="missToggle" aria-pressed="false">只看可错过</button>
+        <button class="seg" id="rareToggle" aria-pressed="false">只看稀有</button>
         <div class="count" id="tcount"></div>
       </div>
       <div id="trophyList"></div>
@@ -393,6 +440,11 @@
   ];
   var byEn={}; D.forEach(function(d){byEn[d.en]=d;});
 
+  // Steam 全球完成率(%)；<10% 记为稀有。白金为 PS 独占无 Steam 成就。
+  var RATES={"THANK YOU":87.9,"MISSION ACCOMPLISHED":86.8,"SECRETS":70.7,"DEVIANT LOCATED":66,"WE ARE FREE":65.6,"DEFEND YOURSELF":41.2,"SELF-CONTROL":39.3,"CONFESSION":43.1,"KNOW YOUR PARTNER":47.2,"SHELTER":48.4,"CATCH IT":13.1,"SAVE HANK":41.9,"ESCAPE THE MANOR":51.5,"BLOODHOUND":41.9,"A GLIMPSE OF JERICHO":8.7,"WHEN A PLAN COMES TOGETHER":17.5,"JERICHO'S HERO":48,"RUTHLESS":26.3,"DOUBTS":30.3,"RUN KARA RUN":57.5,"JUST A MACHINE":7.4,"A SMILE ON HER FACE":47.7,"SEND A MESSAGE":35.9,"BURN THE PLACE":9.3,"NOTHING TO SEE HERE":41.3,"PRIORITIES":9.7,"KINSHIP":41.4,"CONFRONTATION":21.2,"STAND YOUR GROUND":21.6,"THREE AT JERICHO":40.3,"SCORCHED EARTH":41,"ONE OF US":36.4,"COMPLIANT":11.1,"LIBERATION":18.1,"MORAL VICTORY":18.4,"ESCAPE DEATH":7.2,"SAFE HARBOR":16.1,"AN ARMY OF ME":30.5,"MISSION COMPLETE":6.5,"MY TURN TO DECIDE":27.9,"THIS IS MY STORY":39.9,"THESE ARE OUR STORIES":4.1,"PARTNERS":30.5,"HAPPY FAMILY":17,"UNDEFEATED":33.6,"BOOKWORM":1.3,"I'LL BE BACK":1.3,"SURVIVORS":6.9};
+  D.forEach(function(d){if(d.g==="白金"){d.ps=true;}else{d.pct=RATES[d.en];d.rare=d.pct<10;}});
+  function slug(s){return "t-"+s.toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/(^-|-$)/g,"");}
+
   // ---------- MAGAZINES ----------
   var MCHORDER=["新家","色调","画家","搭档","亡命者","等待汉克","逃跑","耶利哥","巢穴","兹拉科","俄罗斯轮盘","伊甸园夜总会","海盗湾","大使桥","史特拉福大厦","公敌","午夜列车","国会公园","去见卡姆斯基","自由示威游行","交叉路口","为底特律而战"];
   var MCH={"新家":"A NEW HOME","色调":"SHADES OF COLOR","画家":"THE PAINTER","搭档":"PARTNERS","亡命者":"FUGITIVES","等待汉克":"WAITING FOR HANK","逃跑":"ON THE RUN","耶利哥":"JERICHO","巢穴":"THE NEST","兹拉科":"ZLATKO","俄罗斯轮盘":"RUSSIAN ROULETTE","伊甸园夜总会":"THE EDEN CLUB","海盗湾":"THE PIRATES' COVE","大使桥":"THE BRIDGE","史特拉福大厦":"THE STRATFORD TOWER","公敌":"PUBLIC ENEMY","午夜列车":"MIDNIGHT TRAIN","国会公园":"CAPITOL PARK","去见卡姆斯基":"MEET KAMSKI","自由示威游行":"FREEDOM MARCH","交叉路口":"CROSSROADS","为底特律而战":"BATTLE FOR DETROIT"};
@@ -455,16 +507,18 @@
   try{doneM=JSON.parse(localStorage.getItem(LS_M)||"{}")||{};}catch(e){}
   function saveT(){try{localStorage.setItem(LS_T,JSON.stringify(doneT));}catch(e){}}
   function saveM(){try{localStorage.setItem(LS_M,JSON.stringify(doneM));}catch(e){}}
-  var tState={q:"",route:"all",miss:false};
+  var tState={q:"",route:"all",miss:false,rareOnly:false};
   var mState={q:"",branch:false};
 
   // ---------- stats ----------
-  var order=["白金","金","银","铜"], gc={白金:0,金:0,银:0,铜:0};
-  D.forEach(function(d){gc[d.g]++;});
-  var gcol={白金:"var(--g-plat)",金:"var(--g-gold)",银:"var(--g-silver)",铜:"var(--g-bronze)"};
   var statsEl=document.getElementById("stats");
-  order.forEach(function(g){var el=document.createElement("div");el.className="stat";el.innerHTML='<div class="k">'+g+'</div><div class="v"><span class="swatch" style="background:'+gcol[g]+'"></span>'+gc[g]+'</div>';statsEl.appendChild(el);});
-  (function(){var el=document.createElement("div");el.className="stat";el.innerHTML='<div class="k">杂志</div><div class="v"><span class="swatch" style="background:var(--thirium)"></span>46</div>';statsEl.appendChild(el);})();
+  function addStat(k,val,color){var el=document.createElement("div");el.className="stat";el.innerHTML='<div class="k">'+k+'</div><div class="v"><span class="swatch" style="background:'+color+'"></span>'+val+'</div>';statsEl.appendChild(el);}
+  var rareN=D.filter(function(d){return !d.ps&&d.rare;}).length;
+  var normN=D.filter(function(d){return !d.ps&&!d.rare;}).length;
+  addStat("稀有",rareN,"#B87A1A");
+  addStat("普通",normN,"var(--thirium)");
+  addStat("PS白金",1,"var(--g-plat)");
+  addStat("杂志",46,"#5C6E7B");
 
   // ---------- ring ----------
   var CIRC=2*Math.PI*38;
@@ -481,12 +535,9 @@
   document.getElementById("ringReset").addEventListener("click",function(){doneT={};doneM={};saveT();saveM();updRing();renderT();renderM();});
 
   // ---------- tabs ----------
-  var tabs=document.querySelectorAll(".tab"), views={route:document.getElementById("view-route"),trophies:document.getElementById("view-trophies"),mags:document.getElementById("view-mags")};
-  tabs.forEach(function(t){t.addEventListener("click",function(){
-    tabs.forEach(function(x){x.setAttribute("aria-selected",x===t);});
-    Object.keys(views).forEach(function(k){views[k].classList.toggle("active",k===t.dataset.view);});
-    window.scrollTo({top:0,behavior:"auto"});
-  });});
+  var tabs=document.querySelectorAll(".tab"), views={route:document.getElementById("view-route"),x:document.getElementById("view-x"),trophies:document.getElementById("view-trophies"),mags:document.getElementById("view-mags")};
+  function activateTab(name){tabs.forEach(function(x){x.setAttribute("aria-selected",x.dataset.view===name);});Object.keys(views).forEach(function(k){views[k].classList.toggle("active",k===name);});}
+  tabs.forEach(function(t){t.addEventListener("click",function(){activateTab(t.dataset.view);window.scrollTo({top:0,behavior:"auto"});});});
 
   // ---------- trophy controls ----------
   var segWrap=document.getElementById("routeSegs");
@@ -499,10 +550,13 @@
   document.getElementById("q").addEventListener("input",function(e){tState.q=e.target.value.trim().toLowerCase();renderT();});
   var missBtn=document.getElementById("missToggle");
   missBtn.addEventListener("click",function(){tState.miss=!tState.miss;missBtn.setAttribute("aria-pressed",tState.miss);renderT();});
+  var rareBtn=document.getElementById("rareToggle");
+  rareBtn.addEventListener("click",function(){tState.rareOnly=!tState.rareOnly;rareBtn.setAttribute("aria-pressed",tState.rareOnly);renderT();});
 
   function tMatch(d){
     if(tState.route!=="all"&&d.route!==tState.route&&d.route!=="all")return false;
     if(tState.miss&&!d.miss)return false;
+    if(tState.rareOnly&&!d.rare)return false;
     if(tState.q){var h=(d.en+" "+d.cn+" "+d.ch+" "+(CH[d.ch]||"")+" "+d.cond).toLowerCase();if(h.indexOf(tState.q)<0)return false;}
     return true;
   }
@@ -520,8 +574,9 @@
     tcount.innerHTML='显示 <b>'+shown+'</b>/49 · 已获得 <b>'+tDone()+'</b>';
   }
   function tRow(d){
-    var row=document.createElement("div");row.className="row"+(d.miss?" miss":"")+(doneT[d.en]?" done":"");
+    var row=document.createElement("div");row.className="row"+(d.miss?" miss":"")+(doneT[d.en]?" done":"");row.id=slug(d.en);
     var tags="";
+    if(d.ps)tags+='<span class="tag ps">PS 独占白金</span>';else tags+='<span class="tag '+(d.rare?"rare":"normal")+'">'+(d.rare?"稀有":"普通")+' · '+d.pct+'%</span>';
     if(d.story)tags+='<span class="tag story">剧情必得</span>';else if(d.miss)tags+='<span class="tag miss">可错过</span>';
     if(d.excl){var p=byEn[d.excl];tags+='<span class="tag excl">互斥：'+(p?p.cn:d.excl)+'</span>';}
     row.innerHTML='<div class="led"></div><div class="grade"><span class="badge g-'+d.g+'">'+d.g+'</span><span class="route"><span class="dot" style="background:'+R[d.route].c+'"></span>'+R[d.route].cn+'</span></div>'+
@@ -561,12 +616,55 @@
     return row;
   }
 
+  // ---------- master table (成就总表) ----------
+  var mtState={rare:"all",sort:"pct"};
+  var xRareSegs=document.getElementById("xRareSegs"), xSortSegs=document.getElementById("xSortSegs"), xcount=document.getElementById("xcount"), masterList=document.getElementById("masterList");
+  [["all","全部"],["rare","稀有"],["normal","普通"]].forEach(function(p){
+    var b=document.createElement("button");b.className="seg";b.setAttribute("aria-pressed",p[0]==="all");b.dataset.k=p[0];b.textContent=p[1];
+    b.addEventListener("click",function(){mtState.rare=p[0];[].forEach.call(xRareSegs.children,function(c){c.setAttribute("aria-pressed",c.dataset.k===p[0]);});renderX();});
+    xRareSegs.appendChild(b);
+  });
+  [["pct","完成率"],["chapter","章节顺序"]].forEach(function(p){
+    var b=document.createElement("button");b.className="seg";b.setAttribute("aria-pressed",p[0]==="pct");b.dataset.k=p[0];b.textContent=p[1];
+    b.addEventListener("click",function(){mtState.sort=p[0];[].forEach.call(xSortSegs.children,function(c){c.setAttribute("aria-pressed",c.dataset.k===p[0]);});renderX();});
+    xSortSegs.appendChild(b);
+  });
+  function renderX(){
+    var arr=D.filter(function(d){if(mtState.rare==="rare")return !d.ps&&d.rare;if(mtState.rare==="normal")return !d.ps&&!d.rare;return true;});
+    if(mtState.sort==="pct")arr=arr.slice().sort(function(a,b){return (a.ps?1000:a.pct)-(b.ps?1000:b.pct);});
+    else arr=arr.slice().sort(function(a,b){return CHORDER.indexOf(a.ch)-CHORDER.indexOf(b.ch);});
+    masterList.innerHTML="";
+    arr.forEach(function(d){masterList.appendChild(xRow(d));});
+    xcount.innerHTML='共 <b>'+arr.length+'</b> 项';
+  }
+  function xRow(d){
+    var b=document.createElement("button");b.type="button";b.className="mrow"+((!d.ps&&d.rare)?" rare":"");
+    var pct=d.ps?"—":(d.pct+"%"), w=d.ps?0:Math.max(2,Math.min(100,d.pct));
+    var rar=d.ps?'<span class="chip ps">PS白金</span>':'<span class="chip '+(d.rare?"rare":"normal")+'">'+(d.rare?"稀有":"普通")+'</span>';
+    b.innerHTML='<span class="mrow-main"><span class="mrow-cn">'+d.cn+' <span class="en">'+d.en+'</span></span><span class="mrow-ch">'+d.ch+(CH[d.ch]?' · '+CH[d.ch]:'')+'</span></span>'+
+      '<span class="mrow-rate"><span class="mrow-pct">'+pct+'</span><span class="mrow-bar"><i style="width:'+w+'%"></i></span></span>'+
+      '<span class="mrow-rar">'+rar+'</span><span class="mrow-arw">›</span>';
+    b.addEventListener("click",function(){jumpToTrophy(d.en);});
+    return b;
+  }
+  function resetTrophyFilters(){
+    tState={q:"",route:"all",miss:false,rareOnly:false};
+    document.getElementById("q").value="";
+    [].forEach.call(segWrap.children,function(c){c.setAttribute("aria-pressed",c.dataset.route==="all");});
+    missBtn.setAttribute("aria-pressed",false);rareBtn.setAttribute("aria-pressed",false);
+  }
+  function jumpToTrophy(en){
+    activateTab("trophies");resetTrophyFilters();renderT();
+    var el=document.getElementById(slug(en));
+    if(el){el.scrollIntoView({behavior:"smooth",block:"center"});el.classList.remove("flash");void el.offsetWidth;el.classList.add("flash");setTimeout(function(){el.classList.remove("flash");},1900);}
+  }
+
   // footer
   var foot=document.createElement("div");foot.className="foot";
-  foot.innerHTML='数据交叉核对：PowerPyx · PSNProfiles · PlayStationTrophies · Detroit Fandom Wiki · 游民星空。奖杯以 PS4 版 49 座为准(Steam 为 48，无白金)。杂志分支条件以实机为准，如与你的存档不符请以实际为准。';
+  foot.innerHTML='数据交叉核对：PowerPyx · PSNProfiles · PlayStationTrophies · Detroit Fandom Wiki · 游民星空 · SteamHunters。奖杯口径：PS4 共 <b>49</b> 座；Steam 共 <b>48</b> 个成就(稀有 10 + 普通 38，无白金)。全球完成率取自 Steam 统计，随时间浮动、仅供参考。杂志分支条件以实机为准。';
   document.querySelector("main").appendChild(foot);
 
-  updRing();renderT();renderM();
+  updRing();renderT();renderM();renderX();
 })();
 </script>
 </body>
