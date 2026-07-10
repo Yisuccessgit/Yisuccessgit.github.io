@@ -1,0 +1,573 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>底特律：化身为人 · 白金全成就攻略</title>
+<style>html,body{margin:0;padding:0}</style>
+</head>
+<body>
+<style>
+  :root{
+    --ground:#EAEEF2; --panel:#FFFFFF; --panel-2:#F4F7F9;
+    --ink:#12191F; --muted:#5C6E7B; --faint:#8496A2;
+    --hair:#D3DCE3;
+    --thirium:#0B84C7; --thirium-deep:#075E8F; --thirium-glow:rgba(11,132,199,.14);
+    --amber:#C87A00; --amber-bg:#FBF0DC;
+    --green:#2F9B7B; --green-bg:#E9F5EF;
+    --red:#C0392B;
+    --g-plat:#7E93A8; --g-gold:#B78E1E; --g-silver:#8D99A3; --g-bronze:#A9683A;
+    --connor:#2E6FB0; --kara:#C0687A; --markus:#2F9B7B; --all:#7E8A97;
+    --mono:ui-monospace,"SF Mono","SFMono-Regular",Menlo,Consolas,monospace;
+    --sans:-apple-system,BlinkMacSystemFont,"PingFang SC","Helvetica Neue","Microsoft YaHei",system-ui,sans-serif;
+  }
+  *{box-sizing:border-box}
+  .dbh{background:var(--ground);color:var(--ink);font-family:var(--sans);line-height:1.5;-webkit-font-smoothing:antialiased;min-height:100vh;font-size:15px}
+  .wrap{max-width:1120px;margin:0 auto;padding:0 20px}
+  .dbh b{font-weight:700}
+
+  /* ---------- HERO ---------- */
+  .hero{position:relative;overflow:hidden;background:linear-gradient(180deg,#FDFEFF 0%,#EEF3F7 100%);border-bottom:1px solid var(--hair)}
+  .hero::before{content:"";position:absolute;inset:0;background-image:repeating-linear-gradient(0deg,rgba(11,132,199,.05) 0 1px,transparent 1px 4px);opacity:.7;pointer-events:none}
+  .hero-inner{position:relative;padding:30px 0 24px}
+  .eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.3em;text-transform:uppercase;color:var(--thirium-deep);display:flex;align-items:center;gap:9px}
+  .tri{width:0;height:0;border-left:5px solid transparent;border-right:5px solid transparent;border-bottom:9px solid var(--thirium);display:inline-block}
+  .title{margin:12px 0 2px;font-size:clamp(27px,4.6vw,42px);font-weight:800;letter-spacing:-.02em;line-height:1.04;text-wrap:balance}
+  .subttl{color:var(--muted);font-size:14px;max-width:62ch}
+  .hero-grid{display:flex;flex-wrap:wrap;align-items:center;gap:26px;margin-top:20px}
+  .ring-block{display:flex;align-items:center;gap:14px}
+  .ring{position:relative;width:88px;height:88px;flex:0 0 auto}
+  .ring svg{transform:rotate(-90deg)}
+  .ring-num{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;font-family:var(--mono)}
+  .ring-num b{font-size:20px;line-height:1;font-weight:700}
+  .ring-num span{font-size:10px;color:var(--faint);letter-spacing:.1em;margin-top:3px}
+  .ring-cap{font-family:var(--mono);font-size:11px;color:var(--muted);letter-spacing:.1em;line-height:1.7}
+  .ring-cap b{color:var(--ink)}
+  .ring-cap .rst{cursor:pointer;color:var(--faint);text-decoration:underline}
+  .stats{display:flex;gap:10px;flex-wrap:wrap}
+  .stat{background:var(--panel);border:1px solid var(--hair);border-radius:3px;padding:8px 13px;min-width:70px}
+  .stat .k{font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--faint)}
+  .stat .v{font-family:var(--mono);font-size:18px;font-weight:700;font-variant-numeric:tabular-nums;display:flex;align-items:center;gap:6px}
+  .stat .v .swatch{width:9px;height:9px;border-radius:50%}
+
+  /* ---------- TABS ---------- */
+  .tabbar{position:sticky;top:0;z-index:30;background:rgba(238,243,247,.9);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--hair)}
+  .tabbar-inner{display:flex;gap:4px;overflow-x:auto;padding:9px 0}
+  .tab{font-family:var(--mono);font-size:13px;letter-spacing:.03em;white-space:nowrap;padding:9px 15px;border:1px solid var(--hair);border-radius:3px;background:var(--panel);color:var(--muted);cursor:pointer;transition:all .12s;display:inline-flex;align-items:center;gap:8px}
+  .tab:hover{border-color:var(--thirium);color:var(--ink)}
+  .tab[aria-selected="true"]{background:var(--thirium);border-color:var(--thirium);color:#fff}
+  .tab .n{font-variant-numeric:tabular-nums;opacity:.75;font-size:12px}
+
+  .view{display:none}
+  .view.active{display:block}
+  main{padding:22px 0 70px}
+
+  /* ---------- ROUTE OVERVIEW ---------- */
+  .thesis{background:var(--panel);border:1px solid var(--hair);border-left:3px solid var(--thirium);border-radius:4px;padding:16px 18px;margin-bottom:20px}
+  .thesis .lbl{font-family:var(--mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--thirium-deep);margin-bottom:7px}
+  .thesis p{margin:0;font-size:15px;line-height:1.7}
+  .c-safe{color:var(--green)} .c-warn{color:var(--amber)}
+  .sec-h{font-size:18px;font-weight:800;letter-spacing:.01em;margin:30px 0 6px;display:flex;align-items:center;gap:10px}
+  .sec-h .en{font-family:var(--mono);font-size:11px;color:var(--faint);letter-spacing:.16em;text-transform:uppercase;font-weight:400}
+  .sec-sub{color:var(--muted);font-size:13.5px;line-height:1.65;margin:0 0 12px}
+
+  .runs{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .run-card{background:var(--panel);border:1px solid var(--hair);border-radius:5px;padding:16px 17px;position:relative;overflow:hidden}
+  .run-card::before{content:"";position:absolute;top:0;left:0;right:0;height:3px}
+  .run-card.r1::before{background:var(--green)}
+  .run-card.r2::before{background:var(--amber)}
+  .run-head{display:flex;align-items:baseline;gap:10px;margin-bottom:3px}
+  .run-idx{font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:.1em;padding:2px 7px;border-radius:2px;color:#fff}
+  .r1 .run-idx{background:var(--green)} .r2 .run-idx{background:var(--amber)}
+  .run-head h3{margin:0;font-size:16px;font-weight:800}
+  .run-sub{color:var(--muted);font-size:12.5px;margin:0 0 11px;line-height:1.5}
+  .goals{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px}
+  .goals li{font-size:13px;line-height:1.5;padding-left:16px;position:relative;color:var(--ink)}
+  .goals li::before{content:"";position:absolute;left:2px;top:8px;width:5px;height:5px;border-radius:50%;background:var(--thirium)}
+  .goals li b{color:var(--thirium-deep)}
+
+  .redlines{background:var(--amber-bg);border:1px solid #E7C98B;border-radius:5px;padding:15px 18px;margin-top:20px}
+  .redlines .rl-title{font-weight:800;font-size:14.5px;color:#9A5E00;margin-bottom:9px;display:flex;align-items:center;gap:8px}
+  .chip-red{font-family:var(--mono);font-size:10px;font-weight:700;letter-spacing:.06em;background:var(--amber);color:#fff;padding:2px 7px;border-radius:2px}
+  .redlines ol{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:8px}
+  .redlines li{font-size:13.5px;line-height:1.6}
+  .redlines li b{color:#8A5400}
+  .star{color:var(--amber);font-weight:800}
+
+  .table-wrap{overflow-x:auto;border:1px solid var(--hair);border-radius:5px;margin-top:4px;background:var(--panel)}
+  table.dt{border-collapse:collapse;width:100%;min-width:520px;font-size:13px}
+  table.dt th,table.dt td{text-align:left;padding:9px 12px;border-bottom:1px solid var(--hair);vertical-align:top;line-height:1.5}
+  table.dt th{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--faint);background:var(--panel-2);font-weight:600;white-space:nowrap}
+  table.dt tr:last-child td{border-bottom:none}
+  table.dt td.n{font-family:var(--mono);font-weight:700;color:var(--thirium-deep);text-align:center;width:34px}
+  table.dt td.ch{font-weight:600;white-space:nowrap}
+  table.dt td .pre{font-family:var(--mono);font-size:11px;color:var(--muted)}
+  table.dt .win{font-family:var(--mono);font-size:11px;font-weight:700;color:var(--thirium-deep)}
+
+  .cs-cols{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:4px}
+  .cs-card{background:var(--panel);border:1px solid var(--hair);border-radius:5px;padding:13px 15px}
+  .cs-card h4{margin:0 0 9px;font-size:13px;font-family:var(--mono);letter-spacing:.06em;text-transform:uppercase;display:flex;align-items:center;gap:7px}
+  .cs-card.ok h4{color:var(--green)} .cs-card.no h4{color:var(--red)}
+  .cs-card ul{margin:0;padding-left:17px;display:flex;flex-direction:column;gap:6px}
+  .cs-card li{font-size:12.5px;line-height:1.55;color:var(--ink)}
+  .redline-note{margin-top:12px;background:var(--panel);border:1px solid #E7C98B;border-left:3px solid var(--amber);border-radius:4px;padding:11px 15px;font-size:13px;line-height:1.6}
+  .redline-note b{color:#8A5400}
+
+  /* ---------- CONTROLS (shared by trophy + mag) ---------- */
+  .controls{display:flex;flex-wrap:wrap;gap:11px;align-items:center;margin-bottom:16px}
+  .search{position:relative;flex:1 1 200px;min-width:170px}
+  .search input{width:100%;font-family:var(--mono);font-size:13px;padding:9px 12px 9px 32px;border:1px solid var(--hair);border-radius:3px;background:var(--panel);color:var(--ink)}
+  .search input:focus{outline:2px solid var(--thirium);outline-offset:0;border-color:transparent}
+  .search::before{content:"\2315";position:absolute;left:11px;top:50%;transform:translateY(-50%);color:var(--faint);font-size:15px}
+  .segs{display:flex;gap:4px;flex-wrap:wrap}
+  .seg{font-family:var(--mono);font-size:12px;padding:8px 11px;border:1px solid var(--hair);border-radius:3px;background:var(--panel);color:var(--muted);cursor:pointer;display:inline-flex;align-items:center;gap:6px;transition:all .12s}
+  .seg:hover{border-color:var(--thirium);color:var(--ink)}
+  .seg[aria-pressed="true"]{background:var(--thirium);border-color:var(--thirium);color:#fff}
+  .seg .dot{width:8px;height:8px;border-radius:50%}
+  .seg.warn[aria-pressed="true"]{background:var(--amber);border-color:var(--amber)}
+  .count{margin-left:auto;font-family:var(--mono);font-size:12px;color:var(--muted);white-space:nowrap}
+  .count b{color:var(--ink);font-variant-numeric:tabular-nums}
+
+  /* ---------- LIST (trophy + mag) ---------- */
+  .chapter{margin-top:24px}.chapter:first-child{margin-top:4px}
+  .ch-head{display:flex;align-items:baseline;gap:12px;padding-bottom:8px;margin-bottom:11px;border-bottom:1px solid var(--hair)}
+  .ch-idx{font-family:var(--mono);font-size:12px;color:var(--thirium-deep);font-weight:700}
+  .ch-cn{font-size:16px;font-weight:700}
+  .ch-en{font-family:var(--mono);font-size:10.5px;color:var(--faint);letter-spacing:.16em;text-transform:uppercase}
+  .ch-cnt{margin-left:auto;font-family:var(--mono);font-size:11px;color:var(--faint)}
+  .rows{display:flex;flex-direction:column;gap:8px}
+  .row{display:grid;grid-template-columns:auto 84px 1fr;gap:14px;align-items:start;background:var(--panel);border:1px solid var(--hair);border-radius:4px;padding:12px 15px;cursor:pointer;transition:border-color .12s,box-shadow .12s,background .12s}
+  .row:hover{border-color:var(--thirium);box-shadow:0 6px 18px -12px rgba(11,60,90,.4)}
+  .row.done{background:var(--panel-2)}
+  .row.done .cn-name,.row.done .en-name,.row.done .cond{color:var(--faint)}
+  .led{width:26px;height:26px;border-radius:50%;flex:0 0 auto;margin-top:1px;display:flex;align-items:center;justify-content:center;border:2px solid var(--thirium)}
+  .led::after{content:"";width:9px;height:9px;border-radius:50%;background:var(--thirium)}
+  .row.miss .led{border-color:var(--amber)} .row.miss .led::after{background:var(--amber)}
+  .row.done .led{border-color:var(--green);background:var(--green)}
+  .row.done .led::after{content:"\2713";width:auto;height:auto;background:none;color:#fff;font-size:14px;font-weight:800;line-height:1}
+  .grade{display:flex;flex-direction:column;gap:5px;align-items:flex-start;padding-top:1px}
+  .badge{font-family:var(--mono);font-size:10px;font-weight:700;letter-spacing:.05em;padding:3px 7px;border-radius:2px;color:#fff;white-space:nowrap;text-transform:uppercase}
+  .g-白金{background:var(--g-plat)} .g-金{background:var(--g-gold)} .g-银{background:var(--g-silver)} .g-铜{background:var(--g-bronze)}
+  .g-num{background:var(--thirium)}
+  .route{font-family:var(--mono);font-size:10px;color:var(--muted);display:inline-flex;align-items:center;gap:5px}
+  .route .dot{width:8px;height:8px;border-radius:50%}
+  .body{min-width:0}
+  .names{display:flex;flex-wrap:wrap;align-items:baseline;gap:9px}
+  .cn-name{font-size:15.5px;font-weight:700}
+  .en-name{font-family:var(--mono);font-size:11px;color:var(--faint);letter-spacing:.1em;text-transform:uppercase}
+  .tags{display:flex;flex-wrap:wrap;gap:6px;margin:7px 0 5px}
+  .tag{font-family:var(--mono);font-size:10px;padding:2px 7px;border-radius:2px;border:1px solid var(--hair);color:var(--muted);display:inline-flex;align-items:center;gap:4px}
+  .tag.miss{color:var(--amber);border-color:#E7C98B;background:var(--amber-bg)}
+  .tag.excl{color:var(--thirium-deep);border-color:#A9D3EC;background:var(--thirium-glow)}
+  .tag.story{color:var(--green);border-color:#A9D8C7;background:var(--green-bg)}
+  .tag.branch{color:#9A5E00;border-color:#E7C98B;background:var(--amber-bg)}
+  .cond{font-size:13.5px;color:var(--muted);line-height:1.6}
+  .empty{text-align:center;color:var(--faint);font-family:var(--mono);font-size:13px;padding:56px 0}
+  .foot{border-top:1px solid var(--hair);margin-top:30px;padding:20px 0 8px;color:var(--faint);font-size:12px;line-height:1.7}
+  .foot b{color:var(--muted)}
+
+  @media (max-width:680px){
+    .runs{grid-template-columns:1fr}
+    .cs-cols{grid-template-columns:1fr}
+    .row{grid-template-columns:auto 1fr}
+    .grade{flex-direction:row;grid-column:1 / -1;order:3;flex-wrap:wrap}
+    .led{order:1}.body{order:2;grid-column:2}
+  }
+  @media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+
+<div class="dbh">
+  <header class="hero">
+    <div class="wrap hero-inner">
+      <div class="eyebrow"><span class="tri"></span> Detroit: Become Human · 全成就攻略站</div>
+      <h1 class="title">底特律：化身为人 · 白金全成就指南</h1>
+      <p class="subttl">两周目最省路线 + 49 座奖杯 + 46 本杂志收集，含分支独占与「逼开第三周目」的陷阱标注。点按条目可勾选记录进度，本地自动保存。</p>
+      <div class="hero-grid">
+        <div class="ring-block">
+          <div class="ring">
+            <svg width="88" height="88" viewBox="0 0 88 88">
+              <circle cx="44" cy="44" r="38" fill="none" stroke="#D3DCE3" stroke-width="7"/>
+              <circle id="ringFill" cx="44" cy="44" r="38" fill="none" stroke="#0B84C7" stroke-width="7" stroke-linecap="round" stroke-dasharray="238.76" stroke-dashoffset="238.76"/>
+            </svg>
+            <div class="ring-num"><b id="ringCount">0</b><span>/ 95</span></div>
+          </div>
+          <div class="ring-cap">总收集 <b id="ringPct">0%</b><br>奖杯 <b id="tCount">0</b>/49 · 杂志 <b id="mCount">0</b>/46<br><span class="rst" id="ringReset">重置进度</span></div>
+        </div>
+        <div class="stats" id="stats"></div>
+      </div>
+    </div>
+  </header>
+
+  <div class="tabbar">
+    <div class="wrap tabbar-inner" role="tablist">
+      <button class="tab" role="tab" data-view="route" aria-selected="true">路线规划</button>
+      <button class="tab" role="tab" data-view="trophies" aria-selected="false">奖杯 <span class="n">49</span></button>
+      <button class="tab" role="tab" data-view="mags" aria-selected="false">杂志 <span class="n">46</span></button>
+    </div>
+  </div>
+
+  <main class="wrap">
+    <!-- ============ ROUTE ============ -->
+    <section class="view active" id="view-route">
+      <div class="thesis">
+        <div class="lbl">核心思路 · 为什么至少两周目</div>
+        <p>「全员存活(SURVIVORS)」走善线、「康纳8死(I'LL BE BACK)」走机器/暴力线，剧情天生互斥，注定<b>两周目</b>。能否两周目搞定，只取决于把 <b>卡拉《逃跑》要不要触发高速追逐</b> 拆到两条线：<b class="c-safe">一周目潜行</b>(拿 41 号杂志) × <b class="c-warn">二周目高速</b>(拿 35 号 + 康纳追车死)。踩错这一步，就是绝大多数人被迫开第三周目的唯一原因。</p>
+      </div>
+
+      <div class="runs">
+        <div class="run-card r1">
+          <div class="run-head"><span class="run-idx">RUN 01</span><h3>和平 · 全员存活</h3></div>
+          <p class="run-sub">从头连续玩、不跳章，作为主存档。所有可控角色活到结局。</p>
+          <ul class="goals">
+            <li><b>SURVIVORS</b> 全员存活(金)</li>
+            <li>觉醒线三杯：<b>ONE OF US</b> 康纳觉醒 · <b>MY TURN TO DECIDE</b> 结局抵抗控制 · <b>AN ARMY OF ME</b> 转化仿生人大军</li>
+            <li>关系杯：<b>PARTNERS</b> 康纳↔汉克友好 · <b>HAPPY FAMILY</b> 卡拉一家团聚</li>
+            <li>和平侧互斥：救汉克 · 放走崔西 · 不杀克洛伊 · 和平示威 · 道德胜利</li>
+            <li>卡拉<b>潜行不被发现</b> → 拿 41 号杂志 · <b>SAFE HARBOR</b> 安全过境</li>
+          </ul>
+        </div>
+        <div class="run-card r2">
+          <div class="run-head"><span class="run-idx">RUN 02</span><h3>暴力 · 机器 + 康纳8死</h3></div>
+          <p class="run-sub">连续新周目，难度调「老手」更易触发死亡。康纳全程机器、压低汉克好感。</p>
+          <ul class="goals">
+            <li><b>I'LL BE BACK</b> 康纳连续 8 死(银) — 本周目重头戏</li>
+            <li>暴力/机器侧互斥：不推 Leo · 追鲁珀特 · 射杀崔西 · 射杀克洛伊 · 暴力示威 · 攻击警察 · 康纳保持机器 · 机器康纳杀马库斯</li>
+            <li><b>LIBERATION</b> 武装革命(会破坏全员存活，只能放这里)</li>
+            <li><b>ESCAPE DEATH</b> 卡拉边境逃生 · SCORCHED EARTH · JUST A MACHINE 等</li>
+            <li>卡拉<b>走高速追逐</b> → 拿 35 号杂志 + 触发康纳追车死</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="redlines">
+        <div class="rl-title"><span class="chip-red">一周目红线</span> 错过章节选择补不了，只能重开周目</div>
+        <ol>
+          <li><span class="star">★</span> 卡拉《逃跑》<b>潜行不被发现</b>，且《亡命者》落脚点选<b>废弃车或汽车旅馆(别选空屋/蹲点)</b> → 41 号杂志才刷新。二周目做康纳8死强制走高速→只出 35 号；若一周目也走高速，两周目都拿不到 41，必须开第三周目。</li>
+          <li><b>全员存活一次做干净</b>：任何人(含汉克不自杀)中途死亡，这条存档即作废，章节选择补不了。全程走和平，别手滑触发武装革命。</li>
+          <li><b>跨章好感杯</b>：康纳↔汉克友好、卡拉/爱丽丝/路德羁绊，好感跨章累积、章节选择起点不带旧好感，趁这条连续善线一次做满。</li>
+        </ol>
+      </div>
+
+      <h3 class="sec-h">康纳 8 死 <span class="en">I'll Be Back</span></h3>
+      <p class="sec-sub">全游戏共 10 个死亡机会，凑满 8 次即可；<b>必须一条连续周目、不能章节选择跳章</b>；奖杯在后期《灵魂之夜》汉克对话时才结算。为铺满死亡：康纳<b>全程机器线</b>，并<b>刻意把汉克好感压到敌对</b>(不服从、贬低仿生人、伊甸俱乐部射杀崔西、打翻汉克的酒)。</p>
+      <div class="table-wrap"><table class="dt">
+        <thead><tr><th>#</th><th>章节</th><th>怎么死</th><th>前置</th></tr></thead>
+        <tbody>
+          <tr><td class="n">1</td><td class="ch">人质</td><td>选「自我牺牲」把丹尼尔推下(或跳楼)，被反杀</td><td class="pre">无</td></tr>
+          <tr><td class="n">2</td><td class="ch">讯问</td><td>逼供后离开选「介入」，被夺枪打死</td><td class="pre">须先在《搭档》阁楼找到异常仿生人</td></tr>
+          <tr><td class="n">3</td><td class="ch">逃跑</td><td>康纳追逐翻栏杆过高速，不按 QTE 被车撞死</td><td class="pre">卡拉一家活着跑过第一条高速(本周目走高速线→顺带拿 35 号)</td></tr>
+          <tr><td class="n">4</td><td class="ch">巢穴</td><td>追鲁珀特的屋顶追逐 QTE 全按错，坠楼</td><td class="pre">无</td></tr>
+          <tr><td class="n">5</td><td class="ch">大使桥</td><td>与汉克敌对时，汉克桥上开枪打死康纳</td><td class="pre">全程压低汉克好感</td></tr>
+          <tr><td class="n">6</td><td class="ch">公敌</td><td>进厨房讯问被拔泵芯，放着不捡，关机死</td><td class="pre">走进厨房讯问路线</td></tr>
+          <tr><td class="n">7</td><td class="ch">最后机会(康纳)</td><td>与盖文敌对，查出耶利哥后打斗不按 QTE，被打死</td><td class="pre">第一次遇盖文就无视/打发他</td></tr>
+          <tr><td class="n">8</td><td class="ch">交叉路口</td><td>保持机器，遇士兵选攻击并按错被爆头；或马库斯在场时不按键由马库斯开枪</td><td class="pre">康纳保持机器</td></tr>
+        </tbody>
+      </table></div>
+      <p class="sec-sub" style="margin-top:10px">备用：后期《为底特律而战》还有 2 处死法(SWAT、诺丝开枪)，可替补前面漏掉的任意一次。</p>
+
+      <h3 class="sec-h">8 对互斥选择 <span class="en">Flip in Run 02</span></h3>
+      <p class="sec-sub">一周目做「善」的一半，二周目全部反着做，即可集齐。</p>
+      <div class="table-wrap"><table class="dt">
+        <thead><tr><th>章节</th><th>一周目</th><th>二周目改做</th><th>二周目奖杯</th></tr></thead>
+        <tbody>
+          <tr><td class="ch">破碎</td><td>推开 Leo</td><td>忍耐、不推</td><td class="win">SELF-CONTROL</td></tr>
+          <tr><td class="ch">巢穴</td><td>救汉克</td><td>追鲁珀特、不救</td><td class="win">CATCH IT</td></tr>
+          <tr><td class="ch">伊甸俱乐部</td><td>放走崔西</td><td>射杀两个崔西</td><td class="win">RUTHLESS</td></tr>
+          <tr><td class="ch">会见卡姆斯基</td><td>不杀克洛伊</td><td>射杀克洛伊</td><td class="win">PRIORITIES</td></tr>
+          <tr><td class="ch">国会公园</td><td>和平示威</td><td>暴力示威</td><td class="win">BURN THE PLACE</td></tr>
+          <tr><td class="ch">自由游行</td><td>和平退让</td><td>攻击警察</td><td class="win">CONFRONTATION</td></tr>
+          <tr><td class="ch">交叉路口</td><td>康纳觉醒</td><td>康纳保持机器</td><td class="win">COMPLIANT</td></tr>
+          <tr><td class="ch">结局</td><td>康纳抵抗控制</td><td>机器康纳杀马库斯</td><td class="win">MISSION COMPLETE</td></tr>
+        </tbody>
+      </table></div>
+
+      <h3 class="sec-h">章节选择收尾 <span class="en">Chapter Select</span></h3>
+      <p class="sec-sub">两周目跑完，用章节选择补零散奖杯，<b>退出时一律选「不保存」</b>即可弹杯。</p>
+      <div class="cs-cols">
+        <div class="cs-card ok">
+          <h4>能补</h4>
+          <ul>
+            <li>即时二选一奖杯(上表反向选项)</li>
+            <li>单章内的剧情、探索、收集杯</li>
+            <li>只在单章内直接拾取、不依赖跨章前置的杂志</li>
+            <li><b>UNDEFEATED</b> 逐章重打失手的搏斗 QTE(建议休闲难度)</li>
+          </ul>
+        </div>
+        <div class="cs-card no">
+          <h4>补不了 · 必须连续周目</h4>
+          <ul>
+            <li><b>SURVIVORS</b> 全员存活</li>
+            <li><b>I'LL BE BACK</b> 康纳 8 死</li>
+            <li><b>PARTNERS / HAPPY FAMILY</b> 跨章好感</li>
+            <li>需「从做选择那章连玩到刷新章」的杂志 — 典型即 <b>41 号 vs 35 号</b></li>
+          </ul>
+        </div>
+      </div>
+      <div class="redline-note"><b>红线：</b>所有章节选择清理都要在<b>开下一个新周目之前</b>做完；新档一开，旧档分支会被覆盖、回不去了。</div>
+
+      <div class="redline-note" style="border-left-color:var(--thirium);background:var(--thirium-glow)">
+        <b>一句话收尾：</b>一周目卡拉潜行拿 41、把全员存活和关系杯做干净；二周目走高速拿 35 并做满康纳 8 死、暴力线奖杯；最后章节选择补零散。把「卡拉是否走高速」分到两条线上，就能稳稳两周目全成就，不必开第三周目。
+      </div>
+    </section>
+
+    <!-- ============ TROPHIES ============ -->
+    <section class="view" id="view-trophies">
+      <div class="controls">
+        <label class="search"><input id="q" type="text" placeholder="搜索奖杯名 / 章节 / 关键词…" aria-label="搜索奖杯"></label>
+        <div class="segs" id="routeSegs"></div>
+        <button class="seg warn" id="missToggle" aria-pressed="false">只看可错过</button>
+        <div class="count" id="tcount"></div>
+      </div>
+      <div id="trophyList"></div>
+    </section>
+
+    <!-- ============ MAGAZINES ============ -->
+    <section class="view" id="view-mags">
+      <div class="controls">
+        <label class="search"><input id="mq" type="text" placeholder="搜索杂志编号 / 章节 / 位置…" aria-label="搜索杂志"></label>
+        <button class="seg warn" id="branchToggle" aria-pressed="false">只看分支独占</button>
+        <div class="count" id="mcount"></div>
+      </div>
+      <p class="sec-sub" style="margin:0 0 14px">共 <b>46 本</b>(部分位置有两面封面各算一件)，集齐解锁 <b>BOOKWORM 书虫</b>(银)。<span class="tag branch" style="margin:0 4px">分支独占</span>= 只在特定选择/路线下才出现，两周目一善一恶自然覆盖大部分；<b>41 vs 35</b> 由「卡拉是否走高速」决定，是唯一真正可能逼开第三周目的一对。章节顺序仅供分组参考。</p>
+      <div id="magList"></div>
+    </section>
+  </main>
+</div>
+
+<script>
+(function(){
+  var R={connor:{cn:"康纳",c:"var(--connor)"},kara:{cn:"卡拉",c:"var(--kara)"},markus:{cn:"马库斯",c:"var(--markus)"},all:{cn:"通用",c:"var(--all)"}};
+  var CH={"人质":"THE HOSTAGE","新家":"A NEW HOME","搭档":"PARTNERS","暴风雨之夜":"STORMY NIGHT","破碎":"BROKEN","审讯":"THE INTERROGATION","等待汉克":"WAITING FOR HANK","逃亡者":"FUGITIVES","巢穴":"THE NEST","兹拉特科":"ZLATKO","公敌":"PUBLIC ENEMY","斯特拉福德大厦":"THE STRATFORD TOWER","零件":"SPARE PARTS","伊甸俱乐部":"THE EDEN CLUB","逃跑":"ON THE RUN","桥":"THE BRIDGE","海盗湾":"THE PIRATES' COVE","国会公园":"CAPITOL PARK","午夜列车":"MIDNIGHT TRAIN","会见卡姆斯基":"MEET KAMSKI","自由游行":"FREEDOM MARCH","十字路口":"CROSSROADS","底特律之战":"BATTLE FOR DETROIT","结局与全局":"ENDINGS & META"};
+  var CHORDER=["人质","新家","搭档","暴风雨之夜","破碎","审讯","等待汉克","逃亡者","巢穴","兹拉特科","公敌","斯特拉福德大厦","零件","伊甸俱乐部","逃跑","桥","海盗湾","国会公园","午夜列车","会见卡姆斯基","自由游行","十字路口","底特律之战","结局与全局"];
+
+  var D=[
+    {en:"THANK YOU",cn:"谢谢",g:"铜",ch:"人质",route:"connor",miss:false,story:true,cond:"完成游戏第一章《人质》后自动获得，剧情必得。"},
+    {en:"MISSION ACCOMPLISHED",cn:"任务完成",g:"铜",ch:"人质",route:"connor",miss:true,cond:"康纳成功救下人质艾玛。尽量多收集线索提高谈判成功率，最终说服异常仿生人放人或抢先开枪击毙它；若艾玛坠楼身亡则无法获得。"},
+    {en:"SECRETS",cn:"秘密",g:"铜",ch:"新家",route:"kara",miss:true,cond:"卡拉获得爱丽丝信任并发现她盒子里的秘密。多处与她互动增进信任，最终她交出钥匙，用它打开房间里的盒子。"},
+    {en:"DEVIANT LOCATED",cn:"定位异常仿生人",g:"铜",ch:"搭档",route:"connor",miss:true,cond:"凶案现场找齐全部线索并向汉克重构案情，从而爬上阁楼找到躲藏的异常仿生人。"},
+    {en:"WE ARE FREE",cn:"我们自由了",g:"铜",ch:"暴风雨之夜",route:"kara",miss:true,cond:"卡拉觉醒后反抗陶德，带爱丽丝逃出他家并赶上公交车。"},
+    {en:"DEFEND YOURSELF",cn:"自我防卫",g:"铜",ch:"破碎",route:"markus",miss:true,excl:"SELF-CONTROL",cond:"里奥挑衅攻击马库斯时，选择『推开里奥』反击。"},
+    {en:"SELF-CONTROL",cn:"自我克制",g:"铜",ch:"破碎",route:"markus",miss:true,excl:"DEFEND YOURSELF",cond:"里奥攻击时选择『忍耐』，不还手、让里奥打赢。"},
+    {en:"CONFESSION",cn:"招供",g:"铜",ch:"审讯",route:"connor",miss:true,cond:"用恰当的审讯策略让被捕的异常仿生人开口认罪，而非其自毁或沉默。"},
+    {en:"KNOW YOUR PARTNER",cn:"了解你的搭档",g:"铜",ch:"等待汉克",route:"connor",miss:true,cond:"在汉克办公桌处分析全部关于汉克的线索，解锁与他的隐藏对话。"},
+    {en:"SHELTER",cn:"庇护所",g:"铜",ch:"逃亡者",route:"kara",miss:true,cond:"卡拉带爱丽丝在汽车旅馆(需钱)或废弃空屋过夜，而非流落街头。"},
+    {en:"CATCH IT",cn:"抓住它",g:"铜",ch:"巢穴",route:"connor",miss:true,excl:"SAVE HANK",cond:"天台追捕鲁伯特时选择『追捕』而非救汉克，并成功抓住它(汉克自行爬上来存活)。"},
+    {en:"SAVE HANK",cn:"救汉克",g:"铜",ch:"巢穴",route:"connor",miss:true,excl:"CATCH IT",cond:"天台追捕到最后选择『救汉克』，放弃追捕、救下悬挂坠落边缘的汉克。"},
+    {en:"ESCAPE THE MANOR",cn:"逃离庄园",g:"铜",ch:"兹拉特科",route:"kara",miss:true,cond:"识破兹拉特科的陷阱，释放被囚仿生人协助，成功逃出宅邸(避免被抹除记忆)。"},
+    {en:"BLOODHOUND",cn:"猎犬",g:"铜",ch:"公敌",route:"connor",miss:true,cond:"不借助卡姆斯基密钥，仅凭自身调查推理独立找出耶利哥位置(依赖前面章节的线索收集)。"},
+    {en:"A GLIMPSE OF JERICHO",cn:"耶利哥的一瞥",g:"铜",ch:"斯特拉福德大厦",route:"connor",miss:true,cond:"跨两章：在斯特拉福德大厦让西蒙受伤被留在天台(不带走)，之后《公敌》里康纳连接西蒙、探取记忆。"},
+    {en:"WHEN A PLAN COMES TOGETHER",cn:"计划顺利进行",g:"铜",ch:"斯特拉福德大厦",route:"markus",miss:true,cond:"电视台成功播出讯息，全程不触发警报、无任何队友伤亡(潜行/无伤处理守卫)。"},
+    {en:"JERICHO'S HERO",cn:"耶利哥的英雄",g:"铜",ch:"零件",route:"markus",miss:true,cond:"潜入货船/仓库，成功盗取足够的零件与蓝血为耶利哥补给(成功偷到蓝血即可)。"},
+    {en:"RUTHLESS",cn:"冷酷无情",g:"铜",ch:"伊甸俱乐部",route:"connor",miss:true,excl:"DOUBTS",cond:"追查崔西时选择『射击』，两名崔西被射杀。"},
+    {en:"DOUBTS",cn:"疑虑",g:"铜",ch:"伊甸俱乐部",route:"connor",miss:true,excl:"RUTHLESS",cond:"选择『放过』、不开枪，让两名崔西逃走存活。"},
+    {en:"RUN KARA RUN",cn:"快跑卡拉",g:"铜",ch:"逃跑",route:"kara",miss:true,cond:"卡拉带爱丽丝成功躲避警察并横穿高速公路车流逃脱。"},
+    {en:"JUST A MACHINE",cn:"只是台机器",g:"铜",ch:"桥",route:"connor",miss:true,cond:"康纳与汉克保持冷淡/敌对(全程冷漠、关系值低)，使汉克在桥边对康纳头部开枪。"},
+    {en:"A SMILE ON HER FACE",cn:"她脸上的笑容",g:"铜",ch:"海盗湾",route:"kara",miss:true,cond:"带爱丽丝到游乐场并启动旋转木马，让她开心游玩、露出笑容后触发。"},
+    {en:"SEND A MESSAGE",cn:"传达讯息",g:"铜",ch:"国会公园",route:"markus",miss:true,excl:"BURN THE PLACE",cond:"发动和平示威：将『和平』进度条提到 100%、饶恕警察，以非暴力完成。"},
+    {en:"BURN THE PLACE",cn:"烧毁这里",g:"铜",ch:"国会公园",route:"markus",miss:true,excl:"SEND A MESSAGE",cond:"发动暴力骚乱：将『暴力』进度条提到 100%、对警察报复破坏。"},
+    {en:"NOTHING TO SEE HERE",cn:"这里没什么可看的",g:"铜",ch:"午夜列车",route:"kara",miss:true,cond:"警察到来前藏好所有暴露仿生人身份的证据并正确应答，成功打发走盘查的警察。"},
+    {en:"PRIORITIES",cn:"优先事项",g:"铜",ch:"会见卡姆斯基",route:"connor",miss:true,excl:"KINSHIP",cond:"图灵测试中选择『射击』射杀克洛伊仿生人以换取情报。"},
+    {en:"KINSHIP",cn:"同类之情",g:"铜",ch:"会见卡姆斯基",route:"connor",miss:true,excl:"PRIORITIES",cond:"图灵测试中选择『不射击』、放下枪，放过克洛伊使其存活。"},
+    {en:"CONFRONTATION",cn:"对抗",g:"铜",ch:"自由游行",route:"markus",miss:true,excl:"STAND YOUR GROUND",cond:"警察封锁线前选择『进攻』并打赢，以暴力击退警察。"},
+    {en:"STAND YOUR GROUND",cn:"坚守立场",g:"铜",ch:"自由游行",route:"markus",miss:true,excl:"CONFRONTATION",cond:"封锁线前两次『坚守』后选『牺牲』，以和平非暴力抵抗。若无人替马库斯挡枪则他会牺牲，会使 SURVIVORS 作废。"},
+    {en:"THREE AT JERICHO",cn:"耶利哥三人齐聚",g:"铜",ch:"十字路口",route:"all",miss:true,cond:"让康纳、卡拉、马库斯三名主角全部存活并在《十字路口》汇聚耶利哥；任一提前死亡则无法获得。"},
+    {en:"SCORCHED EARTH",cn:"焦土",g:"铜",ch:"十字路口",route:"markus",miss:true,cond:"货轮遭突袭时，在走廊选择『炸毁耶利哥』引爆货船基地。"},
+    {en:"ONE OF US",cn:"我们的一员",g:"铜",ch:"十字路口",route:"connor",miss:true,excl:"COMPLIANT",cond:"全程积累康纳的软件不稳定值，在对峙劝说时选择『成为异常仿生人』觉醒、加入马库斯。"},
+    {en:"COMPLIANT",cn:"服从",g:"铜",ch:"十字路口",route:"connor",miss:true,excl:"ONE OF US",cond:"对峙劝说时选择『保持机器』、继续服从 CyberLife 不觉醒。"},
+    {en:"LIBERATION",cn:"解放",g:"铜",ch:"底特律之战",route:"markus",miss:true,cond:"暴力革命路线，马库斯冲破封锁、攻入并解放集中营中被关押的仿生人。"},
+    {en:"MORAL VICTORY",cn:"道德胜利",g:"铜",ch:"底特律之战",route:"markus",miss:true,cond:"全程和平路线，通过唱歌、与诺丝亲吻等让民意足够高，使士兵退让、放下武器。"},
+    {en:"ESCAPE DEATH",cn:"逃离死亡",g:"铜",ch:"底特律之战",route:"kara",miss:true,cond:"卡拉母女(暴力路线下)被抓进回收/销毁中心后，制造混乱、保护爱丽丝并成功逃脱。"},
+    {en:"SAFE HARBOR",cn:"安全港湾",g:"铜",ch:"底特律之战",route:"kara",miss:true,cond:"卡拉与爱丽丝越境抵加拿大(和平结局)。客运站走到抱婴母亲处选留下车票；边境依民意，越境 QTE 成功。"},
+    {en:"AN ARMY OF ME",cn:"我的大军",g:"铜",ch:"底特律之战",route:"connor",miss:true,cond:"觉醒的康纳潜入 CyberLife 大厦，击败守卫、正确应答，最终唤醒/转化仓库大批仿生人组成军队(需康纳已觉醒)。"},
+    {en:"MISSION COMPLETE",cn:"任务达成",g:"铜",ch:"底特律之战",route:"connor",miss:true,excl:"MY TURN TO DECIDE",cond:"康纳成功杀死异常仿生人首领(机器康纳狙杀/肉搏杀马库斯即可；或觉醒后被阿曼达夺权开枪)。机器线自然获得。"},
+    {en:"MY TURN TO DECIDE",cn:"轮到我做决定",g:"铜",ch:"底特律之战",route:"connor",miss:true,excl:"MISSION COMPLETE",cond:"需康纳已觉醒且马库斯革命成功。结局阿曼达夺权时，在禅意花园走到并激活蓝色紧急出口触点、抵抗成功，拒绝射杀马库斯。"},
+    {en:"THIS IS MY STORY",cn:"这是我的故事",g:"金",ch:"结局与全局",route:"all",miss:false,story:true,cond:"完整通关游戏一次，任意选择、任意结局。剧情必得。"},
+    {en:"THESE ARE OUR STORIES",cn:"这些是我们的故事",g:"金",ch:"结局与全局",route:"all",miss:false,story:true,cond:"在额外内容菜单累计花费 20,000 点奖励点数解锁附加内容。正常一周目即可积累足够。"},
+    {en:"PARTNERS",cn:"搭档",g:"银",ch:"结局与全局",route:"connor",miss:true,cond:"康纳与汉克关系达『朋友』且两人都活到结局。全程正面对待汉克、避免康纳频繁死亡；康纳需觉醒并在结局抵抗控制。"},
+    {en:"HAPPY FAMILY",cn:"幸福家庭",g:"银",ch:"结局与全局",route:"kara",miss:true,cond:"让卡拉、爱丽丝、路德三人都活到结局并团聚(通常和平越境)。路德极易在《十字路口》或《底特律之战》牺牲，需保护。"},
+    {en:"UNDEFEATED",cn:"不败",g:"银",ch:"结局与全局",route:"all",miss:true,cond:"整个通关赢得每一场 QTE 搏斗，一次都不能输。可用章节选择重打失手的战斗(建议休闲难度)。"},
+    {en:"BOOKWORM",cn:"书虫",g:"银",ch:"结局与全局",route:"all",miss:true,cond:"找到并阅读全部 46 本杂志(部分含两面封面各算一件)。部分杂志出现取决于剧情选择，见「杂志」页。"},
+    {en:"I'LL BE BACK",cn:"我会回来的",g:"银",ch:"结局与全局",route:"connor",miss:true,cond:"同一连续新周目内让康纳死亡 8 次。用章节选择拼凑不计数。见「路线规划」页详解。"},
+    {en:"SURVIVORS",cn:"幸存者",g:"金",ch:"结局与全局",route:"all",miss:true,cond:"结局时所有主要角色全部存活(康纳、汉克、卡拉、爱丽丝、路德、全部杰里、马库斯、西蒙、诺丝、约什)。和平路线+全程生死 QTE 成功+汉克友好。全游戏最难。"},
+    {en:"DETROIT MASTER",cn:"底特律大师",g:"白金",ch:"结局与全局",route:"all",miss:false,story:true,cond:"解锁其余全部 48 个奖杯后自动获得(仅 PS4；Steam 无白金，共 48 个成就)。需至少两周目+章节选择。"}
+  ];
+  var byEn={}; D.forEach(function(d){byEn[d.en]=d;});
+
+  // ---------- MAGAZINES ----------
+  var MCHORDER=["新家","色调","画家","搭档","亡命者","等待汉克","逃跑","耶利哥","巢穴","兹拉科","俄罗斯轮盘","伊甸园夜总会","海盗湾","大使桥","史特拉福大厦","公敌","午夜列车","国会公园","去见卡姆斯基","自由示威游行","交叉路口","为底特律而战"];
+  var MCH={"新家":"A NEW HOME","色调":"SHADES OF COLOR","画家":"THE PAINTER","搭档":"PARTNERS","亡命者":"FUGITIVES","等待汉克":"WAITING FOR HANK","逃跑":"ON THE RUN","耶利哥":"JERICHO","巢穴":"THE NEST","兹拉科":"ZLATKO","俄罗斯轮盘":"RUSSIAN ROULETTE","伊甸园夜总会":"THE EDEN CLUB","海盗湾":"THE PIRATES' COVE","大使桥":"THE BRIDGE","史特拉福大厦":"THE STRATFORD TOWER","公敌":"PUBLIC ENEMY","午夜列车":"MIDNIGHT TRAIN","国会公园":"CAPITOL PARK","去见卡姆斯基":"MEET KAMSKI","自由示威游行":"FREEDOM MARCH","交叉路口":"CROSSROADS","为底特律而战":"BATTLE FOR DETROIT"};
+  var M=[
+    {n:"1",ch:"新家",r:"kara",loc:"一楼客厅茶几上"},
+    {n:"22",ch:"新家",r:"kara",loc:"一楼客厅茶几上"},
+    {n:"11",ch:"新家",r:"kara",loc:"二楼主卧衣柜/桌上"},
+    {n:"23",ch:"新家",r:"kara",loc:"二楼主卧衣柜/桌上"},
+    {n:"10",ch:"色调",r:"markus",loc:"公园长椅(右侧)"},
+    {n:"19",ch:"色调",r:"markus",loc:"公园长椅(右侧)"},
+    {n:"2",ch:"画家",r:"markus",loc:"客厅茶几(电视前)"},
+    {n:"27",ch:"画家",r:"markus",loc:"客厅茶几"},
+    {n:"12",ch:"搭档",r:"connor",loc:"凶案现场厨房"},
+    {n:"25",ch:"搭档",r:"connor",loc:"凶案现场厨房"},
+    {n:"3",ch:"亡命者",r:"kara",loc:"自助洗衣店柜子里"},
+    {n:"26",ch:"亡命者",r:"kara",loc:"自助洗衣店柜子里"},
+    {n:"30",ch:"等待汉克",r:"connor",loc:"警局办公桌"},
+    {n:"28",ch:"等待汉克",r:"connor",loc:"警局办公桌",b:"《破碎》没推倒 Leo 时出现 · 与 29 互斥"},
+    {n:"29",ch:"等待汉克",r:"connor",loc:"警局办公桌",b:"《破碎》推倒了 Leo 时出现 · 与 28 互斥"},
+    {n:"31",ch:"逃跑",r:"kara",loc:"随落脚点变化(废弃车/旅馆/空屋)"},
+    {n:"—",ch:"逃跑",r:"kara",loc:"同上落脚点附近(第二本)"},
+    {n:"13",ch:"耶利哥",r:"markus",loc:"火车站长椅"},
+    {n:"32",ch:"耶利哥",r:"markus",loc:"火车站长椅",b:"卡拉《逃跑》被发现走高速时出现 · 与 15 互斥"},
+    {n:"15",ch:"耶利哥",r:"markus",loc:"火车站长椅",b:"卡拉《逃跑》未被发现潜行时出现 · 与 32 互斥(另可在《去见卡姆斯基》补齐)"},
+    {n:"20",ch:"巢穴",r:"connor",loc:"侧面小房间桌上"},
+    {n:"33",ch:"巢穴",r:"connor",loc:"侧面小房间桌上"},
+    {n:"34",ch:"兹拉科",r:"kara",loc:"二楼卧室桌上"},
+    {n:"35",ch:"兹拉科",r:"kara",loc:"二楼卧室桌上",b:"卡拉《逃跑》被发现走高速时出现 · 与 41 互斥"},
+    {n:"41",ch:"兹拉科",r:"kara",loc:"二楼卧室桌上",b:"《亡命者》选废弃车/汽车旅馆(非空屋)+ 卡拉《逃跑》未被发现时出现 · 与 35 互斥"},
+    {n:"4",ch:"俄罗斯轮盘",r:"connor",loc:"汉克卧室"},
+    {n:"5",ch:"俄罗斯轮盘",r:"connor",loc:"汉克卧室"},
+    {n:"14",ch:"伊甸园夜总会",r:"connor",loc:"仓库箱子上"},
+    {n:"36",ch:"伊甸园夜总会",r:"connor",loc:"仓库箱子上"},
+    {n:"24",ch:"海盗湾",r:"kara",loc:"油桶处(放手电筒的地方)"},
+    {n:"37",ch:"海盗湾",r:"kara",loc:"油桶处"},
+    {n:"8",ch:"大使桥",r:"connor",loc:"车前长椅上"},
+    {n:"40",ch:"大使桥",r:"connor",loc:"车前长椅上"},
+    {n:"6",ch:"史特拉福大厦",r:"connor",loc:"47 层餐厅吧台"},
+    {n:"38",ch:"史特拉福大厦",r:"connor",loc:"47 层餐厅吧台"},
+    {n:"16",ch:"公敌",r:"markus",loc:"广播室厨房"},
+    {n:"21",ch:"公敌",r:"markus",loc:"广播室厨房"},
+    {n:"9",ch:"午夜列车",r:"kara",loc:"厨房餐桌"},
+    {n:"—",ch:"午夜列车",r:"kara",loc:"厨房餐桌(第二本)"},
+    {n:"7",ch:"国会公园",r:"markus",loc:"开始处箱子(立即左转)"},
+    {n:"39",ch:"国会公园",r:"markus",loc:"开始处箱子"},
+    {n:"17",ch:"去见卡姆斯基",r:"connor",loc:"入口门厅(画下方)"},
+    {n:"15",ch:"去见卡姆斯基",r:"connor",loc:"入口门厅(此处 15 号必出，可补齐)"},
+    {n:"18",ch:"自由示威游行",r:"markus",loc:"开始处左侧"},
+    {n:"42",ch:"自由示威游行",r:"markus",loc:"开始处左侧",b:"《国会公园》走暴力示威路线时出现"},
+    {n:"43",ch:"交叉路口",r:"connor",loc:"耶利哥后方区域的箱子",b:"《自由示威》攻击警察(对抗)时出现"},
+    {n:"44",ch:"交叉路口",r:"connor",loc:"耶利哥后方区域的箱子",b:"《自由示威》攻击警察(对抗)时出现"},
+    {n:"45",ch:"为底特律而战",r:"markus",loc:"马库斯营地/路障长椅",b:"马库斯和平示威路线时出现 · 与 46 路线互斥"},
+    {n:"46",ch:"为底特律而战",r:"kara",loc:"卡拉车站入口右侧放行李处地上",b:"马库斯革命/暴力路线且卡拉母女成功逃到车站时出现 · 与 45 路线互斥"}
+  ];
+
+  // ---------- state ----------
+  var LS_T="dbh_trophies_v1", LS_M="dbh_mags_v1";
+  var doneT={}, doneM={};
+  try{doneT=JSON.parse(localStorage.getItem(LS_T)||"{}")||{};}catch(e){}
+  try{doneM=JSON.parse(localStorage.getItem(LS_M)||"{}")||{};}catch(e){}
+  function saveT(){try{localStorage.setItem(LS_T,JSON.stringify(doneT));}catch(e){}}
+  function saveM(){try{localStorage.setItem(LS_M,JSON.stringify(doneM));}catch(e){}}
+  var tState={q:"",route:"all",miss:false};
+  var mState={q:"",branch:false};
+
+  // ---------- stats ----------
+  var order=["白金","金","银","铜"], gc={白金:0,金:0,银:0,铜:0};
+  D.forEach(function(d){gc[d.g]++;});
+  var gcol={白金:"var(--g-plat)",金:"var(--g-gold)",银:"var(--g-silver)",铜:"var(--g-bronze)"};
+  var statsEl=document.getElementById("stats");
+  order.forEach(function(g){var el=document.createElement("div");el.className="stat";el.innerHTML='<div class="k">'+g+'</div><div class="v"><span class="swatch" style="background:'+gcol[g]+'"></span>'+gc[g]+'</div>';statsEl.appendChild(el);});
+  (function(){var el=document.createElement("div");el.className="stat";el.innerHTML='<div class="k">杂志</div><div class="v"><span class="swatch" style="background:var(--thirium)"></span>46</div>';statsEl.appendChild(el);})();
+
+  // ---------- ring ----------
+  var CIRC=2*Math.PI*38;
+  function tDone(){return D.reduce(function(a,d){return a+(doneT[d.en]?1:0);},0);}
+  function mDone(){return M.reduce(function(a,m,i){return a+(doneM[i]?1:0);},0);}
+  function updRing(){
+    var n=tDone()+mDone(), tot=D.length+M.length, pct=Math.round(n/tot*100);
+    document.getElementById("ringCount").textContent=n;
+    document.getElementById("ringPct").textContent=pct+"%";
+    document.getElementById("tCount").textContent=tDone();
+    document.getElementById("mCount").textContent=mDone();
+    document.getElementById("ringFill").setAttribute("stroke-dashoffset",CIRC*(1-n/tot));
+  }
+  document.getElementById("ringReset").addEventListener("click",function(){doneT={};doneM={};saveT();saveM();updRing();renderT();renderM();});
+
+  // ---------- tabs ----------
+  var tabs=document.querySelectorAll(".tab"), views={route:document.getElementById("view-route"),trophies:document.getElementById("view-trophies"),mags:document.getElementById("view-mags")};
+  tabs.forEach(function(t){t.addEventListener("click",function(){
+    tabs.forEach(function(x){x.setAttribute("aria-selected",x===t);});
+    Object.keys(views).forEach(function(k){views[k].classList.toggle("active",k===t.dataset.view);});
+    window.scrollTo({top:0,behavior:"auto"});
+  });});
+
+  // ---------- trophy controls ----------
+  var segWrap=document.getElementById("routeSegs");
+  [["all","全部"],["connor","康纳"],["kara","卡拉"],["markus","马库斯"]].forEach(function(p){
+    var b=document.createElement("button");b.className="seg";b.setAttribute("aria-pressed",p[0]==="all");b.dataset.route=p[0];
+    b.innerHTML=(p[0]==="all"?"":'<span class="dot" style="background:'+R[p[0]].c+'"></span>')+p[1];
+    b.addEventListener("click",function(){tState.route=p[0];[].forEach.call(segWrap.children,function(c){c.setAttribute("aria-pressed",c.dataset.route===p[0]);});renderT();});
+    segWrap.appendChild(b);
+  });
+  document.getElementById("q").addEventListener("input",function(e){tState.q=e.target.value.trim().toLowerCase();renderT();});
+  var missBtn=document.getElementById("missToggle");
+  missBtn.addEventListener("click",function(){tState.miss=!tState.miss;missBtn.setAttribute("aria-pressed",tState.miss);renderT();});
+
+  function tMatch(d){
+    if(tState.route!=="all"&&d.route!==tState.route&&d.route!=="all")return false;
+    if(tState.miss&&!d.miss)return false;
+    if(tState.q){var h=(d.en+" "+d.cn+" "+d.ch+" "+(CH[d.ch]||"")+" "+d.cond).toLowerCase();if(h.indexOf(tState.q)<0)return false;}
+    return true;
+  }
+  var trophyList=document.getElementById("trophyList"), tcount=document.getElementById("tcount");
+  function renderT(){
+    trophyList.innerHTML="";var shown=0;
+    CHORDER.forEach(function(ch,ci){
+      var items=D.filter(function(d){return d.ch===ch&&tMatch(d);});if(!items.length)return;shown+=items.length;
+      var sec=document.createElement("section");sec.className="chapter";
+      sec.innerHTML='<div class="ch-head"><span class="ch-idx">'+("0"+(ci+1)).slice(-2)+'</span><span class="ch-cn">'+ch+'</span><span class="ch-en">'+(CH[ch]||"")+'</span><span class="ch-cnt">'+items.length+' 项</span></div>';
+      var rows=document.createElement("div");rows.className="rows";
+      items.forEach(function(d){rows.appendChild(tRow(d));});sec.appendChild(rows);trophyList.appendChild(sec);
+    });
+    if(!shown)trophyList.innerHTML='<div class="empty">没有符合筛选条件的奖杯</div>';
+    tcount.innerHTML='显示 <b>'+shown+'</b>/49 · 已获得 <b>'+tDone()+'</b>';
+  }
+  function tRow(d){
+    var row=document.createElement("div");row.className="row"+(d.miss?" miss":"")+(doneT[d.en]?" done":"");
+    var tags="";
+    if(d.story)tags+='<span class="tag story">剧情必得</span>';else if(d.miss)tags+='<span class="tag miss">可错过</span>';
+    if(d.excl){var p=byEn[d.excl];tags+='<span class="tag excl">互斥：'+(p?p.cn:d.excl)+'</span>';}
+    row.innerHTML='<div class="led"></div><div class="grade"><span class="badge g-'+d.g+'">'+d.g+'</span><span class="route"><span class="dot" style="background:'+R[d.route].c+'"></span>'+R[d.route].cn+'</span></div>'+
+      '<div class="body"><div class="names"><span class="cn-name">'+d.cn+'</span><span class="en-name">'+d.en+'</span></div>'+(tags?'<div class="tags">'+tags+'</div>':'')+'<div class="cond">'+d.cond+'</div></div>';
+    row.addEventListener("click",function(){doneT[d.en]=!doneT[d.en];if(!doneT[d.en])delete doneT[d.en];saveT();row.classList.toggle("done",!!doneT[d.en]);updRing();tcount.innerHTML='显示 <b>'+trophyList.querySelectorAll(".row").length+'</b>/49 · 已获得 <b>'+tDone()+'</b>';});
+    return row;
+  }
+
+  // ---------- magazine controls ----------
+  document.getElementById("mq").addEventListener("input",function(e){mState.q=e.target.value.trim().toLowerCase();renderM();});
+  var brBtn=document.getElementById("branchToggle");
+  brBtn.addEventListener("click",function(){mState.branch=!mState.branch;brBtn.setAttribute("aria-pressed",mState.branch);renderM();});
+  function mMatch(m){
+    if(mState.branch&&!m.b)return false;
+    if(mState.q){var h=(m.n+" "+m.ch+" "+(MCH[m.ch]||"")+" "+m.loc+" "+(m.b||"")).toLowerCase();if(h.indexOf(mState.q)<0)return false;}
+    return true;
+  }
+  var magList=document.getElementById("magList"), mcount=document.getElementById("mcount");
+  function renderM(){
+    magList.innerHTML="";var shown=0;
+    MCHORDER.forEach(function(ch,ci){
+      var idxs=[];M.forEach(function(m,i){if(m.ch===ch&&mMatch(m))idxs.push(i);});if(!idxs.length)return;shown+=idxs.length;
+      var sec=document.createElement("section");sec.className="chapter";
+      sec.innerHTML='<div class="ch-head"><span class="ch-idx">'+("0"+(ci+1)).slice(-2)+'</span><span class="ch-cn">'+ch+'</span><span class="ch-en">'+(MCH[ch]||"")+'</span><span class="ch-cnt">'+idxs.length+' 本</span></div>';
+      var rows=document.createElement("div");rows.className="rows";
+      idxs.forEach(function(i){rows.appendChild(mRow(M[i],i));});sec.appendChild(rows);magList.appendChild(sec);
+    });
+    if(!shown)magList.innerHTML='<div class="empty">没有符合筛选条件的杂志</div>';
+    mcount.innerHTML='显示 <b>'+shown+'</b> · 已收集 <b>'+mDone()+'</b>/46';
+  }
+  function mRow(m,i){
+    var row=document.createElement("div");row.className="row"+(m.b?" miss":"")+(doneM[i]?" done":"");
+    var tags=m.b?'<span class="tag branch">分支独占</span>':'';
+    row.innerHTML='<div class="led"></div><div class="grade"><span class="badge g-num">'+(m.n||"—")+' 号</span><span class="route"><span class="dot" style="background:'+R[m.r].c+'"></span>'+R[m.r].cn+'</span></div>'+
+      '<div class="body"><div class="names"><span class="cn-name">'+m.loc+'</span></div>'+(m.b?'<div class="tags">'+tags+'</div><div class="cond">'+m.b+'</div>':'')+'</div>';
+    row.addEventListener("click",function(){doneM[i]=!doneM[i];if(!doneM[i])delete doneM[i];saveM();row.classList.toggle("done",!!doneM[i]);updRing();mcount.innerHTML='显示 <b>'+magList.querySelectorAll(".row").length+'</b> · 已收集 <b>'+mDone()+'</b>/46';});
+    return row;
+  }
+
+  // footer
+  var foot=document.createElement("div");foot.className="foot";
+  foot.innerHTML='数据交叉核对：PowerPyx · PSNProfiles · PlayStationTrophies · Detroit Fandom Wiki · 游民星空。奖杯以 PS4 版 49 座为准(Steam 为 48，无白金)。杂志分支条件以实机为准，如与你的存档不符请以实际为准。';
+  document.querySelector("main").appendChild(foot);
+
+  updRing();renderT();renderM();
+})();
+</script>
+</body>
+</html>

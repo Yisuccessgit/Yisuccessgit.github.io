@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Yisuccess · 全成就攻略站</title>
+<!--
+  ┌─ 怎么再加一部新游戏攻略 ────────────────────────────────┐
+  │ 1. 在本仓库新建一个文件夹，如  eldenring/               │
+  │ 2. 把那部攻略的 index.html 放进去                        │
+  │ 3. 在下面 <div class="grid"> 里复制一张 <a class="card"> │
+  │    改标题、简介、链接(href="./eldenring/")、配色即可      │
+  │ 4. git add -A && git commit -m "add xxx" && git push     │
+  └────────────────────────────────────────────────────────┘
+-->
+<style>
+  :root{
+    --ground:#0B0F15; --panel:#141C27; --panel-2:#1A2432;
+    --ink:#E9EFF5; --muted:#93A2B1; --faint:#5E6E7D; --hair:#243040;
+    --accent:#2CB8E6; --accent-deep:#1B93BC;
+    --mono:ui-monospace,"SF Mono","SFMono-Regular",Menlo,Consolas,monospace;
+    --sans:-apple-system,BlinkMacSystemFont,"PingFang SC","Helvetica Neue","Microsoft YaHei",system-ui,sans-serif;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{
+    background:var(--ground);color:var(--ink);font-family:var(--sans);
+    -webkit-font-smoothing:antialiased;line-height:1.5;min-height:100vh;
+    background-image:radial-gradient(1200px 500px at 50% -8%,rgba(44,184,230,.12),transparent 70%),
+      repeating-linear-gradient(0deg,rgba(255,255,255,.014) 0 1px,transparent 1px 5px);
+  }
+  .wrap{max-width:1000px;margin:0 auto;padding:0 22px}
+
+  header{padding:64px 0 30px;text-align:center;position:relative}
+  .brandmark{width:0;height:0;border-left:8px solid transparent;border-right:8px solid transparent;border-bottom:14px solid var(--accent);margin:0 auto 18px;filter:drop-shadow(0 0 12px rgba(44,184,230,.5))}
+  .eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.34em;text-transform:uppercase;color:var(--accent);margin-bottom:14px}
+  h1{margin:0;font-size:clamp(30px,6vw,52px);font-weight:800;letter-spacing:-.02em;line-height:1.05}
+  h1 .g{background:linear-gradient(90deg,var(--accent),#7FE0FF);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+  .tag{margin:16px auto 0;max-width:52ch;color:var(--muted);font-size:15px}
+  .meta-row{margin-top:22px;display:inline-flex;gap:10px;flex-wrap:wrap;justify-content:center}
+  .pill{font-family:var(--mono);font-size:11px;letter-spacing:.08em;color:var(--muted);border:1px solid var(--hair);border-radius:999px;padding:6px 13px;background:rgba(255,255,255,.02)}
+  .pill b{color:var(--ink);font-variant-numeric:tabular-nums}
+
+  .sec-label{font-family:var(--mono);font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--faint);margin:42px 0 16px;display:flex;align-items:center;gap:12px}
+  .sec-label::after{content:"";flex:1;height:1px;background:var(--hair)}
+
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px;padding-bottom:20px}
+  .card{
+    display:flex;flex-direction:column;text-decoration:none;color:inherit;position:relative;
+    background:var(--panel);border:1px solid var(--hair);border-radius:10px;overflow:hidden;
+    transition:transform .16s ease,border-color .16s ease,box-shadow .16s ease;
+  }
+  .card:hover{transform:translateY(-4px);border-color:var(--card-accent,var(--accent));box-shadow:0 18px 40px -22px rgba(0,0,0,.8),0 0 0 1px var(--card-accent,var(--accent)) inset}
+  .card:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+  .card-top{height:6px;background:var(--card-accent,var(--accent))}
+  .card-body{padding:20px 20px 18px;display:flex;flex-direction:column;gap:10px;flex:1}
+  .card-eyebrow{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--card-accent,var(--accent))}
+  .card h2{margin:0;font-size:21px;font-weight:800;letter-spacing:-.01em;line-height:1.15}
+  .card .en{font-family:var(--mono);font-size:11px;color:var(--faint);letter-spacing:.08em;margin-top:-3px}
+  .card p{margin:2px 0 0;font-size:13.5px;color:var(--muted);line-height:1.6}
+  .chips{display:flex;flex-wrap:wrap;gap:7px;margin-top:4px}
+  .chip{font-family:var(--mono);font-size:10.5px;color:var(--muted);border:1px solid var(--hair);border-radius:4px;padding:3px 8px}
+  .go{margin-top:auto;padding-top:14px;font-family:var(--mono);font-size:12px;letter-spacing:.06em;color:var(--card-accent,var(--accent));display:inline-flex;align-items:center;gap:7px}
+  .card:hover .go .arw{transform:translateX(4px)}
+  .arw{transition:transform .16s ease}
+
+  .soon{border-style:dashed;background:transparent}
+  .soon .card-top{background:var(--hair)}
+  .soon .card-eyebrow,.soon .go{color:var(--faint)}
+  .soon h2{color:var(--muted)}
+
+  footer{border-top:1px solid var(--hair);margin-top:36px;padding:22px 0 40px;color:var(--faint);font-size:12.5px;text-align:center;line-height:1.7}
+  footer a{color:var(--muted);text-decoration:none;border-bottom:1px solid var(--hair)}
+  @media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+  <header class="wrap">
+    <div class="brandmark"></div>
+    <div class="eyebrow">Game Completion Guides</div>
+    <h1>Yisuccess · <span class="g">全成就攻略站</span></h1>
+    <p class="tag">白金 / 全成就 / 全收集，一站式路线规划与避雷。每篇都交叉核对多来源、标注可错过陷阱，支持在线勾选记录进度。</p>
+    <div class="meta-row">
+      <span class="pill">共 <b>1</b> 部攻略</span>
+      <span class="pill">持续更新中</span>
+      <span class="pill">手机 / 电脑均可查看</span>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <div class="sec-label">全部攻略</div>
+    <div class="grid">
+
+      <a class="card" href="./detroit/" style="--card-accent:#0B84C7">
+        <div class="card-top"></div>
+        <div class="card-body">
+          <div class="card-eyebrow">互动电影 · Quantic Dream</div>
+          <h2>底特律：化身为人</h2>
+          <div class="en">Detroit: Become Human</div>
+          <p>两周目最省路线 + 康纳 8 死 + 全奖杯全杂志，含分支独占与「逼开第三周目」的陷阱标注。</p>
+          <div class="chips"><span class="chip">49 奖杯</span><span class="chip">46 杂志</span><span class="chip">两周目路线</span><span class="chip">可勾选进度</span></div>
+          <span class="go">查看攻略 <span class="arw">→</span></span>
+        </div>
+      </a>
+
+      <div class="card soon">
+        <div class="card-top"></div>
+        <div class="card-body">
+          <div class="card-eyebrow">敬请期待</div>
+          <h2>下一部攻略</h2>
+          <div class="en">Coming soon</div>
+          <p>更多游戏的全成就 / 全收集攻略陆续上线。</p>
+          <span class="go">筹备中</span>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <footer class="wrap">
+    作者 <a href="https://github.com/Yisuccessgit" target="_blank" rel="noopener">@Yisuccessgit</a> · 攻略数据交叉核对多来源，如与实机不符请以实际为准<br>
+    本站基于 GitHub Pages 免费托管 · 欢迎收藏分享
+  </footer>
+</body>
+</html>
