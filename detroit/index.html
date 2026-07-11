@@ -166,6 +166,24 @@
   .foot{border-top:1px solid var(--hair);margin-top:30px;padding:20px 0 8px;color:var(--faint);font-size:12px;line-height:1.7}
   .foot b{color:var(--muted)}
 
+  /* ---- top nav + CTA (promo channels) ---- */
+  .topnav{display:flex;align-items:center;justify-content:space-between;gap:12px;max-width:1120px;margin:0 auto;padding:11px 20px}
+  .tn-brand{display:inline-flex;align-items:center;gap:7px;font-family:var(--mono);font-size:12px;letter-spacing:.03em;color:var(--muted);text-decoration:none;transition:color .12s}
+  .tn-brand:hover{color:var(--thirium-deep)}
+  .tn-brand .bk{color:var(--thirium);font-weight:700;font-size:14px}
+  .tn-gh{display:inline-flex;align-items:center;gap:6px;font-family:var(--mono);font-size:12px;color:var(--muted);text-decoration:none;border:1px solid var(--hair);border-radius:5px;padding:6px 11px;background:var(--panel);transition:all .12s}
+  .tn-gh:hover{border-color:var(--thirium);color:var(--ink)}
+  .tn-gh svg,.cta-btn svg{width:15px;height:15px;fill:currentColor;flex:0 0 auto}
+  .cta{margin:28px 0 4px;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:16px;background:linear-gradient(135deg,#F4FAFE,#E9F3FA);border:1px solid #BFDCEC;border-radius:9px;padding:18px 22px}
+  .cta-t{font-size:16px;font-weight:800;letter-spacing:-.01em}
+  .cta-s{font-size:13px;color:var(--muted);margin-top:4px;line-height:1.5}
+  .cta-btns{display:flex;flex-wrap:wrap;gap:10px}
+  .cta-btn{font-family:var(--mono);font-size:12.5px;text-decoration:none;padding:9px 15px;border-radius:6px;border:1px solid var(--hair);color:var(--ink);background:var(--panel);white-space:nowrap;transition:all .12s;display:inline-flex;align-items:center;gap:6px}
+  .cta-btn:hover{border-color:var(--thirium);transform:translateY(-1px)}
+  .cta-btn.primary{background:var(--thirium);border-color:var(--thirium);color:#fff}
+  .cta-btn.primary:hover{background:var(--thirium-deep)}
+  @media (max-width:560px){.tn-brand{font-size:11px}.cta{padding:16px 17px}}
+
   /* ---- rarity chips (trophy detail) ---- */
   .stat .v .swatch{width:9px;height:9px;border-radius:50%}
   .tag.rare{color:#8A5600;border-color:#E4C48A;background:#F7EAD1}
@@ -211,6 +229,10 @@
 </style>
 
 <div class="dbh">
+  <nav class="topnav">
+    <a class="tn-brand" href="https://yisuccessgit.github.io/"><span class="bk">‹</span> 易PLAY · 全成就攻略站</a>
+    <a class="tn-gh" href="https://github.com/Yisuccessgit" target="_blank" rel="noopener"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82a7.6 7.6 0 014 0c1.53-1.03 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.28.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0016 8c0-4.42-3.58-8-8-8z"/></svg> GitHub</a>
+  </nav>
   <header class="hero">
     <div class="wrap hero-inner">
       <div class="eyebrow"><span class="tri"></span> Detroit: Become Human · 全成就攻略站</div>
@@ -378,6 +400,18 @@
       <p class="sec-sub" style="margin:0 0 14px">共 <b>46 本</b>(部分位置有两面封面各算一件)，集齐解锁 <b>BOOKWORM 书虫</b>(银)。<span class="tag branch" style="margin:0 4px">分支独占</span>= 只在特定选择/路线下才出现，两周目一善一恶自然覆盖大部分；<b>41 vs 35</b> 由「卡拉是否走高速」决定，是唯一真正可能逼开第三周目的一对。章节顺序仅供分组参考。</p>
       <div id="magList"></div>
     </section>
+
+    <div class="cta">
+      <div>
+        <div class="cta-t">这份攻略帮到你了吗？</div>
+        <div class="cta-s">更多游戏的全成就 / 全收集攻略，都在「易PLAY · 全成就攻略站」持续更新。</div>
+      </div>
+      <div class="cta-btns">
+        <a class="cta-btn primary" href="https://yisuccessgit.github.io/"><span style="font-weight:700">‹</span> 回攻略站首页</a>
+        <a class="cta-btn" href="https://github.com/Yisuccessgit/Yisuccessgit.github.io" target="_blank" rel="noopener"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82a7.6 7.6 0 014 0c1.53-1.03 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.28.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0016 8c0-4.42-3.58-8-8-8z"/></svg> 点个 Star</a>
+        <a class="cta-btn" href="https://github.com/Yisuccessgit" target="_blank" rel="noopener">关注作者 易PLAY</a>
+      </div>
+    </div>
   </main>
 </div>
 
