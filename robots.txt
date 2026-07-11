@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://yisuccessgit.github.io/sitemap.xml
