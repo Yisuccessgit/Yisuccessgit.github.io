@@ -3,13 +3,13 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Pacify 玩法攻略｜四图详解(娃娃屋/农场/树林/总部) · 易PLAY全成就攻略站</title>
-<meta name="description" content="Pacify 玩法攻略：娃娃屋/农场/树林/总部四张地图详解(布局示意图+详细流程+道具+全纸条)，附全52成就分类。">
+<title>Pacify 玩法攻略｜四图详解(平面图+全notes位置图) · 易PLAY全成就攻略站</title>
+<meta name="description" content="Pacify 玩法攻略：娃娃屋/农场/树林/总部四图详解，含真实俯视平面图与全notes位置图库(点击放大)、详细流程、道具分布，附全成就分类。">
 <meta name="author" content="易PLAY">
 <link rel="canonical" href="https://yisuccessgit.github.io/pacify/">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Pacify 玩法攻略 · 四图详解">
-<meta property="og:description" content="娃娃屋/农场/树林/总部 布局·流程·道具·纸条详解。">
+<meta property="og:title" content="Pacify 玩法攻略 · 四图详解(平面图+notes图库)">
+<meta property="og:description" content="真实平面图 + 全notes位置图 + 详细流程。">
 <meta property="og:url" content="https://yisuccessgit.github.io/pacify/">
 <meta name="robots" content="index,follow">
 <style>html,body{margin:0;padding:0}</style>
@@ -216,6 +216,26 @@
   .mb-go{display:inline-block;margin-top:12px;font-family:var(--mono);font-size:12px;color:var(--mc)}
   .mapblock:hover .mb-go{text-decoration:underline}
 
+  /* image gallery + lightbox */
+  .gallery2{display:grid;grid-template-columns:repeat(auto-fill,minmax(148px,1fr));gap:9px;margin:6px 0}
+  .lb-thumb{padding:0;border:1px solid var(--hair);border-radius:5px;overflow:hidden;background:var(--panel);cursor:zoom-in;text-align:left;color:inherit;font:inherit;transition:border-color .12s}
+  .lb-thumb:hover{border-color:var(--blood)}
+  .lb-thumb img{width:100%;height:98px;object-fit:cover;display:block;background:var(--panel-3)}
+  .lb-thumb .tc{padding:5px 8px;font-size:10.5px;color:var(--muted);line-height:1.35;font-family:var(--mono)}
+  .fpgal{grid-template-columns:repeat(auto-fill,minmax(200px,1fr))}
+  .fpgal .lb-thumb img{height:130px;object-fit:contain;padding:4px}
+  .lb-overlay{position:fixed;inset:0;z-index:100;background:rgba(6,4,5,.95);display:none;align-items:center;justify-content:center;flex-direction:column;padding:44px 60px}
+  .lb-overlay.open{display:flex}
+  .lb-img{max-width:100%;max-height:80vh;object-fit:contain;border:1px solid var(--hair);border-radius:4px;background:#000}
+  .lb-cap{margin-top:12px;font-size:14px;color:var(--ink);text-align:center;max-width:80ch;line-height:1.5}
+  .lb-count{margin-top:5px;font-family:var(--mono);font-size:12px;color:var(--faint)}
+  .lb-close{position:absolute;top:14px;right:18px;font-size:20px;background:none;border:1px solid var(--hair);color:var(--muted);cursor:pointer;width:38px;height:38px;border-radius:6px}
+  .lb-close:hover{color:var(--ink);border-color:var(--blood)}
+  .lb-prev,.lb-next{position:absolute;top:50%;transform:translateY(-50%);font-size:34px;background:rgba(0,0,0,.35);border:1px solid var(--hair);color:var(--ink);cursor:pointer;width:44px;height:66px;border-radius:6px;line-height:1;display:flex;align-items:center;justify-content:center}
+  .lb-prev{left:12px}.lb-next{right:12px}
+  .lb-prev:hover,.lb-next:hover{border-color:var(--blood);background:rgba(192,57,43,.25)}
+  @media (max-width:560px){.lb-overlay{padding:44px 8px}.lb-prev,.lb-next{width:36px;height:56px;font-size:26px}}
+
   @media (max-width:680px){.maps{grid-template-columns:1fr}.notes-grid{grid-template-columns:1fr}}
   @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
 </style>
@@ -257,6 +277,15 @@
     <button class="tab" role="tab" data-view="master" aria-selected="false">成就总表 <span class="n">52</span></button>
     <button class="tab" role="tab" data-view="detail" aria-selected="false">成就详解</button>
   </div></div>
+
+  <div class="lb-overlay" id="lbOverlay" aria-hidden="true">
+    <button class="lb-close" id="lbClose" aria-label="关闭">✕</button>
+    <button class="lb-prev" id="lbPrev" aria-label="上一张">‹</button>
+    <img class="lb-img" id="lbImg" src="" alt="">
+    <button class="lb-next" id="lbNext" aria-label="下一张">›</button>
+    <div class="lb-cap" id="lbCap"></div>
+    <div class="lb-count" id="lbCount"></div>
+  </div>
 
   <main class="wrap">
     <!-- OVERVIEW (map landing · default) -->
@@ -329,7 +358,7 @@
       <div class="maps">
         <div class="mapcard"><h4>娃娃屋</h4><div class="en">Dolls · Emilie</div><p>点燃锅炉 → 烧掉所有黑暗娃娃 → 女孩变身时用「安抚娃娃」安抚 → 击晕后送货车通关。别把安抚娃娃烧了（除非专门做 Wrong Doll）。</p></div>
         <div class="mapcard"><h4>农场</h4><div class="en">Farm</div><p>蓄水 → 投毒 → 把击晕的鸡放入毒水做「毒鸡」→ 喂给怪物削弱它，再用独轮车搬走。普通鸡与毒鸡分别喂各解一个成就。</p></div>
-        <div class="mapcard"><h4>树林</h4><div class="en">Woods · Agnes</div><p>找齐材料（含小狗尾巴）投入大锅熬「女巫药剂」削弱 Agnes，昏倒后送货车通关；或投进净化湖触发隐藏结局。</p></div>
+        <div class="mapcard"><h4>树林</h4><div class="en">Woods · Agnes</div><p>找齐材料（含小狗尾巴）投入井熬「女巫药剂」削弱 Agnes，昏倒后送货车通关；或投进净化湖触发隐藏结局。</p></div>
         <div class="mapcard"><h4>总部</h4><div class="en">Headquarters · House of Souls</div><p>停电模式，最难。充电池 → 供电给收容单元把逃出的怪物关回去；维持门电量、烧诅咒娃娃、干扰枪击杀实体。You Can Do It! / Invincible 都在这。</p></div>
       </div>
     </section>
@@ -375,7 +404,7 @@
           <div class="rooms">
             <div class="room hub"><div class="room-t">🔥 锅炉房 Boiler</div><div class="mks"><span class="mk fire">烧 9 个标记娃娃</span><span class="mk">木柴/火柴</span><span class="mk note">纸条</span></div></div>
             <div class="room"><div class="room-t">入口 / 右侧房间</div><div class="mks"><span class="mk note">纸条×2</span></div></div>
-            <div class="room"><div class="room-t">纸箱间</div><div class="mks"><span class="mk key">大门钥匙(通关后出现)</span></div></div>
+            <div class="room"><div class="room-t">纸箱间</div><div class="mks"><span class="mk key">大门钥匙(固定·可无视)</span></div></div>
           </div>
         </div>
       </div>
@@ -385,6 +414,14 @@
         <span><i style="background:var(--hidden)"></i>标记娃娃·要烧</span>
         <span><i style="background:var(--coop)"></i>安抚娃娃·保命</span>
         <span><i style="background:var(--solo)"></i>纸条 notes</span>
+      </div>
+
+      <h3 class="sec-h">真实俯视平面图</h3>
+      <div class="attrib">转载 · 玩家绘制的俯视楼层平面图，来源 Steam 攻略《Pacify: Complete Guide [ESP/ENG]》· 作者 <b>Azucarilla</b> · <a href="https://steamcommunity.com/sharedfiles/filedetails/?id=1691164914" target="_blank" rel="noopener">原帖</a>。点图放大。</div>
+      <div class="gallery2 fpgal">
+        <button class="lb-thumb" data-src="img/dolls/fp/fp1.jpg" data-cap="娃娃屋 下层(地下室/一楼)平面图 · 图例:绿=标记娃娃 黄=安抚娃娃 红框=钥匙 蓝=木柴 · 转载自 Azucarilla"><img src="img/dolls/fp/fp1.jpg" alt="娃娃屋下层平面图" loading="lazy"><div class="tc">下层(地下室/一楼)</div></button>
+        <button class="lb-thumb" data-src="img/dolls/fp/fp2.jpg" data-cap="娃娃屋 上层(二楼)平面图 · 同图例 · 转载自 Azucarilla"><img src="img/dolls/fp/fp2.jpg" alt="娃娃屋上层平面图" loading="lazy"><div class="tc">上层(二楼)</div></button>
+        <button class="lb-thumb" data-src="img/dolls/fp/fp3.jpg" data-cap="娃娃屋 平面图/图例(同系列) · 转载自 Azucarilla"><img src="img/dolls/fp/fp3.jpg" alt="娃娃屋平面图补充" loading="lazy"><div class="tc">图例/补充</div></button>
       </div>
 
       <h3 class="sec-h">详细流程（单人）</h3>
@@ -418,33 +455,33 @@
       <p class="sec-sub">钥匙<b>具体点位半随机，但获取顺序与所在范围是固定的</b>——按下面规律找即可，不用乱翻：</p>
       <div class="chain"><span class="k">大厅①</span><span class="arw">→</span><span class="k">卧室②</span><span class="arw">→</span><span class="k">阁楼③</span><span class="arw">→</span><span class="k">地下室④</span><span class="arw">→</span><span class="k">大门⑤</span></div>
       <ul class="idist">
-        <li><b>大厅钥匙①</b>：在<b>一楼</b>（进门就找）。</li>
-        <li><b>卧室钥匙②</b>：也在<b>一楼</b>，但在<b>需要大厅钥匙才能解锁的区域</b>内。</li>
-        <li><b>阁楼钥匙③</b>：在<b>卧室</b>里（一楼或二楼的卧室）。</li>
-        <li><b>地下室钥匙④</b>：<b>固定</b>在<b>阁楼的小房间</b>（存放标记娃娃那间）。</li>
-        <li><b>大门钥匙⑤</b>：<b>通关之后</b>才会出现在<b>地下室的固定位置</b>——流程中可无视，烧完 9 娃娃正门会自动打开。</li>
+        <li><b>大厅钥匙①</b>：<b>随机点</b>（地下室楼梯口，或一楼客厅/图书室/厨房那片）——前三把都是随机位。</li>
+        <li><b>卧室钥匙②</b>：在<b>一楼</b>，但在<b>需大厅钥匙解锁的区域</b>内。</li>
+        <li><b>阁楼钥匙③</b>：基本在<b>二楼卧室</b>（极少数在一楼厨房正下方）。</li>
+        <li><b>地下室钥匙④</b>：<b>固定</b>在<b>阁楼小房间</b>（存放标记娃娃那间）。</li>
+        <li><b>大门钥匙⑤</b>：<b>固定</b>在<b>地下室锅炉房外堆箱子的小屋</b>，从头就在、可提前拿；但只是<b>可选逃生道具</b>——真正通关是烧完 9 娃娃后正门自动开。<span style="color:var(--faint)">(注:此处与"通关后才出现"的说法不同，据 Steam 攻略实为一开始就固定在地下室)</span></li>
       </ul>
 
       <h3 class="sec-h">全 Notes 收集（成就 I love lore!）</h3>
-      <p class="sec-sub">各攻略给的总数不一致（12 / 15 / 16 张），因为纸条点位半随机、且是否计入地下室/阁楼分法不同。成就要求把<b>本局出现的全部纸条</b>读完，<b>可分多局累积</b>。下面给两种分区对照：</p>
-      <div class="notes-grid">
-        <div class="notebox">
-          <h5>详版 · 16 张（按区域）</h5>
-          <ul>
-            <li><b>地下室 ×3</b>：入口左侧 / 右边房间 / 锅炉房内</li>
-            <li><b>地面层 ×6</b>：图书馆 ×2 / 主休息室尽头左房 / 走廊尽头房 / 起居室 / 对侧门左转</li>
-            <li><b>一楼 ×5</b>：左侧房 / 右侧房 / 回廊尽头图书馆 / 主卧 / 主卧旁浴室</li>
-            <li><b>阁楼 ×2</b>：阁楼门正前方 / 阁楼房间内</li>
-          </ul>
-        </div>
-        <div class="notebox">
-          <h5>对照版 · 15 张（按楼层）</h5>
-          <ul>
-            <li><b>地面层 ×8</b>：入口 1 / 厨房 2 / 餐厅 3 / 图书馆 2</li>
-            <li><b>二楼 ×7</b>：两间浴室各 1（共 2）/ 东向长卧 1 / 西向长卧 3 / 东卧旁小房间 1</li>
-            <li style="color:var(--faint)">（若某局漏读，可在后续对局补齐）</li>
-          </ul>
-        </div>
+      <p class="sec-sub">娃娃屋共 <b>16 张</b>纸条：<b>地下室 3 · 一楼 6 · 二楼 5 · 阁楼 2</b>。读完全部解锁 <b>I love lore!</b>，可分多局累积。（网上常见的「15 张 / 8+7」其实是<b>农场</b>图的，别混。）每张都有位置图——<b>点图放大、左右切换</b>：</p>
+      <div class="attrib">转载 · Note 位置图来源 Steam 攻略《Lore Documents Location》· 作者 <b>Knight</b> · <a href="https://steamcommunity.com/sharedfiles/filedetails/?id=1689577740" target="_blank" rel="noopener">原帖</a>。版权归原作者，仅作参考。</div>
+      <div class="gallery2">
+        <button class="lb-thumb" data-src="img/dolls/notes/n01.jpg" data-cap="地下室① 下地下室洞口的左侧"><img src="img/dolls/notes/n01.jpg" alt="note" loading="lazy"><div class="tc">地下室①</div></button>
+        <button class="lb-thumb" data-src="img/dolls/notes/n02.jpg" data-cap="地下室② 上一处右手边的房间内"><img src="img/dolls/notes/n02.jpg" alt="note" loading="lazy"><div class="tc">地下室②</div></button>
+        <button class="lb-thumb" data-src="img/dolls/notes/n03.jpg" data-cap="地下室③ 锅炉房内（需地下室钥匙才能进）"><img src="img/dolls/notes/n03.jpg" alt="note" loading="lazy"><div class="tc">地下室③</div></button>
+        <button class="lb-thumb" data-src="img/dolls/notes/n04.jpg" data-cap="一楼① 锅炉房旁楼梯上来、左侧图书室处"><img src="img/dolls/notes/n04.jpg" alt="note" loading="lazy"><div class="tc">一楼①</div></button>
+        <button class="lb-thumb" data-src="img/dolls/notes/n05.jpg" data-cap="一楼② 图书室另一侧"><img src="img/dolls/notes/n05.jpg" alt="note" loading="lazy"><div class="tc">一楼②</div></button>
+        <button class="lb-thumb" data-src="img/dolls/notes/n06.jpg" data-cap="一楼③ 出图书室左门、穿主客厅到底、转进左边房间"><img src="img/dolls/notes/n06.jpg" alt="note" loading="lazy"><div class="tc">一楼③</div></button>
+        <button class="lb-thumb" data-src="img/dolls/notes/n07.jpg" data-cap="一楼④ 沿走廊到尽头房间"><img src="img/dolls/notes/n07.jpg" alt="note" loading="lazy"><div class="tc">一楼④</div></button>
+        <button class="lb-thumb" data-src="img/dolls/notes/n08.jpg" data-cap="一楼⑤ 紧邻上一间的起居室内"><img src="img/dolls/notes/n08.jpg" alt="note" loading="lazy"><div class="tc">一楼⑤</div></button>
+        <button class="lb-thumb" data-src="img/dolls/notes/n09.jpg" data-cap="一楼⑥ 从起居室另一扇门出去、左转"><img src="img/dolls/notes/n09.jpg" alt="note" loading="lazy"><div class="tc">一楼⑥</div></button>
+        <button class="lb-thumb" data-src="img/dolls/notes/n10.jpg" data-cap="二楼① 上一段位置附近上楼、左侧房间"><img src="img/dolls/notes/n10.jpg" alt="note" loading="lazy"><div class="tc">二楼①</div></button>
+        <button class="lb-thumb" data-src="img/dolls/notes/n11.jpg" data-cap="二楼② 楼梯右侧的另一间房"><img src="img/dolls/notes/n11.jpg" alt="note" loading="lazy"><div class="tc">二楼②</div></button>
+        <button class="lb-thumb" data-src="img/dolls/notes/n12.jpg" data-cap="二楼③ 沿主厅顶部走廊到尽头右转的图书室"><img src="img/dolls/notes/n12.jpg" alt="note" loading="lazy"><div class="tc">二楼③</div></button>
+        <button class="lb-thumb" data-src="img/dolls/notes/n13.jpg" data-cap="二楼④ 主客厅上层另一侧、左转第一扇右门的主卧"><img src="img/dolls/notes/n13.jpg" alt="note" loading="lazy"><div class="tc">二楼④</div></button>
+        <button class="lb-thumb" data-src="img/dolls/notes/n14.jpg" data-cap="二楼⑤ 主卧旁的浴室"><img src="img/dolls/notes/n14.jpg" alt="note" loading="lazy"><div class="tc">二楼⑤</div></button>
+        <button class="lb-thumb" data-src="img/dolls/notes/n15.jpg" data-cap="阁楼① 紧闭的阁楼门前"><img src="img/dolls/notes/n15.jpg" alt="note" loading="lazy"><div class="tc">阁楼①</div></button>
+        <button class="lb-thumb" data-src="img/dolls/notes/n16.jpg" data-cap="阁楼② 上锁的阁楼房间内"><img src="img/dolls/notes/n16.jpg" alt="note" loading="lazy"><div class="tc">阁楼②</div></button>
       </div>
 
       <h3 class="sec-h">娃娃屋相关成就</h3>
@@ -531,29 +568,20 @@
       </ul>
 
       <h3 class="sec-h">全 Notes 收集（成就 Interesting Story）</h3>
-      <p class="sec-sub">据一篇 All Notes 专攻略，农场约 <b>27 张</b>纸条，部分需断线钳开锁才能拿；读完全部解锁 <b>Interesting Story</b>。个别摆放可能随版本微调。</p>
-      <div class="notes-grid">
-        <div class="notebox">
-          <h5>主屋（约 15 张）</h5>
-          <ul>
-            <li>一层厨房：小桌 1 · 通谷仓门旁 1</li>
-            <li>一层主入口/客厅：进门右侧桌 1</li>
-            <li>二层后门入口：右侧桌 1</li>
-            <li>二层第一间开放房（绿家具）：1</li>
-            <li>二层某卧室：床头柜 1 · <b>桌上一堆 8 张</b></li>
-            <li>二层浴室：马桶上方 1</li>
-            <li>阁楼：沙发+手提箱旁 1</li>
-          </ul>
-        </div>
-        <div class="notebox">
-          <h5>棚 + 谷仓（约 8 张）</h5>
-          <ul>
-            <li>毒药棚：靠墙桌上（毒药袋附近）1</li>
-            <li>谷仓二层：上楼对面书桌 2</li>
-            <li>谷仓二层：梳妆台/柜子 3</li>
-            <li>谷仓二层：楼梯栅栏旁小桌 2</li>
-          </ul>
-        </div>
+      <p class="sec-sub">农场约 <b>24 张</b>纸条（含卧室大桌上<b>一次 8 张</b>那处，最易漏数），部分需先用断线钳开锁；读完解锁 <b>Interesting Story</b>。每处位置都有图——<b>点图放大、左右切换</b>：</p>
+      <div class="attrib">转载 · Note 位置图来源 Steam 攻略《Farm - All Notes / Lore》· 作者 <b>Nitro</b> · <a href="https://steamcommunity.com/sharedfiles/filedetails/?id=2832651451" target="_blank" rel="noopener">原帖</a>。版权归原作者，仅作参考。</div>
+      <div class="gallery2">
+        <button class="lb-thumb" data-src="img/farm/notes/n01.jpg" data-cap="主屋一楼厨房：通谷仓的门上 1 张 + 白色小桌上 1 张"><img src="img/farm/notes/n01.jpg" alt="note" loading="lazy"><div class="tc">厨房(门+桌)</div></button>
+        <button class="lb-thumb" data-src="img/farm/notes/n02.jpg" data-cap="主屋一楼正门入口右侧桌上"><img src="img/farm/notes/n02.jpg" alt="note" loading="lazy"><div class="tc">入口桌</div></button>
+        <button class="lb-thumb" data-src="img/farm/notes/n03.jpg" data-cap="主屋一楼层(经屋外楼梯进的后门)右侧桌上"><img src="img/farm/notes/n03.jpg" alt="note" loading="lazy"><div class="tc">后门桌</div></button>
+        <button class="lb-thumb" data-src="img/farm/notes/n05.jpg" data-cap="主屋一楼层卧室 床头柜上"><img src="img/farm/notes/n05.jpg" alt="note" loading="lazy"><div class="tc">卧室床头柜</div></button>
+        <button class="lb-thumb" data-src="img/farm/notes/n06.jpg" data-cap="主屋一楼层卧室 大桌上：一次性 8 张（最易漏数的一处！）"><img src="img/farm/notes/n06.jpg" alt="note" loading="lazy"><div class="tc">卧室桌·8张</div></button>
+        <button class="lb-thumb" data-src="img/farm/notes/n07.jpg" data-cap="主屋一楼层厕所（马桶处）"><img src="img/farm/notes/n07.jpg" alt="note" loading="lazy"><div class="tc">厕所</div></button>
+        <button class="lb-thumb" data-src="img/farm/notes/n08.jpg" data-cap="阁楼：靠沙发与手提箱的桌上"><img src="img/farm/notes/n08.jpg" alt="note" loading="lazy"><div class="tc">阁楼</div></button>
+        <button class="lb-thumb" data-src="img/farm/notes/n09.jpg" data-cap="工具/毒药屋：墙边桌上（旁有工具与毒药袋，需断线钳开）"><img src="img/farm/notes/n09.jpg" alt="note" loading="lazy"><div class="tc">毒药屋</div></button>
+        <button class="lb-thumb" data-src="img/farm/notes/n10.jpg" data-cap="谷仓二层：翻倒的书桌上（2 张）"><img src="img/farm/notes/n10.jpg" alt="note" loading="lazy"><div class="tc">谷仓·书桌</div></button>
+        <button class="lb-thumb" data-src="img/farm/notes/n11.jpg" data-cap="谷仓二层：小柜/矮橱上（3 张）"><img src="img/farm/notes/n11.jpg" alt="note" loading="lazy"><div class="tc">谷仓·矮橱</div></button>
+        <button class="lb-thumb" data-src="img/farm/notes/n12.jpg" data-cap="谷仓二层：靠楼梯栅栏的小桌上（2 张）"><img src="img/farm/notes/n12.jpg" alt="note" loading="lazy"><div class="tc">谷仓·梯旁</div></button>
       </div>
 
       <h3 class="sec-h">农场相关成就</h3>
@@ -566,7 +594,7 @@
     <section class="view" id="view-woods">
       <div class="thesis">
         <div class="lbl">树林 Woods · 女巫 Agnes · 目标</div>
-        <p>用 <b>女巫头发 + 小狗尾巴 + 树枝娃娃</b> 在地下室<b>大锅</b>熬出 <b>9 个附魔娃娃</b>，插到巢穴墙上的<b>尖刺</b>削弱女巫 Agnes；她昏倒后抬上<b>货车</b>带回总部通关。随身带<b>玫瑰</b>：被 Agnes 抓住时递给她可暂时安抚保命。</p>
+        <p>用 <b>女巫头发 + 小狗尾巴 + 树枝娃娃</b> 到地窖尽头的<b>井(well)</b>边附魔出 <b>9 个娃娃</b>，插到巢穴墙上的<b>尖刺</b>削弱女巫 Agnes；她昏倒后抬上<b>货车</b>带回总部通关。随身带<b>玫瑰</b>：被 Agnes 抓住时递给她可暂时安抚保命。</p>
       </div>
 
       <h3 class="sec-h">区域示意图</h3>
@@ -593,7 +621,7 @@
         <div class="floor">
           <div class="floor-name">地下室<small>LAIR</small></div>
           <div class="rooms">
-            <div class="room hub"><div class="room-t">女巫巢穴（Agnes 主动）</div><div class="mks"><span class="mk fire">大锅(熬药)</span><span class="mk">墙上尖刺(插娃娃×9)</span><span class="mk pdoll">药水(速度/隐身)</span></div></div>
+            <div class="room hub"><div class="room-t">女巫巢穴（Agnes 主动）</div><div class="mks"><span class="mk fire">井(熬药)</span><span class="mk">墙上尖刺(插娃娃×9)</span><span class="mk pdoll">药水(速度/隐身)</span></div></div>
           </div>
         </div>
         <div class="floor">
@@ -608,10 +636,17 @@
       </div>
       <div class="legend">
         <span><i style="background:var(--rarec)"></i>钥匙/工具</span>
-        <span><i style="background:var(--blood)"></i>熬药材料/大锅</span>
+        <span><i style="background:var(--blood)"></i>熬药材料/井</span>
         <span><i style="background:var(--hidden)"></i>女巫/危险</span>
         <span><i style="background:var(--coop)"></i>安抚/安全/药水</span>
         <span><i style="background:var(--solo)"></i>纸条 notes</span>
+      </div>
+
+      <h3 class="sec-h">真实俯视平面图</h3>
+      <div class="attrib">转载 · 玩家绘制的一/二楼平面图（红点=纸条、蓝点=钥匙可能点、绿点=女巫头发），来源攻略《Pacify - Map of the House in Woods》· 发布者 <b>Robins Chew</b>（<a href="https://www.gamepretty.com/pacify-map-of-the-house-in-woods/" target="_blank" rel="noopener">GamePretty 转载</a>）。点图放大。</div>
+      <div class="gallery2 fpgal">
+        <button class="lb-thumb" data-src="img/woods/fp/fp1.png" data-cap="树林宅子 一楼平面图 · 红点=纸条 蓝点=钥匙可能点 绿点=女巫头发 · 转载自 Robins Chew"><img src="img/woods/fp/fp1.png" alt="树林一楼平面图" loading="lazy"><div class="tc">一楼平面图</div></button>
+        <button class="lb-thumb" data-src="img/woods/fp/fp2.png" data-cap="树林宅子 二楼平面图 · 同图例 · 转载自 Robins Chew"><img src="img/woods/fp/fp2.png" alt="树林二楼平面图" loading="lazy"><div class="tc">二楼平面图</div></button>
       </div>
 
       <h3 class="sec-h">详细流程（单人）</h3>
@@ -622,12 +657,12 @@
         <li>在宅内收集<b>女巫头发</b>（一层桌面尤其留声机旁、二层浴室；全图约 11 撮，每次熬药用 1 撮，要反复来取）。</li>
         <li>经厨房后门到<b>狗园</b>（Gate Key 开），剪下<b>小狗尾巴</b>。</li>
         <li>去宅后<b>墓地</b>拿<b>树枝娃娃</b>——拾取后会被「孩子影子」追，拿离你远的那个、拿完就跑。</li>
-        <li>带齐三材料从玩具房旁的门下<b>地下室巢穴</b>（进去后 Agnes 立刻主动追人）。把三样投入<b>大锅</b>熬煮附魔，取出附魔娃娃<b>插到墙上尖刺</b> = 削弱 1 次。</li>
+        <li>带齐三材料从玩具房旁的门下<b>地下室巢穴</b>（进去后 Agnes 立刻主动追人）。把三样投入<b>井</b>熬煮附魔，取出附魔娃娃<b>插到墙上尖刺</b> = 削弱 1 次。</li>
         <li><b>重复步骤 4→7 共 9 次</b>（每次重取头发/尾巴/娃娃）。用<b>药水</b>管理：速度药水（约30秒）前中期甩女巫；隐身药水（约60秒·共3瓶）留给最后 2–3 个。</li>
-        <li>插满第 9 个后 Agnes 被削弱昏倒（出现在玩具房/大锅旁）。</li>
+        <li>插满第 9 个后 Agnes 被削弱昏倒（出现在玩具房/井旁）。</li>
         <li>标准结局：把昏迷的 Agnes 抬上宅外<b>货车</b>带回总部 → 通关。<b>隐藏结局</b>：改把她拖进<b>净化湖</b>，她会融化、释放孩子灵魂（Release The Children's Spirits）。</li>
       </ol>
-      <div class="imgslot"><b>【真图占位】</b>贴你自己的截图：大锅熬药 / 墙上插满附魔娃娃</div>
+      <div class="imgslot"><b>【真图占位】</b>贴你自己的截图：井熬药 / 墙上插满附魔娃娃</div>
 
       <h3 class="sec-h">道具分布</h3>
       <ul class="idist">
@@ -639,30 +674,30 @@
       </ul>
 
       <h3 class="sec-h">全 Notes 收集（成就 Notes From a Lost Child）</h3>
-      <p class="sec-sub">树林共 <b>15 张</b>纸条（一层 8 + 二层 7），读完解锁 <b>Notes From a Lost Child</b>。</p>
-      <div class="notes-grid">
-        <div class="notebox">
-          <h5>一层 · 8 张</h5>
-          <ul>
-            <li>进门左转桌上 / 进门向右一张桌上 / 紧挨其旁架子顶</li>
-            <li>厨房尽头 / 厨房靠门处</li>
-            <li>餐厅大桌 / 餐厅小桌 / 餐厅另一张大桌</li>
-          </ul>
-        </div>
-        <div class="notebox">
-          <h5>二层 · 7 张</h5>
-          <ul>
-            <li>左侧门进的卧室床上 / 其旁角落椅子上</li>
-            <li>左浴室马桶水箱顶 / 出浴室走廊桌上</li>
-            <li>右浴室马桶水箱顶 / 对侧走廊桌上 / 附近房间椅子上</li>
-          </ul>
-        </div>
+      <p class="sec-sub">树林共 <b>15 张</b>纸条（一层 8 + 二层 7），读完解锁 <b>Notes From a Lost Child</b>。关手电更易看清纸条。第一张是<b>总览图</b>，其余为逐处位置——<b>点图放大、左右切换</b>：</p>
+      <div class="attrib">转载 · Note 位置图来源 Steam 攻略《Pacify: Complete Guide [ESP/ENG]》· 作者 <b>Azucarilla</b> · <a href="https://steamcommunity.com/sharedfiles/filedetails/?id=1691164914" target="_blank" rel="noopener">原帖</a>。版权归原作者，仅作参考。</div>
+      <div class="gallery2">
+        <button class="lb-thumb" data-src="img/woods/notes/n01.jpg" data-cap="树林 纸条位置总览图"><img src="img/woods/notes/n01.jpg" alt="总览" loading="lazy"><div class="tc">总览图</div></button>
+        <button class="lb-thumb" data-src="img/woods/notes/n02.jpg" data-cap="一层 · 入口/门厅区"><img src="img/woods/notes/n02.jpg" alt="note" loading="lazy"><div class="tc">一层·入口</div></button>
+        <button class="lb-thumb" data-src="img/woods/notes/n03.jpg" data-cap="一层 · 门厅区"><img src="img/woods/notes/n03.jpg" alt="note" loading="lazy"><div class="tc">一层</div></button>
+        <button class="lb-thumb" data-src="img/woods/notes/n04.jpg" data-cap="一层 · 厨房区"><img src="img/woods/notes/n04.jpg" alt="note" loading="lazy"><div class="tc">一层·厨房</div></button>
+        <button class="lb-thumb" data-src="img/woods/notes/n05.jpg" data-cap="一层 · 厨房/餐厅区"><img src="img/woods/notes/n05.jpg" alt="note" loading="lazy"><div class="tc">一层·厨/餐</div></button>
+        <button class="lb-thumb" data-src="img/woods/notes/n06.jpg" data-cap="一层 · 餐厅区"><img src="img/woods/notes/n06.jpg" alt="note" loading="lazy"><div class="tc">一层·餐厅</div></button>
+        <button class="lb-thumb" data-src="img/woods/notes/n07.jpg" data-cap="一层 · 餐厅区"><img src="img/woods/notes/n07.jpg" alt="note" loading="lazy"><div class="tc">一层·餐厅</div></button>
+        <button class="lb-thumb" data-src="img/woods/notes/n08.jpg" data-cap="一层 · 餐厅/书房区"><img src="img/woods/notes/n08.jpg" alt="note" loading="lazy"><div class="tc">一层·餐/书</div></button>
+        <button class="lb-thumb" data-src="img/woods/notes/n09.jpg" data-cap="一层 · 书房 library 区"><img src="img/woods/notes/n09.jpg" alt="note" loading="lazy"><div class="tc">一层·书房</div></button>
+        <button class="lb-thumb" data-src="img/woods/notes/n10.jpg" data-cap="二层 · 大浴室"><img src="img/woods/notes/n10.jpg" alt="note" loading="lazy"><div class="tc">二层·浴室</div></button>
+        <button class="lb-thumb" data-src="img/woods/notes/n11.jpg" data-cap="二层 · 另一大浴室"><img src="img/woods/notes/n11.jpg" alt="note" loading="lazy"><div class="tc">二层·浴室</div></button>
+        <button class="lb-thumb" data-src="img/woods/notes/n12.jpg" data-cap="二层 · 东侧长卧室"><img src="img/woods/notes/n12.jpg" alt="note" loading="lazy"><div class="tc">二层·东卧</div></button>
+        <button class="lb-thumb" data-src="img/woods/notes/n13.jpg" data-cap="二层 · 西侧长卧室"><img src="img/woods/notes/n13.jpg" alt="note" loading="lazy"><div class="tc">二层·西卧</div></button>
+        <button class="lb-thumb" data-src="img/woods/notes/n14.jpg" data-cap="二层 · 西侧长卧室"><img src="img/woods/notes/n14.jpg" alt="note" loading="lazy"><div class="tc">二层·西卧</div></button>
+        <button class="lb-thumb" data-src="img/woods/notes/n15.jpg" data-cap="二层 · 西侧长卧室 / 东卧旁小房间"><img src="img/woods/notes/n15.jpg" alt="note" loading="lazy"><div class="tc">二层·小房</div></button>
       </div>
 
       <h3 class="sec-h">树林相关成就</h3>
       <p class="sec-sub">完整清单见 <b>「成就详解 → 树林」</b>。要点：<b>Explore The Creepy Woods Together</b>（合作）、<b>Only You And The Witch / Who Cares About The Team</b>（单人/PvP）、<b>Witch's Brew / Poor Puppy / Release The Power</b>（熬药链）、<b>Release The Children's Spirits</b>（隐藏·投湖）、<b>Notes From a Lost Child</b>、<b>Beat the Game Developer III</b>（单人 20 分钟速通）。</p>
 
-      <div class="credit"><b>参考来源：</b>综合自 Steam 社区 Pacify 攻略与 Fandom Wiki 整理核对；<b>区域示意图为本站原创绘制</b>。真图占位建议贴你自己的截图。（注：熬药点「大锅 cauldron」与旧版「井 well」为同一处；材料/娃娃总数约 11、所需 9 为多数攻略口径，实机以够用为准。）</div>
+      <div class="credit"><b>参考来源：</b>综合自 Steam 社区 Pacify 攻略与 Fandom Wiki 整理核对；<b>区域示意图为本站原创绘制</b>。（注：<b>附魔点是地窖尽头的井(well)</b>，部分旧攻略误称「大锅 cauldron」；材料/娃娃总数约 11、所需 9 为多数攻略口径，实机以够用为准。）</div>
     </section>
 
     <!-- HEADQUARTERS MAP GUIDE (most detailed) -->
@@ -693,7 +728,7 @@
             <div class="room hub"><div class="room-t">8 个收容牢房 Cells 1–8</div><div class="mks"><span class="mk key">每门插 1 电池维持</span><span class="mk mdoll">耗尽=越狱</span></div></div>
             <div class="room"><div class="room-t">Lesser 单元（Shag）</div><div class="mks"><span class="mk key">2 块慢放电池</span><span class="mk mdoll">Shag 从此越狱</span></div></div>
             <div class="room"><div class="room-t">发电/充电室（中央·两处）</div><div class="mks"><span class="mk key">给空电池充电</span></div></div>
-            <div class="room"><div class="room-t">焚化炉（入口楼梯前）</div><div class="mks"><span class="mk fire">供电·烧诅咒娃娃</span></div></div>
+            <div class="room"><div class="room-t">焚化炉（Beta环·近出口）</div><div class="mks"><span class="mk fire">供电·烧诅咒娃娃</span></div></div>
             <div class="room"><div class="room-t">干扰枪炮台 Disruptor（沿走廊）</div><div class="mks"><span class="mk fire">打 Shag·每发耗电池25-50%</span></div></div>
           </div>
         </div>
@@ -703,6 +738,12 @@
         <span><i style="background:var(--blood)"></i>焚化炉/干扰枪/供电点</span>
         <span><i style="background:var(--hidden)"></i>实体/危险</span>
         <span><i style="background:var(--coop)"></i>安抚道具</span>
+      </div>
+
+      <h3 class="sec-h">真实楼层平面图</h3>
+      <div class="attrib">转载 · 官方向导内嵌的下层(收容层)真实平面图，来源 Steam 攻略《Headquarters Guide》· 作者 <b>Raptvre</b> · <a href="https://steamcommunity.com/sharedfiles/filedetails/?id=3037211738" target="_blank" rel="noopener">原帖</a>。点图放大。</div>
+      <div class="gallery2 fpgal">
+        <button class="lb-thumb" data-src="img/hq/fp/fp1.jpg" data-cap="总部 下层(收容层)真实平面图 · 左 Alpha Loop / 右 Beta Loop 两条环形走廊 · 8 个收容室(编号1-8) · 中央=充电器 · 顶部=Lesser 收容单元(LCU) · 焚化炉在 Beta Loop 近出口 · 图例:绿=供电插座 蓝=干扰枪 红框=收容室 · 转载自 Raptvre"><img src="img/hq/fp/fp1.jpg" alt="总部下层平面图" loading="lazy"><div class="tc">下层(收容层)平面图</div></button>
       </div>
 
       <div class="callout">
@@ -828,7 +869,7 @@
     ["Magical Windmill","魔法风车","woods",30,true,"any",false,"在风车处被复活。","需先在树林中「倒下」，再于风车处复活；合作更易触发。"],
     ["Poor Puppy","可怜的小狗","woods",29.9,true,"any",false,"剪下一只小狗的尾巴。","女巫药剂材料之一，找到小狗用剪刀取尾，别错过材料点。"],
     ["Explore The Creepy Woods Together","一起探索恐怖树林","woods",28.3,false,"coop",false,"以合作模式在树林地图游玩。","进入树林 Co-op 局即解锁。"],
-    ["Witch's Brew","女巫药剂","woods",25.8,false,"any",false,"在大锅里把各种材料混合。","集齐材料（含小狗尾巴等）投入大锅，是削弱女巫的核心。"],
+    ["Witch's Brew","女巫药剂","woods",25.8,false,"any",false,"在井里把各种材料混合。","集齐材料（含小狗尾巴等）投入井，是削弱女巫的核心。"],
     ["Release The Power","释放力量","woods",24.9,true,"any",false,"刺穿一个附魔的树枝娃娃。","树林特有机制，用尖物刺穿；易与其他步骤混淆而漏做。"],
     ["Capture The Witch!","抓住女巫！","woods",13.2,false,"any",false,"削弱女巫 Agnes 后把她带到货车（树林正常通关结局）。","用药剂削弱女巫使其昏倒，再搬去货车。"],
     ["Only You And The Witch","只有你和女巫","woods",2.2,false,"solo",false,"单人（Solo）在树林地图游玩。","单人进入树林局即解锁。"],
@@ -975,6 +1016,27 @@
     var el=document.getElementById(slug(en));
     if(el){el.scrollIntoView({behavior:"smooth",block:"center"});el.classList.remove("flash");void el.offsetWidth;el.classList.add("flash");setTimeout(function(){el.classList.remove("flash");},1900);}
   }
+
+  // ---------- lightbox gallery ----------
+  (function(){
+    var ov=document.getElementById("lbOverlay"),im=document.getElementById("lbImg"),cp=document.getElementById("lbCap"),ct=document.getElementById("lbCount");
+    if(!ov)return;
+    var cur=[],idx=0;
+    function show(){im.src=cur[idx].src;cp.textContent=cur[idx].cap;ct.textContent=(idx+1)+" / "+cur.length;}
+    function openLB(list,i){cur=list;idx=i;ov.classList.add("open");ov.setAttribute("aria-hidden","false");show();}
+    function closeLB(){ov.classList.remove("open");ov.setAttribute("aria-hidden","true");im.src="";}
+    function nav(d){idx=(idx+d+cur.length)%cur.length;show();}
+    document.getElementById("lbClose").addEventListener("click",closeLB);
+    document.getElementById("lbPrev").addEventListener("click",function(e){e.stopPropagation();nav(-1);});
+    document.getElementById("lbNext").addEventListener("click",function(e){e.stopPropagation();nav(1);});
+    ov.addEventListener("click",function(e){if(e.target===ov)closeLB();});
+    document.addEventListener("keydown",function(e){if(!ov.classList.contains("open"))return;if(e.key==="Escape")closeLB();else if(e.key==="ArrowLeft")nav(-1);else if(e.key==="ArrowRight")nav(1);});
+    [].forEach.call(document.querySelectorAll(".gallery2"),function(g){
+      var thumbs=[].slice.call(g.querySelectorAll(".lb-thumb"));
+      var imgs=thumbs.map(function(t){return {src:t.dataset.src,cap:t.dataset.cap};});
+      thumbs.forEach(function(t,i){t.addEventListener("click",function(){openLB(imgs,i);});});
+    });
+  })();
 
   // footer
   var foot=document.createElement("div");foot.className="foot wrap";
