@@ -3,13 +3,13 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Pacify 全成就攻略｜52 成就·4 地图·刷取指南 · 易PLAY全成就攻略站</title>
-<meta name="description" content="Pacify 全部 52 个 Steam 成就攻略：4 张地图(娃娃屋/农场/树林/总部)、单人/合作/PvP 分类、隐藏结局与可错过标注、全球完成率与刷取指南，可勾选记录进度。">
+<title>Pacify 全成就攻略｜52 成就·4 地图·娃娃屋详解 · 易PLAY全成就攻略站</title>
+<meta name="description" content="Pacify 全成就攻略：娃娃屋/农场/树林/总部四张地图详解(布局示意图+详细流程+道具分布+全notes位置)、52个成就单人/合作/PvP分类与刷取指南，可勾选进度。">
 <meta name="author" content="易PLAY">
 <link rel="canonical" href="https://yisuccessgit.github.io/pacify/">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Pacify 全成就攻略 · 52 成就 4 地图">
-<meta property="og:description" content="单人/合作/PvP 分类、隐藏结局、刷取指南，可勾选进度。">
+<meta property="og:title" content="Pacify 全成就攻略 · 地图详解 + 52 成就">
+<meta property="og:description" content="娃娃屋等地图布局/流程/道具/notes 详解 + 全成就分类，可勾选进度。">
 <meta property="og:url" content="https://yisuccessgit.github.io/pacify/">
 <meta name="robots" content="index,follow">
 <style>html,body{margin:0;padding:0}</style>
@@ -159,7 +159,44 @@
   .cta-btn.primary{background:var(--blood);border-color:var(--blood);color:#fff}
   .foot{border-top:1px solid var(--hair);margin-top:26px;padding:18px 0 8px;color:var(--faint);font-size:12px;line-height:1.7}.foot b{color:var(--muted)}
 
-  @media (max-width:680px){.maps{grid-template-columns:1fr}}
+  /* floor plan */
+  .fp{display:flex;flex-direction:column;gap:8px;background:var(--panel);border:1px solid var(--hair);border-radius:8px;padding:14px;margin-bottom:6px}
+  .fp-note{font-family:var(--mono);font-size:11.5px;color:var(--muted);line-height:1.5;padding-bottom:2px}
+  .floor{display:flex;gap:10px;align-items:stretch;background:var(--panel-2);border:1px solid var(--hair);border-radius:6px;padding:9px 10px}
+  .floor-name{flex:0 0 58px;display:flex;flex-direction:column;justify-content:center;font-family:var(--serif);font-size:14px;color:#F0E8E7;border-right:1px solid var(--hair);padding-right:8px}
+  .floor-name small{font-family:var(--mono);font-size:8.5px;color:var(--faint);letter-spacing:.1em}
+  .rooms{display:flex;flex-wrap:wrap;gap:7px;flex:1;align-content:center}
+  .room{background:var(--panel-3);border:1px solid var(--hair);border-radius:5px;padding:6px 9px;flex:1 1 130px;min-width:120px}
+  .room.hub{border-color:var(--blood);background:rgba(192,57,43,.1)}
+  .room-t{font-size:12px;font-weight:700;color:var(--ink);margin-bottom:5px}
+  .mks{display:flex;flex-wrap:wrap;gap:4px}
+  .mk{font-family:var(--mono);font-size:9.5px;padding:1px 6px;border-radius:10px;border:1px solid var(--hair);white-space:nowrap}
+  .mk.key{color:#E6C374;border-color:#5A481F;background:rgba(185,138,52,.14)}
+  .mk.fire{color:#E68A7E;border-color:#5E2B25;background:rgba(192,57,43,.16)}
+  .mk.mdoll{color:#C6A9E4;border-color:#43315A;background:rgba(138,102,176,.16)}
+  .mk.pdoll{color:#93D9B4;border-color:#2E5A44;background:rgba(79,158,119,.12)}
+  .mk.note{color:#A9C6DE;border-color:#33505F;background:rgba(108,142,174,.12)}
+  .legend{display:flex;flex-wrap:wrap;gap:12px;font-family:var(--mono);font-size:10.5px;color:var(--muted)}
+  .legend span{display:inline-flex;align-items:center;gap:5px}
+  .legend i{width:9px;height:9px;border-radius:50%;display:inline-block}
+  .imgslot{border:1px dashed #4A3A3D;background:rgba(255,255,255,.02);border-radius:6px;padding:15px;text-align:center;color:var(--faint);font-family:var(--mono);font-size:12px;margin:10px 0;line-height:1.6}
+  .imgslot b{color:var(--muted)}
+  .chain{display:flex;flex-wrap:wrap;align-items:center;gap:7px;font-family:var(--mono);font-size:12px;margin:6px 0}
+  .chain .k{background:rgba(185,138,52,.14);border:1px solid #5A481F;color:#E6C374;padding:4px 9px;border-radius:5px}
+  .chain .arw{color:var(--faint)}
+  .idist{list-style:none;margin:6px 0 0;padding:0;display:flex;flex-direction:column;gap:7px}
+  .idist li{font-size:13px;line-height:1.5;padding-left:14px;position:relative;color:var(--ink)}
+  .idist li::before{content:"";position:absolute;left:2px;top:7px;width:6px;height:6px;border-radius:50%;background:var(--blood)}
+  .idist b{color:#E6C374}
+  .notes-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .notebox{background:var(--panel);border:1px solid var(--hair);border-radius:6px;padding:12px 14px}
+  .notebox h5{margin:0 0 8px;font-family:var(--mono);font-size:11px;letter-spacing:.08em;color:var(--solo);text-transform:uppercase}
+  .notebox ul{margin:0;padding-left:16px;display:flex;flex-direction:column;gap:5px}
+  .notebox li{font-size:12.5px;color:var(--muted);line-height:1.5}.notebox li b{color:var(--ink)}
+  .credit{background:var(--panel);border:1px solid var(--hair);border-left:3px solid var(--faint);border-radius:6px;padding:12px 15px;font-size:12px;color:var(--muted);line-height:1.7;margin-top:16px}
+  .credit b{color:var(--ink)}
+
+  @media (max-width:680px){.maps{grid-template-columns:1fr}.notes-grid{grid-template-columns:1fr}}
   @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
 </style>
 
@@ -192,6 +229,7 @@
 
   <div class="tabbar"><div class="wrap tabbar-inner" role="tablist">
     <button class="tab" role="tab" data-view="guide" aria-selected="true">刷取指南</button>
+    <button class="tab" role="tab" data-view="dolls" aria-selected="false">娃娃屋详解</button>
     <button class="tab" role="tab" data-view="master" aria-selected="false">成就总表 <span class="n">52</span></button>
     <button class="tab" role="tab" data-view="detail" aria-selected="false">成就详解</button>
   </div></div>
@@ -223,6 +261,116 @@
         <div class="mapcard"><h4>农场</h4><div class="en">Farm</div><p>蓄水 → 投毒 → 把击晕的鸡放入毒水做「毒鸡」→ 喂给怪物削弱它，再用独轮车搬走。普通鸡与毒鸡分别喂各解一个成就。</p></div>
         <div class="mapcard"><h4>树林</h4><div class="en">Woods · Agnes</div><p>找齐材料（含小狗尾巴）投入大锅熬「女巫药剂」削弱 Agnes，昏倒后送货车通关；或投进净化湖触发隐藏结局。</p></div>
         <div class="mapcard"><h4>总部</h4><div class="en">Headquarters · House of Souls</div><p>停电模式，最难。充电池 → 供电给收容单元把逃出的怪物关回去；维持门电量、烧诅咒娃娃、干扰枪击杀实体。You Can Do It! / Invincible 都在这。</p></div>
+      </div>
+    </section>
+
+    <!-- DOLLS MAP GUIDE (template) -->
+    <section class="view" id="view-dolls">
+      <div class="thesis">
+        <div class="lbl">娃娃屋 Dolls · 目标</div>
+        <p>在<b>地下室锅炉</b>里烧掉 <b>9 个「标记娃娃」</b>，驱散附在女孩 Emilia 身上的恶灵；期间用<b>「安抚娃娃」</b>应对她的暴走。烧完她会昏倒、正门自动打开，把她<b>抱上货车（van）</b>即通关。钥匙按 <b>大门 → 大厅 → 卧室 → 阁楼 → 地下室</b> 链条逐把递进解锁。</p>
+      </div>
+
+      <h3 class="sec-h">分层示意平面图</h3>
+      <p class="sec-sub"><b>示意图（非精确比例、原创绘制）</b>。娃娃屋的钥匙 / 纸条点位是半随机的，图中标的是<b>各区域功能与大致分布</b>，实际点位以你当局为准。</p>
+      <div class="fp">
+        <div class="fp-note">屋外正门 = 出生点（初始上锁）　→　烧完 9 个标记娃娃后正门自动打开　→　抱昏倒的女孩出门、上货车（van）通关</div>
+        <div class="floor">
+          <div class="floor-name">阁楼<small>ATTIC</small></div>
+          <div class="rooms">
+            <div class="room"><div class="room-t">阁楼门（锁）</div><div class="mks"><span class="mk key">需阁楼钥匙开</span></div></div>
+            <div class="room"><div class="room-t">阁楼房间 / 标记娃娃室</div><div class="mks"><span class="mk mdoll">标记娃娃×9 来源</span><span class="mk key">地下室钥匙(固定)</span><span class="mk note">纸条×2</span></div></div>
+          </div>
+        </div>
+        <div class="floor">
+          <div class="floor-name">一楼<small>1F</small></div>
+          <div class="rooms">
+            <div class="room"><div class="room-t">主卧 Master BR</div><div class="mks"><span class="mk pdoll">安抚娃娃</span><span class="mk note">纸条</span></div></div>
+            <div class="room"><div class="room-t">浴室 ×2</div><div class="mks"><span class="mk pdoll">安抚娃娃×2</span><span class="mk note">纸条×2</span></div></div>
+            <div class="room"><div class="room-t">图书馆(上) / 小房间</div><div class="mks"><span class="mk key">阁楼钥匙常在此层</span><span class="mk note">纸条</span></div></div>
+          </div>
+        </div>
+        <div class="floor">
+          <div class="floor-name">地面层<small>GF</small></div>
+          <div class="rooms">
+            <div class="room hub"><div class="room-t">★ 中央大厅 / 主楼梯</div><div class="mks"><span class="mk">全屋交通枢纽</span><span class="mk key">大厅钥匙①·卧室钥匙②</span></div></div>
+            <div class="room"><div class="room-t">图书馆</div><div class="mks"><span class="mk note">纸条×2</span></div></div>
+            <div class="room"><div class="room-t">厨房</div><div class="mks"><span class="mk pdoll">安抚娃娃</span><span class="mk note">纸条</span></div></div>
+            <div class="room"><div class="room-t">餐厅 / 起居室</div><div class="mks"><span class="mk note">纸条×2</span></div></div>
+            <div class="room"><div class="room-t">内庭院</div><div class="mks"><span class="mk pdoll">安抚娃娃</span></div></div>
+          </div>
+        </div>
+        <div class="floor">
+          <div class="floor-name">地下室<small>B1</small></div>
+          <div class="rooms">
+            <div class="room hub"><div class="room-t">🔥 锅炉房 Boiler</div><div class="mks"><span class="mk fire">烧 9 个标记娃娃</span><span class="mk">木柴/火柴</span><span class="mk note">纸条</span></div></div>
+            <div class="room"><div class="room-t">入口 / 右侧房间</div><div class="mks"><span class="mk note">纸条×2</span></div></div>
+            <div class="room"><div class="room-t">纸箱间</div><div class="mks"><span class="mk key">大门钥匙(可无视)</span></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="legend">
+        <span><i style="background:var(--rarec)"></i>钥匙</span>
+        <span><i style="background:var(--blood)"></i>锅炉(烧娃娃)</span>
+        <span><i style="background:var(--hidden)"></i>标记娃娃·要烧</span>
+        <span><i style="background:var(--coop)"></i>安抚娃娃·保命</span>
+        <span><i style="background:var(--solo)"></i>纸条 notes</span>
+      </div>
+
+      <h3 class="sec-h">详细流程（单人）</h3>
+      <ol class="steps">
+        <li>出生在屋外正门。先在门口 / 地下室楼梯口附近找到<b>第一把钥匙（大厅钥匙，半随机点位）</b>开门进屋。</li>
+        <li>可先下地下室，从标记娃娃室取一个<b>标记娃娃当「万能钥匙」</b>临时开你还没配对钥匙的门（注意：Emilia 平静时会来偷你手上的安抚娃娃）。</li>
+        <li>按 <b>大厅 → 卧室 → 阁楼 → 地下室</b> 顺序逐把找钥匙——每把都锁在上一把开的门后，捡到会提示下一把；前两把在地面层，阁楼钥匙在一楼，地下室钥匙固定在阁楼房间。</li>
+        <li>开阁楼门：会「释放」全部标记娃娃并拿到地下室钥匙，从而能进锅炉房。</li>
+        <li>沿途收齐 <b>9 个彩色安抚娃娃</b>（每卧室 / 每浴室各一、厨房一个、内庭院一个、地下室楼梯附近一个）——她暴走扑来时给一个即可让她回平静，相当于一条命。</li>
+        <li><b>【关键】先收后烧</b>：先把 9 个标记娃娃全部搬到锅炉房炉子左侧安全点囤好，再统一开始烧——被抓概率远低于边找边烧。</li>
+      </ol>
+      <div class="imgslot"><b>【真图占位①】</b>贴你自己的截图：地下室锅炉房 + 囤好的一排标记娃娃<br><span style="font-size:11px">（发布时替换为你的游戏截图）</span></div>
+      <ol class="steps" start="7">
+        <li>用附近<b>木柴 + 火柴</b>点炉，一个个把标记娃娃丢进去烧；每烧掉一个她立刻暴走一次、并加速一档。</li>
+        <li>只剩<b>最后 1 个</b>时她的灯变红、不再回平静——留足安抚娃娃、规划好逃跑路线再烧最后一个。</li>
+        <li>烧完 9 个后 Emilia 昏倒，正门自动打开。</li>
+        <li>抱起昏倒的女孩，出正门送上货车（van）<b>通关</b>。（大门钥匙在地下室纸箱间，可无视；想拿 notes 成就就顺路把纸条清完。）</li>
+      </ol>
+      <div class="imgslot"><b>【真图占位②】</b>贴你自己的截图：正门打开 / 抱女孩上货车的画面</div>
+
+      <h3 class="sec-h">钥匙链 & 道具分布</h3>
+      <div class="chain"><span class="k">大门</span><span class="arw">→</span><span class="k">大厅①</span><span class="arw">→</span><span class="k">卧室②</span><span class="arw">→</span><span class="k">阁楼③</span><span class="arw">→</span><span class="k">地下室④</span><span class="arw" style="color:var(--faint)">（+大门钥匙⑤可选）</span></div>
+      <ul class="idist">
+        <li><b>标记娃娃 ×9</b>（要烧的目标）：地下室「标记娃娃室」固定集中，开阁楼门后才可取。</li>
+        <li><b>安抚娃娃 ×9</b>（保命道具）：每卧室 / 每浴室各一、厨房一个、内庭院一个、地下室楼梯附近一个。</li>
+        <li><b>木柴 / 火柴</b>：锅炉房附近散落，用于点炉，<b>数量有限别浪费</b>。</li>
+        <li><b>钥匙</b>：一次只出一把、总锁在上一把开的门后，按链条线性推进即可，不必来回乱找。</li>
+      </ul>
+
+      <h3 class="sec-h">全 Notes 收集（成就 I love lore!）</h3>
+      <p class="sec-sub">各攻略给的总数不一致（12 / 15 / 16 张），因为纸条点位半随机、且是否计入地下室/阁楼分法不同。成就要求把<b>本局出现的全部纸条</b>读完，<b>可分多局累积</b>。下面给两种分区对照：</p>
+      <div class="notes-grid">
+        <div class="notebox">
+          <h5>详版 · 16 张（按区域）</h5>
+          <ul>
+            <li><b>地下室 ×3</b>：入口左侧 / 右边房间 / 锅炉房内</li>
+            <li><b>地面层 ×6</b>：图书馆 ×2 / 主休息室尽头左房 / 走廊尽头房 / 起居室 / 对侧门左转</li>
+            <li><b>一楼 ×5</b>：左侧房 / 右侧房 / 回廊尽头图书馆 / 主卧 / 主卧旁浴室</li>
+            <li><b>阁楼 ×2</b>：阁楼门正前方 / 阁楼房间内</li>
+          </ul>
+        </div>
+        <div class="notebox">
+          <h5>对照版 · 15 张（按楼层）</h5>
+          <ul>
+            <li><b>地面层 ×8</b>：入口 1 / 厨房 2 / 餐厅 3 / 图书馆 2</li>
+            <li><b>二楼 ×7</b>：两间浴室各 1（共 2）/ 东向长卧 1 / 西向长卧 3 / 东卧旁小房间 1</li>
+            <li style="color:var(--faint)">（若某局漏读，可在后续对局补齐）</li>
+          </ul>
+        </div>
+      </div>
+
+      <h3 class="sec-h">娃娃屋相关成就</h3>
+      <p class="sec-sub">娃娃屋是成就最多的地图（16 个），完整清单与解锁条件见 <b>「成就详解 → 娃娃屋」</b>。其中最需要专门做的：<b>Burn the girl</b>（隐藏坏结局，烧女孩而非送货车）、<b>Beat the game developer</b>（单人 20 分钟速通）、<b>I love lore!</b>（读齐全部纸条）、以及多人的 <b>Save a friend / Win with Friends / Destroy the competition / Bully / Key Hoarder</b>。</p>
+
+      <div class="credit">
+        <b>参考来源 & 说明：</b>本页地图布局 / 流程 / 道具 / 纸条信息，综合自 Steam 社区多篇英文图文攻略与 Pacify Fandom Wiki 整理核对；上方分层示意平面图为<b>本站原创绘制</b>（非游戏原图）。真图占位处建议贴你<b>自己的游戏截图</b>。如需附上某篇英文原帖的原图，可单独下载并标注「转载自 作者 · 原帖链接」。数据如与实机不符以实际为准。
       </div>
     </section>
 
@@ -351,7 +499,7 @@
   document.getElementById("ringReset").addEventListener("click",function(){done={};save();updRing();renderD();renderM();});
 
   // tabs
-  var tabs=document.querySelectorAll(".tab"),views={guide:document.getElementById("view-guide"),master:document.getElementById("view-master"),detail:document.getElementById("view-detail")};
+  var tabs=document.querySelectorAll(".tab"),views={guide:document.getElementById("view-guide"),dolls:document.getElementById("view-dolls"),master:document.getElementById("view-master"),detail:document.getElementById("view-detail")};
   function activateTab(name){tabs.forEach(function(x){x.setAttribute("aria-selected",x.dataset.view===name);});Object.keys(views).forEach(function(k){views[k].classList.toggle("active",k===name);});}
   tabs.forEach(function(t){t.addEventListener("click",function(){activateTab(t.dataset.view);window.scrollTo({top:0});});});
 
