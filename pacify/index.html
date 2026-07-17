@@ -3,13 +3,13 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Pacify 全成就攻略｜四图详解(娃娃屋/农场/树林/总部)·52成就 · 易PLAY全成就攻略站</title>
-<meta name="description" content="Pacify 全成就攻略：娃娃屋/农场/树林/总部四张地图详解(示意平面图+详细流程+道具分布+全notes)、52个成就分类与刷取指南，可勾选进度。">
+<title>Pacify 玩法攻略｜四图详解(娃娃屋/农场/树林/总部) · 易PLAY全成就攻略站</title>
+<meta name="description" content="Pacify 玩法攻略：娃娃屋/农场/树林/总部四张地图详解(布局示意图+详细流程+道具+全纸条)，附全52成就分类。">
 <meta name="author" content="易PLAY">
 <link rel="canonical" href="https://yisuccessgit.github.io/pacify/">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Pacify 全成就攻略 · 四图详解 + 52 成就">
-<meta property="og:description" content="娃娃屋/农场/树林/总部 布局·流程·道具·notes 详解，可勾选进度。">
+<meta property="og:title" content="Pacify 玩法攻略 · 四图详解">
+<meta property="og:description" content="娃娃屋/农场/树林/总部 布局·流程·道具·纸条详解。">
 <meta property="og:url" content="https://yisuccessgit.github.io/pacify/">
 <meta name="robots" content="index,follow">
 <style>html,body{margin:0;padding:0}</style>
@@ -204,6 +204,18 @@
   .gimg img{width:100%;height:140px;object-fit:cover;display:block;background:var(--panel-3)}
   .gimg .cap{padding:7px 10px;font-size:12px;color:var(--muted);line-height:1.45}.gimg .cap b{color:#E6C374}
 
+  .mapgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(238px,1fr));gap:14px;margin-top:16px}
+  .mapblock{text-align:left;font:inherit;color:inherit;background:var(--panel);border:1px solid var(--hair);border-radius:8px;overflow:hidden;cursor:pointer;transition:transform .14s,border-color .14s,box-shadow .14s;display:block;padding:0;width:100%}
+  .mapblock:hover{transform:translateY(-3px);border-color:var(--mc);box-shadow:0 16px 34px -20px rgba(0,0,0,.85)}
+  .mb-top{height:6px;background:var(--mc)}
+  .mb-body{padding:16px 17px}
+  .mb-idx{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;color:var(--mc);text-transform:uppercase}
+  .mapblock h3{margin:5px 0 7px;font-family:var(--serif);font-size:21px;color:#F0E8E7;display:flex;align-items:baseline;gap:9px}
+  .mapblock h3 span{font-family:var(--mono);font-size:11px;color:var(--faint);letter-spacing:.1em;text-transform:uppercase;font-weight:400}
+  .mapblock p{margin:0;font-size:13px;color:var(--muted);line-height:1.55}
+  .mb-go{display:inline-block;margin-top:12px;font-family:var(--mono);font-size:12px;color:var(--mc)}
+  .mapblock:hover .mb-go{text-decoration:underline}
+
   @media (max-width:680px){.maps{grid-template-columns:1fr}.notes-grid{grid-template-columns:1fr}}
   @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
 </style>
@@ -236,18 +248,65 @@
   </header>
 
   <div class="tabbar"><div class="wrap tabbar-inner" role="tablist">
-    <button class="tab" role="tab" data-view="guide" aria-selected="true">刷取指南</button>
-    <button class="tab" role="tab" data-view="dolls" aria-selected="false">娃娃屋详解</button>
-    <button class="tab" role="tab" data-view="farm" aria-selected="false">农场详解</button>
-    <button class="tab" role="tab" data-view="woods" aria-selected="false">树林详解</button>
-    <button class="tab" role="tab" data-view="hq" aria-selected="false">总部详解</button>
+    <button class="tab" role="tab" data-view="overview" aria-selected="true">地图总览</button>
+    <button class="tab" role="tab" data-view="dolls" aria-selected="false">娃娃屋</button>
+    <button class="tab" role="tab" data-view="farm" aria-selected="false">农场</button>
+    <button class="tab" role="tab" data-view="woods" aria-selected="false">树林</button>
+    <button class="tab" role="tab" data-view="hq" aria-selected="false">总部</button>
+    <button class="tab" role="tab" data-view="guide" aria-selected="false">全成就·刷取</button>
     <button class="tab" role="tab" data-view="master" aria-selected="false">成就总表 <span class="n">52</span></button>
     <button class="tab" role="tab" data-view="detail" aria-selected="false">成就详解</button>
   </div></div>
 
   <main class="wrap">
-    <!-- GUIDE -->
-    <section class="view active" id="view-guide">
+    <!-- OVERVIEW (map landing · default) -->
+    <section class="view active" id="view-overview">
+      <div class="thesis">
+        <div class="lbl">Pacify · 玩法攻略</div>
+        <p>本站主打<b>每张地图的玩法攻略</b>（布局示意图 / 详细流程 / 道具分布 / 全纸条）。Pacify 的难点是“不知道该干嘛”，理清流程后其实更偏<b>策略</b>。<b>选一张地图开始 ↓</b>　（想冲全成就的另见「全成就·刷取」与「成就」标签）</p>
+      </div>
+      <div class="mapgrid">
+        <button class="mapblock" data-goto="dolls" style="--mc:#8A66B0">
+          <div class="mb-top"></div>
+          <div class="mb-body">
+            <div class="mb-idx">Map 01</div>
+            <h3>娃娃屋 <span>Dolls</span></h3>
+            <p>女孩 Emilia · 锅炉烧 9 个标记娃娃 · 钥匙链规律 · 16 张纸条</p>
+            <span class="mb-go">看攻略 →</span>
+          </div>
+        </button>
+        <button class="mapblock" data-goto="farm" style="--mc:#6E9E4F">
+          <div class="mb-top"></div>
+          <div class="mb-body">
+            <div class="mb-idx">Map 02</div>
+            <h3>农场 <span>Farm</span></h3>
+            <p>农妇 Karen · 毒鸡削弱 · 断线钳开锁 · 27 张纸条</p>
+            <span class="mb-go">看攻略 →</span>
+          </div>
+        </button>
+        <button class="mapblock" data-goto="woods" style="--mc:#3E9B7E">
+          <div class="mb-top"></div>
+          <div class="mb-body">
+            <div class="mb-idx">Map 03</div>
+            <h3>树林 <span>Woods</span></h3>
+            <p>女巫 Agnes · 熬药附魔 9 娃娃 · 净化湖隐藏结局 · 15 张纸条</p>
+            <span class="mb-go">看攻略 →</span>
+          </div>
+        </button>
+        <button class="mapblock" data-goto="hq" style="--mc:#C0392B">
+          <div class="mb-top"></div>
+          <div class="mb-body">
+            <div class="mb-idx">Map 04 · 最难</div>
+            <h3>总部 <span>Headquarters</span></h3>
+            <p>供电收容生存 · 两杀 Shag · 烧诅咒娃娃 · 无纸条</p>
+            <span class="mb-go">看攻略 →</span>
+          </div>
+        </button>
+      </div>
+    </section>
+
+    <!-- GUIDE (achievements / 刷取 · secondary) -->
+    <section class="view" id="view-guide">
       <div class="thesis">
         <div class="lbl">核心思路 · 全成就的最大门槛</div>
         <p>Pacify 共 <b>52 个成就</b>，跨 <b>4 张地图</b>。真正的坎不是难度，而是——有 <b style="color:#E7B08A">10 个成就必须多人</b>（5 个需合作 Co-op、5 个需对抗 PvP）。<b>纯单人最多拿 42 个</b>，剩下 10 个务必找联机搭子集中刷。其余多为单张地图内的流程操作、收集与隐藏结局。</p>
@@ -294,17 +353,17 @@
           </div>
         </div>
         <div class="floor">
-          <div class="floor-name">一楼<small>1F</small></div>
+          <div class="floor-name">二楼<small>2F</small></div>
           <div class="rooms">
-            <div class="room"><div class="room-t">主卧 Master BR</div><div class="mks"><span class="mk pdoll">安抚娃娃</span><span class="mk note">纸条</span></div></div>
+            <div class="room"><div class="room-t">主卧 Master BR</div><div class="mks"><span class="mk key">阁楼钥匙(卧室内)</span><span class="mk pdoll">安抚娃娃</span><span class="mk note">纸条</span></div></div>
             <div class="room"><div class="room-t">浴室 ×2</div><div class="mks"><span class="mk pdoll">安抚娃娃×2</span><span class="mk note">纸条×2</span></div></div>
-            <div class="room"><div class="room-t">图书馆(上) / 小房间</div><div class="mks"><span class="mk key">阁楼钥匙常在此层</span><span class="mk note">纸条</span></div></div>
+            <div class="room"><div class="room-t">图书馆(上) / 小房间</div><div class="mks"><span class="mk note">纸条</span></div></div>
           </div>
         </div>
         <div class="floor">
-          <div class="floor-name">地面层<small>GF</small></div>
+          <div class="floor-name">一楼<small>1F</small></div>
           <div class="rooms">
-            <div class="room hub"><div class="room-t">★ 中央大厅 / 主楼梯</div><div class="mks"><span class="mk">全屋交通枢纽</span><span class="mk key">大厅钥匙①·卧室钥匙②</span></div></div>
+            <div class="room hub"><div class="room-t">★ 中央大厅 / 主楼梯</div><div class="mks"><span class="mk">全屋交通枢纽</span><span class="mk key">大厅钥匙① · 卧室钥匙②(锁区)</span></div></div>
             <div class="room"><div class="room-t">图书馆</div><div class="mks"><span class="mk note">纸条×2</span></div></div>
             <div class="room"><div class="room-t">厨房</div><div class="mks"><span class="mk pdoll">安抚娃娃</span><span class="mk note">纸条</span></div></div>
             <div class="room"><div class="room-t">餐厅 / 起居室</div><div class="mks"><span class="mk note">纸条×2</span></div></div>
@@ -316,7 +375,7 @@
           <div class="rooms">
             <div class="room hub"><div class="room-t">🔥 锅炉房 Boiler</div><div class="mks"><span class="mk fire">烧 9 个标记娃娃</span><span class="mk">木柴/火柴</span><span class="mk note">纸条</span></div></div>
             <div class="room"><div class="room-t">入口 / 右侧房间</div><div class="mks"><span class="mk note">纸条×2</span></div></div>
-            <div class="room"><div class="room-t">纸箱间</div><div class="mks"><span class="mk key">大门钥匙(可无视)</span></div></div>
+            <div class="room"><div class="room-t">纸箱间</div><div class="mks"><span class="mk key">大门钥匙(通关后出现)</span></div></div>
           </div>
         </div>
       </div>
@@ -355,16 +414,16 @@
         <li><b>钥匙</b>：一次只出一把、总锁在上一把开的门后，按链条线性推进即可，不必来回乱找。</li>
       </ul>
 
-      <h3 class="sec-h">钥匙位置实拍</h3>
-      <div class="attrib">转载 · 以下 6 张为玩家实机指路截图，来源 Steam 社区攻略《Pacify - All Keys Possible Locations》 · 作者 <b>ilares</b> · 原帖 <a href="https://steamcommunity.com/sharedfiles/filedetails/?id=2165726648" target="_blank" rel="noopener">steamcommunity.com/…id=2165726648</a>。版权归原作者所有，此处仅作攻略参考、非商用。</div>
-      <div class="gallery">
-        <a class="gimg" href="img/dolls/key-hall.jpg" target="_blank" rel="noopener"><img src="img/dolls/key-hall.jpg" alt="大厅钥匙位置" loading="lazy"><div class="cap"><b>大厅钥匙①</b> 出地下室往左·一层大厅方位</div></a>
-        <a class="gimg" href="img/dolls/key-bedroom.jpg" target="_blank" rel="noopener"><img src="img/dolls/key-bedroom.jpg" alt="卧室钥匙位置" loading="lazy"><div class="cap"><b>卧室钥匙②</b> 面对红色主楼梯·右侧 45°</div></a>
-        <a class="gimg" href="img/dolls/key-attic.jpg" target="_blank" rel="noopener"><img src="img/dolls/key-attic.jpg" alt="阁楼钥匙位置" loading="lazy"><div class="cap"><b>阁楼钥匙③</b> 上主楼梯右手边的主卧（红床）</div></a>
-        <a class="gimg" href="img/dolls/key-basement.jpg" target="_blank" rel="noopener"><img src="img/dolls/key-basement.jpg" alt="地下室钥匙位置" loading="lazy"><div class="cap"><b>地下室钥匙④</b> 固定·阁楼放娃娃房间的柜子上</div></a>
-        <a class="gimg" href="img/dolls/key-maindoor.jpg" target="_blank" rel="noopener"><img src="img/dolls/key-maindoor.jpg" alt="大门钥匙位置" loading="lazy"><div class="cap"><b>大门钥匙⑤</b> 出锅炉房往左·箱子堆里（可无视）</div></a>
-        <a class="gimg" href="img/dolls/ending-escape.jpg" target="_blank" rel="noopener"><img src="img/dolls/ending-escape.jpg" alt="通关逃脱" loading="lazy"><div class="cap"><b>通关</b> 烧完 9 娃娃后从正门离开</div></a>
-      </div>
+      <h3 class="sec-h">钥匙规律</h3>
+      <p class="sec-sub">钥匙<b>具体点位半随机，但获取顺序与所在范围是固定的</b>——按下面规律找即可，不用乱翻：</p>
+      <div class="chain"><span class="k">大厅①</span><span class="arw">→</span><span class="k">卧室②</span><span class="arw">→</span><span class="k">阁楼③</span><span class="arw">→</span><span class="k">地下室④</span><span class="arw">→</span><span class="k">大门⑤</span></div>
+      <ul class="idist">
+        <li><b>大厅钥匙①</b>：在<b>一楼</b>（进门就找）。</li>
+        <li><b>卧室钥匙②</b>：也在<b>一楼</b>，但在<b>需要大厅钥匙才能解锁的区域</b>内。</li>
+        <li><b>阁楼钥匙③</b>：在<b>卧室</b>里（一楼或二楼的卧室）。</li>
+        <li><b>地下室钥匙④</b>：<b>固定</b>在<b>阁楼的小房间</b>（存放标记娃娃那间）。</li>
+        <li><b>大门钥匙⑤</b>：<b>通关之后</b>才会出现在<b>地下室的固定位置</b>——流程中可无视，烧完 9 娃娃正门会自动打开。</li>
+      </ul>
 
       <h3 class="sec-h">全 Notes 收集（成就 I love lore!）</h3>
       <p class="sec-sub">各攻略给的总数不一致（12 / 15 / 16 张），因为纸条点位半随机、且是否计入地下室/阁楼分法不同。成就要求把<b>本局出现的全部纸条</b>读完，<b>可分多局累积</b>。下面给两种分区对照：</p>
@@ -813,9 +872,10 @@
   document.getElementById("ringReset").addEventListener("click",function(){done={};save();updRing();renderD();renderM();});
 
   // tabs
-  var tabs=document.querySelectorAll(".tab"),views={guide:document.getElementById("view-guide"),dolls:document.getElementById("view-dolls"),farm:document.getElementById("view-farm"),woods:document.getElementById("view-woods"),hq:document.getElementById("view-hq"),master:document.getElementById("view-master"),detail:document.getElementById("view-detail")};
+  var tabs=document.querySelectorAll(".tab"),views={overview:document.getElementById("view-overview"),guide:document.getElementById("view-guide"),dolls:document.getElementById("view-dolls"),farm:document.getElementById("view-farm"),woods:document.getElementById("view-woods"),hq:document.getElementById("view-hq"),master:document.getElementById("view-master"),detail:document.getElementById("view-detail")};
   function activateTab(name){tabs.forEach(function(x){x.setAttribute("aria-selected",x.dataset.view===name);});Object.keys(views).forEach(function(k){views[k].classList.toggle("active",k===name);});}
   tabs.forEach(function(t){t.addEventListener("click",function(){activateTab(t.dataset.view);window.scrollTo({top:0});});});
+  document.querySelectorAll(".mapblock").forEach(function(b){b.addEventListener("click",function(){activateTab(b.dataset.goto);window.scrollTo({top:0});});});
 
   function tagHTML(a){
     var h="";
