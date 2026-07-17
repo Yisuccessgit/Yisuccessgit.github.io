@@ -16,3 +16,9 @@
 ---
 
 *纯静态站，基于 GitHub Pages 托管。攻略数据交叉核对 PowerPyx · PSNProfiles · Detroit Fandom Wiki · 游民星空 · SteamHunters，如与实机不符以实际为准。*
+
+## 版权 · License
+
+**版权所有 © 2026 易PLAY（@Yisuccessgit）· 保留所有权利（All Rights Reserved）。**
+
+本项目为私有版权作品、**非开源**。未经作者书面许可，禁止复制/克隆/镜像代码，或搬运/转载本站原创攻略内容（中文攻略、原创示意平面图、界面设计）到任何平台。站内第三方转载图（已署名）版权归各自原作者。详见 [LICENSE](LICENSE)。
