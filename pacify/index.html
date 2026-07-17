@@ -3,13 +3,13 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Pacify 全成就攻略｜52 成就·4 地图·娃娃屋详解 · 易PLAY全成就攻略站</title>
-<meta name="description" content="Pacify 全成就攻略：娃娃屋/农场/树林/总部四张地图详解(布局示意图+详细流程+道具分布+全notes位置)、52个成就单人/合作/PvP分类与刷取指南，可勾选进度。">
+<title>Pacify 全成就攻略｜四图详解(娃娃屋/农场/树林/总部)·52成就 · 易PLAY全成就攻略站</title>
+<meta name="description" content="Pacify 全成就攻略：娃娃屋/农场/树林/总部四张地图详解(示意平面图+详细流程+道具分布+全notes)、52个成就分类与刷取指南，可勾选进度。">
 <meta name="author" content="易PLAY">
 <link rel="canonical" href="https://yisuccessgit.github.io/pacify/">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Pacify 全成就攻略 · 地图详解 + 52 成就">
-<meta property="og:description" content="娃娃屋等地图布局/流程/道具/notes 详解 + 全成就分类，可勾选进度。">
+<meta property="og:title" content="Pacify 全成就攻略 · 四图详解 + 52 成就">
+<meta property="og:description" content="娃娃屋/农场/树林/总部 布局·流程·道具·notes 详解，可勾选进度。">
 <meta property="og:url" content="https://yisuccessgit.github.io/pacify/">
 <meta name="robots" content="index,follow">
 <style>html,body{margin:0;padding:0}</style>
@@ -238,6 +238,9 @@
   <div class="tabbar"><div class="wrap tabbar-inner" role="tablist">
     <button class="tab" role="tab" data-view="guide" aria-selected="true">刷取指南</button>
     <button class="tab" role="tab" data-view="dolls" aria-selected="false">娃娃屋详解</button>
+    <button class="tab" role="tab" data-view="farm" aria-selected="false">农场详解</button>
+    <button class="tab" role="tab" data-view="woods" aria-selected="false">树林详解</button>
+    <button class="tab" role="tab" data-view="hq" aria-selected="false">总部详解</button>
     <button class="tab" role="tab" data-view="master" aria-selected="false">成就总表 <span class="n">52</span></button>
     <button class="tab" role="tab" data-view="detail" aria-selected="false">成就详解</button>
   </div></div>
@@ -393,6 +396,298 @@
       </div>
     </section>
 
+    <!-- FARM MAP GUIDE -->
+    <section class="view" id="view-farm">
+      <div class="thesis">
+        <div class="lbl">农场 Farm · 目标</div>
+        <p>用<b>毒药 + 水源</b>做出 <b>9 只「毒鸡」(绿鸡)</b>喂给谷仓里的农妇怪物 <b>Karen</b>，把她毒到昏倒，再用<b>独轮车</b>推到货车通关。核心循环：<b>开棚拿毒药 → 倒进屋后水源 → 平底锅敲鸡 → 浸毒水变绿鸡 → 喂 Karen</b>。<b class="c-warn" style="color:var(--pvp)">绝不能让她吃到普通白鸡</b>（会回血、清空喂食进度）。</p>
+      </div>
+
+      <h3 class="sec-h">区域示意图</h3>
+      <p class="sec-sub"><b>示意图（非精确比例、原创绘制）</b>。农场是开放院落，以中央货车为参照，图中标各区功能与相对方位。</p>
+      <div class="fp">
+        <div class="fp-note">货车 Van = 出生点 + 正常结局交付点。把昏倒的 Karen 用独轮车推到货车即通关。</div>
+        <div class="floor">
+          <div class="floor-name">核心<small>CENTER</small></div>
+          <div class="rooms">
+            <div class="room hub"><div class="room-t">货车 Van</div><div class="mks"><span class="mk">出生 / 交付</span></div></div>
+            <div class="room"><div class="room-t">前院 · 鸡区</div><div class="mks"><span class="mk pdoll">活鸡 同屏4-5只·会刷新</span></div></div>
+          </div>
+        </div>
+        <div class="floor">
+          <div class="floor-name">主屋<small>HOUSE</small></div>
+          <div class="rooms">
+            <div class="room"><div class="room-t">一层 · 厨房</div><div class="mks"><span class="mk key">平底锅(敲鸡)</span><span class="mk note">纸条×2</span></div></div>
+            <div class="room"><div class="room-t">二层 卧室/浴室</div><div class="mks"><span class="mk key">断线钳(开所有锁)</span><span class="mk note">纸条多</span></div></div>
+            <div class="room"><div class="room-t">阁楼</div><div class="mks"><span class="mk pdoll">天使雕像(多人复活)</span><span class="mk note">纸条</span></div></div>
+          </div>
+        </div>
+        <div class="floor">
+          <div class="floor-name">工位<small>KEY</small></div>
+          <div class="rooms">
+            <div class="room"><div class="room-t">毒药棚 Shed（锁·货车左）</div><div class="mks"><span class="mk key">断线钳开</span><span class="mk fire">毒药袋</span><span class="mk note">纸条</span></div></div>
+            <div class="room hub"><div class="room-t">水源（屋后）</div><div class="mks"><span class="mk fire">倒毒药 + 浸鸡 = 毒鸡</span></div></div>
+            <div class="room"><div class="room-t">谷仓 Barn（锁）</div><div class="mks"><span class="mk mdoll">Karen 关在内</span><span class="mk note">二层纸条多</span></div></div>
+          </div>
+        </div>
+        <div class="floor">
+          <div class="floor-name">外围<small>OUTER</small></div>
+          <div class="rooms">
+            <div class="room"><div class="room-t">墓地 + 封印箱</div><div class="mks"><span class="mk pdoll">安全区</span><span class="mk">秘密结局点</span></div></div>
+            <div class="room"><div class="room-t">风车 Windmill</div><div class="mks"><span class="mk pdoll">Karen 进不去·安全区</span></div></div>
+            <div class="room"><div class="room-t">独轮车</div><div class="mks"><span class="mk key">主屋左侧·运 Karen</span></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="legend">
+        <span><i style="background:var(--rarec)"></i>工具/钥匙</span>
+        <span><i style="background:var(--blood)"></i>关键机制(水源/毒鸡)</span>
+        <span><i style="background:var(--hidden)"></i>怪物 Karen</span>
+        <span><i style="background:var(--coop)"></i>安全区/安抚</span>
+        <span><i style="background:var(--solo)"></i>纸条 notes</span>
+      </div>
+
+      <h3 class="sec-h">详细流程（单人）</h3>
+      <ol class="steps">
+        <li>货车出生后先进<b>主屋一层厨房</b>拿<b>平底锅</b>（敲晕活鸡用）。</li>
+        <li>上<b>二层</b>（或走屋外楼梯从后门进）找<b>断线钳/铰剪</b>——刷新点不固定（浴室桌、绿卧室抽屉、露台、蓝椅旁等），挨间翻。它能开<b>所有锁</b>（毒药棚/谷仓/墓地小屋）。</li>
+        <li>用断线钳开<b>货车左侧的毒药棚</b>，搬出毒药袋（建议一次备 <b>5–6 袋</b>）。</li>
+        <li>把毒药拿到<b>屋后水源</b>激活并倒进去。</li>
+        <li>在院子/货车附近用平底锅<b>敲晕活鸡</b>，浸进毒水 → 变<b>绿鸡（毒鸡）</b>。重复先攒一批。</li>
+        <li>技巧：把多余绿鸡丢到 <b>Karen 够不到的安全角落</b>暂存，别让她提前吃掉。</li>
+        <li>用断线钳<b>开谷仓门放出 Karen</b>（此后她会追人），把绿鸡一只只喂给她——<b>共喂满 9 只</b>，全程只喂绿鸡。</li>
+        <li>被追急了往<b>风车 / 墓地</b>（她进不去）躲。</li>
+        <li>喂满 9 只后 Karen 昏倒。到主屋左侧取<b>独轮车</b>把她装上。</li>
+        <li>推到<b>货车</b>交付 → 通关。（秘密结局：改推到墓地<b>封印箱</b>，空手回货车触发；往箱里放绿鸡会召唤巨型霓虹绿鸡 Boss，平底锅多打几下击败。）</li>
+      </ol>
+      <div class="imgslot"><b>【真图占位】</b>贴你自己的截图：做毒鸡的水源工位 / 喂 Karen 的画面</div>
+
+      <h3 class="sec-h">道具分布</h3>
+      <ul class="idist">
+        <li><b>平底锅</b>：主屋一层厨房 — 敲晕活鸡（也可应急打 Boss）。</li>
+        <li><b>断线钳/铰剪</b>：主屋二层（多随机点）— 开毒药棚/谷仓/墓地小屋所有锁。</li>
+        <li><b>毒药袋</b>：货车左侧毒药棚内（需断线钳）— 倒进水源，备 5–6 袋。</li>
+        <li><b>独轮车</b>：主屋左侧 — 运昏倒的 Karen 去货车（正常）或封印箱（秘密）。</li>
+        <li><b>天使雕像</b>：主屋阁楼 — 带到风车可复活队友（多人向，单人可略）。</li>
+      </ul>
+
+      <h3 class="sec-h">全 Notes 收集（成就 Interesting Story）</h3>
+      <p class="sec-sub">据一篇 All Notes 专攻略，农场约 <b>27 张</b>纸条，部分需断线钳开锁才能拿；读完全部解锁 <b>Interesting Story</b>。个别摆放可能随版本微调。</p>
+      <div class="notes-grid">
+        <div class="notebox">
+          <h5>主屋（约 15 张）</h5>
+          <ul>
+            <li>一层厨房：小桌 1 · 通谷仓门旁 1</li>
+            <li>一层主入口/客厅：进门右侧桌 1</li>
+            <li>二层后门入口：右侧桌 1</li>
+            <li>二层第一间开放房（绿家具）：1</li>
+            <li>二层某卧室：床头柜 1 · <b>桌上一堆 8 张</b></li>
+            <li>二层浴室：马桶上方 1</li>
+            <li>阁楼：沙发+手提箱旁 1</li>
+          </ul>
+        </div>
+        <div class="notebox">
+          <h5>棚 + 谷仓（约 8 张）</h5>
+          <ul>
+            <li>毒药棚：靠墙桌上（毒药袋附近）1</li>
+            <li>谷仓二层：上楼对面书桌 2</li>
+            <li>谷仓二层：梳妆台/柜子 3</li>
+            <li>谷仓二层：楼梯栅栏旁小桌 2</li>
+          </ul>
+        </div>
+      </div>
+
+      <h3 class="sec-h">农场相关成就</h3>
+      <p class="sec-sub">完整清单见 <b>「成就详解 → 农场」</b>。要点：<b>Cooped up on the farm!</b>（合作）、<b>Farm Solo / Free For All Farm</b>（单人/PvP 各一）、<b>Weaken The Monster</b>（喂毒鸡）、<b>Interesting Story</b>（读齐纸条）、<b>Beat the Game Developer II</b>（单人 30 分钟速通）、以及秘密结局相关。</p>
+
+      <div class="credit"><b>参考来源：</b>本页布局/流程/道具/纸条信息综合自 Steam 社区 Pacify 攻略与 Fandom Wiki 整理核对；<b>区域示意图为本站原创绘制</b>。真图占位建议贴你自己的截图。数据如与实机不符以实际为准。</div>
+    </section>
+
+    <!-- WOODS MAP GUIDE -->
+    <section class="view" id="view-woods">
+      <div class="thesis">
+        <div class="lbl">树林 Woods · 女巫 Agnes · 目标</div>
+        <p>用 <b>女巫头发 + 小狗尾巴 + 树枝娃娃</b> 在地下室<b>大锅</b>熬出 <b>9 个附魔娃娃</b>，插到巢穴墙上的<b>尖刺</b>削弱女巫 Agnes；她昏倒后抬上<b>货车</b>带回总部通关。随身带<b>玫瑰</b>：被 Agnes 抓住时递给她可暂时安抚保命。</p>
+      </div>
+
+      <h3 class="sec-h">区域示意图</h3>
+      <p class="sec-sub"><b>示意图（非精确比例、原创绘制）</b>。核心是中央两层庄园（含地下室巢穴），四周分布狗园/墓地/工具棚/净化湖。</p>
+      <div class="fp">
+        <div class="fp-note">出生牌在宅子门前（附近有园艺剪）。熬满 9 个附魔娃娃 → Agnes 昏倒 → 抬上货车回总部通关（或拖进净化湖 = 隐藏结局）。</div>
+        <div class="floor">
+          <div class="floor-name">一层<small>1F</small></div>
+          <div class="rooms">
+            <div class="room"><div class="room-t">正门大厅</div><div class="mks"><span class="mk key">Gate 钥匙(一层)</span><span class="mk note">纸条×3</span></div></div>
+            <div class="room"><div class="room-t">厨房→后门(狗园)</div><div class="mks"><span class="mk note">纸条×2</span></div></div>
+            <div class="room"><div class="room-t">餐厅</div><div class="mks"><span class="mk note">纸条×3</span></div></div>
+            <div class="room"><div class="room-t">客厅(留声机)</div><div class="mks"><span class="mk fire">女巫头发常见</span></div></div>
+            <div class="room"><div class="room-t">玩具房→巢穴门</div><div class="mks"><span class="mk mdoll">下地下室入口</span></div></div>
+          </div>
+        </div>
+        <div class="floor">
+          <div class="floor-name">二层<small>2F</small></div>
+          <div class="rooms">
+            <div class="room"><div class="room-t">卧室×2 / 小房间</div><div class="mks"><span class="mk key">House 钥匙(二层)</span><span class="mk note">纸条</span></div></div>
+            <div class="room"><div class="room-t">浴室×2</div><div class="mks"><span class="mk fire">女巫头发</span><span class="mk note">纸条×2(水箱)</span></div></div>
+          </div>
+        </div>
+        <div class="floor">
+          <div class="floor-name">地下室<small>LAIR</small></div>
+          <div class="rooms">
+            <div class="room hub"><div class="room-t">女巫巢穴（Agnes 主动）</div><div class="mks"><span class="mk fire">大锅(熬药)</span><span class="mk">墙上尖刺(插娃娃×9)</span><span class="mk pdoll">药水(速度/隐身)</span></div></div>
+          </div>
+        </div>
+        <div class="floor">
+          <div class="floor-name">外围<small>OUTER</small></div>
+          <div class="rooms">
+            <div class="room"><div class="room-t">狗园（宅左）</div><div class="mks"><span class="mk key">Gate 钥匙开</span><span class="mk fire">剪小狗尾巴</span></div></div>
+            <div class="room"><div class="room-t">墓地（宅后）</div><div class="mks"><span class="mk fire">树枝娃娃</span><span class="mk mdoll">孩子影子会来抢</span></div></div>
+            <div class="room"><div class="room-t">净化湖</div><div class="mks"><span class="mk">隐藏结局 / 变鼠时可跳湖复活</span></div></div>
+            <div class="room"><div class="room-t">工具棚 / 风车</div><div class="mks"><span class="mk key">剪刀</span><span class="mk pdoll">风车复活(多人)</span></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="legend">
+        <span><i style="background:var(--rarec)"></i>钥匙/工具</span>
+        <span><i style="background:var(--blood)"></i>熬药材料/大锅</span>
+        <span><i style="background:var(--hidden)"></i>女巫/危险</span>
+        <span><i style="background:var(--coop)"></i>安抚/安全/药水</span>
+        <span><i style="background:var(--solo)"></i>纸条 notes</span>
+      </div>
+
+      <h3 class="sec-h">详细流程（单人）</h3>
+      <ol class="steps">
+        <li>出生后在门前拿<b>园艺剪</b>（出生牌附近/木桌/独轮车/工具棚各有）。</li>
+        <li>用剪刀在树上剪至少 <b>1 朵玫瑰</b>随身带 —— 被 Agnes 抓时递给她可暂时安抚保命。</li>
+        <li>进宅子取两把钥匙：<b>Gate Key</b>（一层：厨房/客厅/玩具房）、<b>House Key</b>（二层：卧室/浴室/小房间）。</li>
+        <li>在宅内收集<b>女巫头发</b>（一层桌面尤其留声机旁、二层浴室；全图约 11 撮，每次熬药用 1 撮，要反复来取）。</li>
+        <li>经厨房后门到<b>狗园</b>（Gate Key 开），剪下<b>小狗尾巴</b>。</li>
+        <li>去宅后<b>墓地</b>拿<b>树枝娃娃</b>——拾取后会被「孩子影子」追，拿离你远的那个、拿完就跑。</li>
+        <li>带齐三材料从玩具房旁的门下<b>地下室巢穴</b>（进去后 Agnes 立刻主动追人）。把三样投入<b>大锅</b>熬煮附魔，取出附魔娃娃<b>插到墙上尖刺</b> = 削弱 1 次。</li>
+        <li><b>重复步骤 4→7 共 9 次</b>（每次重取头发/尾巴/娃娃）。用<b>药水</b>管理：速度药水（约30秒）前中期甩女巫；隐身药水（约60秒·共3瓶）留给最后 2–3 个。</li>
+        <li>插满第 9 个后 Agnes 被削弱昏倒（出现在玩具房/大锅旁）。</li>
+        <li>标准结局：把昏迷的 Agnes 抬上宅外<b>货车</b>带回总部 → 通关。<b>隐藏结局</b>：改把她拖进<b>净化湖</b>，她会融化、释放孩子灵魂（Release The Children's Spirits）。</li>
+      </ol>
+      <div class="imgslot"><b>【真图占位】</b>贴你自己的截图：大锅熬药 / 墙上插满附魔娃娃</div>
+
+      <h3 class="sec-h">道具分布</h3>
+      <ul class="idist">
+        <li><b>园艺剪</b>：出生牌/木桌/独轮车/工具棚/墓地手推车 — 剪玫瑰、小狗尾巴。</li>
+        <li><b>玫瑰</b>：树上剪 — 安抚道具，被抓时递给 Agnes 保命。</li>
+        <li><b>熬药三材料</b>：女巫头发（宅内桌面/浴室，约11撮）+ 小狗尾巴（狗园）+ 树枝娃娃（墓地，约11个）。</li>
+        <li><b>药水</b>：地下室巢穴 — 速度/隐身/变形，甩女巫用。</li>
+        <li><b>Gate/House 钥匙</b>：一层 / 二层。</li>
+      </ul>
+
+      <h3 class="sec-h">全 Notes 收集（成就 Notes From a Lost Child）</h3>
+      <p class="sec-sub">树林共 <b>15 张</b>纸条（一层 8 + 二层 7），读完解锁 <b>Notes From a Lost Child</b>。</p>
+      <div class="notes-grid">
+        <div class="notebox">
+          <h5>一层 · 8 张</h5>
+          <ul>
+            <li>进门左转桌上 / 进门向右一张桌上 / 紧挨其旁架子顶</li>
+            <li>厨房尽头 / 厨房靠门处</li>
+            <li>餐厅大桌 / 餐厅小桌 / 餐厅另一张大桌</li>
+          </ul>
+        </div>
+        <div class="notebox">
+          <h5>二层 · 7 张</h5>
+          <ul>
+            <li>左侧门进的卧室床上 / 其旁角落椅子上</li>
+            <li>左浴室马桶水箱顶 / 出浴室走廊桌上</li>
+            <li>右浴室马桶水箱顶 / 对侧走廊桌上 / 附近房间椅子上</li>
+          </ul>
+        </div>
+      </div>
+
+      <h3 class="sec-h">树林相关成就</h3>
+      <p class="sec-sub">完整清单见 <b>「成就详解 → 树林」</b>。要点：<b>Explore The Creepy Woods Together</b>（合作）、<b>Only You And The Witch / Who Cares About The Team</b>（单人/PvP）、<b>Witch's Brew / Poor Puppy / Release The Power</b>（熬药链）、<b>Release The Children's Spirits</b>（隐藏·投湖）、<b>Notes From a Lost Child</b>、<b>Beat the Game Developer III</b>（单人 20 分钟速通）。</p>
+
+      <div class="credit"><b>参考来源：</b>综合自 Steam 社区 Pacify 攻略与 Fandom Wiki 整理核对；<b>区域示意图为本站原创绘制</b>。真图占位建议贴你自己的截图。（注：熬药点「大锅 cauldron」与旧版「井 well」为同一处；材料/娃娃总数约 11、所需 9 为多数攻略口径，实机以够用为准。）</div>
+    </section>
+
+    <!-- HEADQUARTERS MAP GUIDE (most detailed) -->
+    <section class="view" id="view-hq">
+      <div class="thesis">
+        <div class="lbl">总部 Headquarters「House of Souls」· 公认最难</div>
+        <p>总部停电，所有实体的收容单元只靠<b>备用电池</b>供电。核心任务：<b>不停给电池充电、维持各处供电</b>阻止越狱 → <b>两次击杀大实体 Shag</b> → <b>烧毁所有诅咒娃娃</b> → <b>把逃出的实体全部重新关押</b>，恢复供电达成好结局 <b>You Can Do It!</b>。全程<b>一次都不被攻击</b>即同时解锁 <b>Invincible</b>。单人流程动辄 <b>1 小时以上</b>，是全游戏最硬的成就。</p>
+      </div>
+
+      <h3 class="sec-h">分层示意图</h3>
+      <p class="sec-sub"><b>示意图（非精确比例、原创绘制）</b>。两层结构，靠中央<b>舱口 Hatch</b>（需供电才开）上下连通。</p>
+      <div class="fp">
+        <div class="fp-note">出生在楼上主走廊一端。楼上补给 → 供电开舱口 → 下地下室维持 8 个牢房供电 → 打 Shag / 烧娃娃 / 重新收容 → 好结局。</div>
+        <div class="floor">
+          <div class="floor-name">楼上<small>MAIN</small></div>
+          <div class="rooms">
+            <div class="room"><div class="room-t">出生 / 接待区</div><div class="mks"><span class="mk">主走廊一端</span></div></div>
+            <div class="room hub"><div class="room-t">补给室 Supply（左·倒二门）</div><div class="mks"><span class="mk key">一整排电池</span><span class="mk key">充电器</span><span class="mk pdoll">6 种安抚道具</span></div></div>
+            <div class="room"><div class="room-t">休息室 Break（右·第二门）</div><div class="mks"><span class="mk key">需电池开</span><span class="mk">飞镖靶 Bull's Eye</span></div></div>
+            <div class="room"><div class="room-t">鬼屋模拟间（右·最后门）</div><div class="mks"><span class="mk key">需电池开</span></div></div>
+            <div class="room"><div class="room-t">主管办公室（尽头）</div><div class="mks"><span class="mk mdoll">引 Shag 来 = Bye! 秘密结局(勿)</span></div></div>
+            <div class="room"><div class="room-t">舱口 Hatch</div><div class="mks"><span class="mk fire">供电后打开·下地下室</span></div></div>
+          </div>
+        </div>
+        <div class="floor">
+          <div class="floor-name">地下室<small>CONTAIN</small></div>
+          <div class="rooms">
+            <div class="room hub"><div class="room-t">8 个收容牢房 Cells 1–8</div><div class="mks"><span class="mk key">每门插 1 电池维持</span><span class="mk mdoll">耗尽=越狱</span></div></div>
+            <div class="room"><div class="room-t">Lesser 单元（Shag）</div><div class="mks"><span class="mk key">2 块慢放电池</span><span class="mk mdoll">Shag 从此越狱</span></div></div>
+            <div class="room"><div class="room-t">发电/充电室（中央·两处）</div><div class="mks"><span class="mk key">给空电池充电</span></div></div>
+            <div class="room"><div class="room-t">焚化炉（入口楼梯前）</div><div class="mks"><span class="mk fire">供电·烧诅咒娃娃</span></div></div>
+            <div class="room"><div class="room-t">干扰枪炮台 Disruptor（沿走廊）</div><div class="mks"><span class="mk fire">打 Shag·每发耗电池25-50%</span></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="legend">
+        <span><i style="background:var(--rarec)"></i>电池/充电</span>
+        <span><i style="background:var(--blood)"></i>焚化炉/干扰枪/供电点</span>
+        <span><i style="background:var(--hidden)"></i>实体/危险</span>
+        <span><i style="background:var(--coop)"></i>安抚道具</span>
+      </div>
+
+      <div class="callout">
+        <b>核心机制：供电循环（吃透这个就不慌）</b><br>
+        <span style="font-size:13px;color:var(--muted)">8 个牢门 + Lesser 单元 + 焚化炉 + 干扰枪都<b>吃电池</b>，电池会持续放电（某些阶段约 −7/秒）。你要不停「<b>把电量低的门电池换成满电池 → 空电池拿去中央充电室充</b>」。远望门上是否亮<b>双绿灯</b>可快速判断某区还有没有电。<b>干扰枪省着用</b>——每发耗 25–50% 电量，乱开会打空整条通道导致连锁越狱，只在打 Shag 时集中用。</span>
+      </div>
+
+      <h3 class="sec-h">详细流程（单人好结局 You Can Do It!）</h3>
+      <ol class="steps">
+        <li><b>开局补给</b>：进补给室（主走廊左手倒数第二门）。门左有充电器、门内右墙一整排电池。<b>尽量多带电池</b>，并把 6 种<b>安抚道具各拿一个</b>（玫瑰/娃娃/毒鸡/画/干草/骷髅）——实体逃出时会先吃道具而不打你，这是<b>零受伤(Invincible)的关键</b>。</li>
+        <li><b>供电开舱口</b>：给舱口（Hatch）供电使其打开，跳进地下室主区。</li>
+        <li><b>维持牢门供电</b>：地下室 8 个牢房门各插一块电池，耗尽就越狱。反复巡逻，低电换满电，空电池拿去中央充电室充。</li>
+        <li><b>给 Lesser 单元供电</b>：较小收容单元（Shag 关在这，用两块慢放电池）也要保持供电。</li>
+        <li><b>持续循环维持</b>：在换电池 / 充电 / 巡逻之间循环，坚持<b>约 10 分钟</b>直到剧情推进让大实体的门开启。这是最耗时、最考验节奏的阶段。</li>
+        <li><b>第一次击退 Shag</b>：Shag 越狱后用走廊上的<b>干扰枪</b>对它开火，持续打到它倒下（约 <b>3–5 击</b>）。</li>
+        <li><b>烧诅咒娃娃</b>：Shag 倒下后，上一张地图带来的<b>诅咒娃娃</b>（单人约 <b>10 只</b>、人多可达 40）被放出四处乱跑（有塑料脚步声+咯咯笑声）。逐一抓住拿到<b>焚化炉</b>烧掉，同时继续管理被娃娃放出的其它怪物。</li>
+        <li><b>第二次击杀 Shag</b>：烧完最后一只娃娃，Agnes 会尖叫让 Shag 复活。若你在尸体旁听到吼声<b>立刻跑开</b>，再用干扰枪打它 <b>5 下永久击杀</b>。</li>
+        <li><b>全部重新关押</b>：把所有逃出的实体逐一引/关回牢房，确保每个门都插着有电的电池。</li>
+        <li><b>达成好结局</b>：全部实体重新收容、供电完全恢复 → 主管表扬你，解锁 <b>You Can Do It!</b>。若<b>全程零受伤</b>同时解锁 <b>Invincible</b>。</li>
+      </ol>
+      <div class="imgslot"><b>【真图占位】</b>贴你自己的截图：地下室牢房供电状态 / 干扰枪打 Shag / 焚化炉烧娃娃</div>
+
+      <h3 class="sec-h">道具 & 安抚对应</h3>
+      <ul class="idist">
+        <li><b>电池</b>（最核心）：补给室一整排 + 地下室两处充电区；8 牢门各1 + Lesser 2 块 + 焚化炉/舱口都要。</li>
+        <li><b>充电器</b>：楼上补给室门左 + 地下室中央充电室（两处）。空电池拿来充。</li>
+        <li><b>干扰枪</b>：沿地下室走廊的炮台，打 Shag 用；每发耗 25–50% 电量，省着用。</li>
+        <li><b>飞镖</b>：休息室（右手第二门，需电池）— 投中靶心拿 <b>Bull's Eye</b>（瞄高一点）。</li>
+      </ul>
+      <p class="sec-sub" style="margin-top:10px"><b>实体 → 安抚道具</b>（逃出时会先吃道具而非打你，是零受伤关键）：Agnes 女巫→<b>玫瑰</b> · Emilia 女孩→<b>娃娃</b> · Karen 农妇→<b>毒鸡</b> · Quin→<b>画</b> · Vinisin→<b>干草</b> · Zhoy→<b>骷髅</b>。<b>Bully / Gheet</b> 不会伤你、只是障碍，不能安抚也别浪费道具。</p>
+
+      <h3 class="sec-h">结局提示</h3>
+      <ul class="idist">
+        <li><b>好结局 You Can Do It!</b>：按上面流程全部重新收容、恢复供电。</li>
+        <li><b>坏结局（自毁）</b>：逃出实体太多控不住场，总部进入自毁倒计时、烧毁失败。宁可稳扎稳打维持供电，别贪进度。</li>
+        <li><b>秘密结局 Bye!</b>：把 Shag <b>引到主管办公室</b>会害死主管、实体集体逃走（非好结局）。想要好结局就<b>别把 Shag 带去主管办公室</b>。</li>
+      </ul>
+
+      <h3 class="sec-h">总部相关成就 & Notes</h3>
+      <p class="sec-sub">完整清单见 <b>「成就详解 → 总部」</b>。要点：<b>You Can Do It!</b>（单人好结局·0.2%）、<b>Invincible</b>（零受伤·0.2%）、<b>Welcome to PAH HQ</b>（合作好结局）、<b>Bye!</b>（隐藏）、<b>Bull's Eye / Power it up / Charge it / Get back in there! / Don't Do That / Self Destruct</b>。<br><b>Notes：总部没有可收集的纸条（0 张）</b>——lore 收集成就只属于娃娃屋/农场/树林。</p>
+
+      <div class="credit"><b>参考来源：</b>综合自 Steam 社区总部专攻略（id 3037211738 等）、Pacify Fandom Wiki、gamenguides/naguide 等整理核对；<b>分层示意图为本站原创绘制</b>。真图占位建议贴你自己的截图。Shag 击打次数（3–5 / 5）等细节不同来源略有出入，持续打到倒下即可，实机为准。</div>
+    </section>
+
     <!-- MASTER -->
     <section class="view" id="view-master">
       <p class="sec-sub">全部 52 个成就，默认按<b>全球完成率</b>排序（越稀有越靠前）。可按地图 / 模式筛选，<b>点任意一条跳到「成就详解」看完整条件与技巧</b>。</p>
@@ -518,7 +813,7 @@
   document.getElementById("ringReset").addEventListener("click",function(){done={};save();updRing();renderD();renderM();});
 
   // tabs
-  var tabs=document.querySelectorAll(".tab"),views={guide:document.getElementById("view-guide"),dolls:document.getElementById("view-dolls"),master:document.getElementById("view-master"),detail:document.getElementById("view-detail")};
+  var tabs=document.querySelectorAll(".tab"),views={guide:document.getElementById("view-guide"),dolls:document.getElementById("view-dolls"),farm:document.getElementById("view-farm"),woods:document.getElementById("view-woods"),hq:document.getElementById("view-hq"),master:document.getElementById("view-master"),detail:document.getElementById("view-detail")};
   function activateTab(name){tabs.forEach(function(x){x.setAttribute("aria-selected",x.dataset.view===name);});Object.keys(views).forEach(function(k){views[k].classList.toggle("active",k===name);});}
   tabs.forEach(function(t){t.addEventListener("click",function(){activateTab(t.dataset.view);window.scrollTo({top:0});});});
 
