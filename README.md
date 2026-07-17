@@ -9,6 +9,7 @@
 | 游戏 | 内容 |
 |---|---|
 | 🔺 [底特律：化身为人 / Detroit: Become Human](https://yisuccessgit.github.io/detroit/) | 两周目最省路线 · 康纳8死 · 49 奖杯 · 46 杂志 · Steam 稀有度与全球完成率 |
+| ☠ [Pacify](https://yisuccessgit.github.io/pacify/) | 52 个成就 · 4 张地图 · 单人/合作/PvP 分类 · 隐藏结局 · 刷取指南 |
 
 持续更新中。觉得有用欢迎点个 ⭐ **Star** / 关注 [@Yisuccessgit](https://github.com/Yisuccessgit)。
 
