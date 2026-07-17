@@ -196,6 +196,14 @@
   .credit{background:var(--panel);border:1px solid var(--hair);border-left:3px solid var(--faint);border-radius:6px;padding:12px 15px;font-size:12px;color:var(--muted);line-height:1.7;margin-top:16px}
   .credit b{color:var(--ink)}
 
+  .attrib{font-family:var(--mono);font-size:11px;color:var(--muted);background:var(--panel-2);border:1px solid var(--hair);border-left:3px solid var(--solo);border-radius:5px;padding:9px 12px;margin:6px 0 10px;line-height:1.7}
+  .attrib b{color:var(--ink)}.attrib a{color:var(--solo);text-decoration:none;border-bottom:1px solid var(--hair)}
+  .gallery{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:10px;margin:4px 0}
+  .gimg{background:var(--panel);border:1px solid var(--hair);border-radius:6px;overflow:hidden;text-decoration:none;color:inherit;display:block;transition:border-color .12s}
+  .gimg:hover{border-color:var(--blood)}
+  .gimg img{width:100%;height:140px;object-fit:cover;display:block;background:var(--panel-3)}
+  .gimg .cap{padding:7px 10px;font-size:12px;color:var(--muted);line-height:1.45}.gimg .cap b{color:#E6C374}
+
   @media (max-width:680px){.maps{grid-template-columns:1fr}.notes-grid{grid-template-columns:1fr}}
   @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
 </style>
@@ -344,6 +352,17 @@
         <li><b>钥匙</b>：一次只出一把、总锁在上一把开的门后，按链条线性推进即可，不必来回乱找。</li>
       </ul>
 
+      <h3 class="sec-h">钥匙位置实拍</h3>
+      <div class="attrib">转载 · 以下 6 张为玩家实机指路截图，来源 Steam 社区攻略《Pacify - All Keys Possible Locations》 · 作者 <b>ilares</b> · 原帖 <a href="https://steamcommunity.com/sharedfiles/filedetails/?id=2165726648" target="_blank" rel="noopener">steamcommunity.com/…id=2165726648</a>。版权归原作者所有，此处仅作攻略参考、非商用。</div>
+      <div class="gallery">
+        <a class="gimg" href="img/dolls/key-hall.jpg" target="_blank" rel="noopener"><img src="img/dolls/key-hall.jpg" alt="大厅钥匙位置" loading="lazy"><div class="cap"><b>大厅钥匙①</b> 出地下室往左·一层大厅方位</div></a>
+        <a class="gimg" href="img/dolls/key-bedroom.jpg" target="_blank" rel="noopener"><img src="img/dolls/key-bedroom.jpg" alt="卧室钥匙位置" loading="lazy"><div class="cap"><b>卧室钥匙②</b> 面对红色主楼梯·右侧 45°</div></a>
+        <a class="gimg" href="img/dolls/key-attic.jpg" target="_blank" rel="noopener"><img src="img/dolls/key-attic.jpg" alt="阁楼钥匙位置" loading="lazy"><div class="cap"><b>阁楼钥匙③</b> 上主楼梯右手边的主卧（红床）</div></a>
+        <a class="gimg" href="img/dolls/key-basement.jpg" target="_blank" rel="noopener"><img src="img/dolls/key-basement.jpg" alt="地下室钥匙位置" loading="lazy"><div class="cap"><b>地下室钥匙④</b> 固定·阁楼放娃娃房间的柜子上</div></a>
+        <a class="gimg" href="img/dolls/key-maindoor.jpg" target="_blank" rel="noopener"><img src="img/dolls/key-maindoor.jpg" alt="大门钥匙位置" loading="lazy"><div class="cap"><b>大门钥匙⑤</b> 出锅炉房往左·箱子堆里（可无视）</div></a>
+        <a class="gimg" href="img/dolls/ending-escape.jpg" target="_blank" rel="noopener"><img src="img/dolls/ending-escape.jpg" alt="通关逃脱" loading="lazy"><div class="cap"><b>通关</b> 烧完 9 娃娃后从正门离开</div></a>
+      </div>
+
       <h3 class="sec-h">全 Notes 收集（成就 I love lore!）</h3>
       <p class="sec-sub">各攻略给的总数不一致（12 / 15 / 16 张），因为纸条点位半随机、且是否计入地下室/阁楼分法不同。成就要求把<b>本局出现的全部纸条</b>读完，<b>可分多局累积</b>。下面给两种分区对照：</p>
       <div class="notes-grid">
@@ -370,7 +389,7 @@
       <p class="sec-sub">娃娃屋是成就最多的地图（16 个），完整清单与解锁条件见 <b>「成就详解 → 娃娃屋」</b>。其中最需要专门做的：<b>Burn the girl</b>（隐藏坏结局，烧女孩而非送货车）、<b>Beat the game developer</b>（单人 20 分钟速通）、<b>I love lore!</b>（读齐全部纸条）、以及多人的 <b>Save a friend / Win with Friends / Destroy the competition / Bully / Key Hoarder</b>。</p>
 
       <div class="credit">
-        <b>参考来源 & 说明：</b>本页地图布局 / 流程 / 道具 / 纸条信息，综合自 Steam 社区多篇英文图文攻略与 Pacify Fandom Wiki 整理核对；上方分层示意平面图为<b>本站原创绘制</b>（非游戏原图）。真图占位处建议贴你<b>自己的游戏截图</b>。如需附上某篇英文原帖的原图，可单独下载并标注「转载自 作者 · 原帖链接」。数据如与实机不符以实际为准。
+        <b>参考来源 & 说明：</b>本页地图布局 / 流程 / 道具 / 纸条信息，综合自 Steam 社区多篇英文图文攻略与 Pacify Fandom Wiki 整理核对；上方分层示意平面图为<b>本站原创绘制</b>（非游戏原图）。「钥匙位置实拍」6 张转载自 Steam 用户 <b>ilares</b> 的攻略《Pacify - All Keys Possible Locations》（已在图上方标注原帖链接），版权归原作者，仅作参考、非商用；如原作者不同意可随时撤下。其余「真图占位」建议贴你<b>自己的游戏截图</b>。数据如与实机不符以实际为准。
       </div>
     </section>
 
